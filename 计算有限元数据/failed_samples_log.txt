@@ -1,0 +1,174 @@
+[2026-04-06 23:33:46] Case_0001 | 报错: Exception:
+[2026-04-06 23:55:06] Case_0001 失败:
+Traceback (most recent call last):
+  File "java.lang.Thread.java", line 0, in java.lang.Thread.run
+Exception: Java Exception
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "d:\1\LJJ\practical_project\Viscous-Damper-Surrogate-Model\计算有限元数据\main.py", line 100, in run_comsol_batch
+    export_node = model.java.result().export("data_out")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+com.comsol.util.exceptions.com.comsol.util.exceptions.FlException: Exception:
+	com.comsol.util.exceptions.FlException: 未知特征。
+Messages:
+	未知特征。
+	- 标记: data_out
+
+
+--------------------------------------------------
+[2026-04-07 21:36:22] Case_0002 失败:
+Traceback (most recent call last):
+  File "java.lang.Thread.java", line 0, in java.lang.Thread.run
+Exception: Java Exception
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "d:\1\LJJ\practical_project\Viscous-Damper-Surrogate-Model\计算有限元数据\main.py", line 97, in run_comsol_batch
+    model.solve()
+  File "D:\ProgramData\miniconda3\envs\pinn\Lib\site-packages\mph\model.py", line 343, in solve
+    node.run()
+  File "D:\ProgramData\miniconda3\envs\pinn\Lib\site-packages\mph\node.py", line 565, in run
+    java.run()
+com.comsol.util.exceptions.com.comsol.util.exceptions.FlException: Exception:
+	com.comsol.util.exceptions.FlException: 以下特征遇到问题：
+Messages:
+	以下特征遇到问题：
+	- 特征: 瞬态求解器 1 (sol1/t1)
+
+	非线性求解器不收敛。
+
+	达到最大牛顿迭代次数。
+
+	时间：2.7660000000000003e-07。
+
+	最后一个时步不收敛。
+
+
+--------------------------------------------------
+[2026-04-07 21:38:35] Case_0004 失败:
+Traceback (most recent call last):
+  File "java.lang.Thread.java", line 0, in java.lang.Thread.run
+Exception: Java Exception
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "d:\1\LJJ\practical_project\Viscous-Damper-Surrogate-Model\计算有限元数据\main.py", line 97, in run_comsol_batch
+    model.solve()
+  File "D:\ProgramData\miniconda3\envs\pinn\Lib\site-packages\mph\model.py", line 343, in solve
+    node.run()
+  File "D:\ProgramData\miniconda3\envs\pinn\Lib\site-packages\mph\node.py", line 565, in run
+    java.run()
+com.comsol.util.exceptions.com.comsol.util.exceptions.FlException: Exception:
+	com.comsol.util.exceptions.FlException: 以下特征遇到问题：
+Messages:
+	以下特征遇到问题：
+	- 特征: 瞬态求解器 1 (sol1/t1)
+
+	非线性求解器不收敛。
+
+	达到最大牛顿迭代次数。
+
+	时间：0.047020551433525785。
+
+	最后一个时步不收敛。
+
+
+--------------------------------------------------
+[2026-04-07 21:44:19] Case_0008 失败:
+Traceback (most recent call last):
+  File "java.lang.Thread.java", line 0, in java.lang.Thread.run
+Exception: Java Exception
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "d:\1\LJJ\practical_project\Viscous-Damper-Surrogate-Model\计算有限元数据\main.py", line 97, in run_comsol_batch
+    model.solve()
+  File "D:\ProgramData\miniconda3\envs\pinn\Lib\site-packages\mph\model.py", line 343, in solve
+    node.run()
+  File "D:\ProgramData\miniconda3\envs\pinn\Lib\site-packages\mph\node.py", line 565, in run
+    java.run()
+com.comsol.util.exceptions.com.comsol.util.exceptions.FlException: Exception:
+	com.comsol.util.exceptions.FlException: 以下特征遇到问题：
+Messages:
+	以下特征遇到问题：
+	- 特征: 瞬态求解器 1 (sol1/t1)
+
+	非线性求解器不收敛。
+
+	达到最大牛顿迭代次数。
+
+	时间：0.75223094897385601。
+
+	最后一个时步不收敛。
+
+
+--------------------------------------------------
+[2026-04-07 21:56:41] Case_0017 失败:
+Traceback (most recent call last):
+  File "java.lang.Thread.java", line 0, in java.lang.Thread.run
+Exception: Java Exception
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "d:\1\LJJ\practical_project\Viscous-Damper-Surrogate-Model\计算有限元数据\main.py", line 97, in run_comsol_batch
+    model.solve()
+  File "D:\ProgramData\miniconda3\envs\pinn\Lib\site-packages\mph\model.py", line 343, in solve
+    node.run()
+  File "D:\ProgramData\miniconda3\envs\pinn\Lib\site-packages\mph\node.py", line 565, in run
+    java.run()
+com.comsol.util.exceptions.com.comsol.util.exceptions.FlException: Exception:
+	com.comsol.util.exceptions.FlException: 以下特征遇到问题：
+Messages:
+	以下特征遇到问题：
+	- 特征: 瞬态求解器 1 (sol1/t1)
+
+	非线性求解器不收敛。
+
+	达到最大牛顿迭代次数。
+
+	时间：0.16540513682573674。
+
+	最后一个时步不收敛。
+
+
+--------------------------------------------------
+[2026-04-07 21:57:59] Case_0018 失败:
+Traceback (most recent call last):
+  File "SourceFile", line 224, in com.comsol.clientapi.impl.StudyClient.run
+Exception: Java Exception
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "d:\1\LJJ\practical_project\Viscous-Damper-Surrogate-Model\计算有限元数据\main.py", line 97, in run_comsol_batch
+    model.solve()
+  File "D:\ProgramData\miniconda3\envs\pinn\Lib\site-packages\mph\model.py", line 343, in solve
+    node.run()
+  File "D:\ProgramData\miniconda3\envs\pinn\Lib\site-packages\mph\node.py", line 565, in run
+    java.run()
+java.lang.java.lang.NullPointerException: java.lang.NullPointerException
+
+--------------------------------------------------
+[2026-04-07 22:13:45] Case_0004 失败:
+Traceback (most recent call last):
+  File "SourceFile", line 224, in com.comsol.clientapi.impl.StudyClient.run
+Exception: Java Exception
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "d:\1\LJJ\practical_project\Viscous-Damper-Surrogate-Model\计算有限元数据\main.py", line 97, in run_comsol_batch
+    model.solve()
+  File "D:\ProgramData\miniconda3\envs\pinn\Lib\site-packages\mph\model.py", line 343, in solve
+    node.run()
+  File "D:\ProgramData\miniconda3\envs\pinn\Lib\site-packages\mph\node.py", line 565, in run
+    java.run()
+java.lang.java.lang.NullPointerException: <exception str() failed>
+
+--------------------------------------------------

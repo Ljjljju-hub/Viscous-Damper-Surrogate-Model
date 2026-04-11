@@ -1,0 +1,4009 @@
+{
+    "dataset_metadata": {
+        "description": "流体介质 25℃ 基础动力粘度 mu (Pa·s)。",
+        "total_samples": 1000,
+        "sampling_method": "Latin Hypercube Sampling (LHS) with geometric safety filtering"
+    },
+    "parameters_list": [
+        {
+            "mu": 1200.19,
+            "part_id": "Mat_Sample_0001"
+        },
+        {
+            "mu": 2744.62,
+            "part_id": "Mat_Sample_0002"
+        },
+        {
+            "mu": 1336.88,
+            "part_id": "Mat_Sample_0003"
+        },
+        {
+            "mu": 2107.44,
+            "part_id": "Mat_Sample_0004"
+        },
+        {
+            "mu": 2311.35,
+            "part_id": "Mat_Sample_0005"
+        },
+        {
+            "mu": 1967.02,
+            "part_id": "Mat_Sample_0006"
+        },
+        {
+            "mu": 1092.31,
+            "part_id": "Mat_Sample_0007"
+        },
+        {
+            "mu": 2923.3,
+            "part_id": "Mat_Sample_0008"
+        },
+        {
+            "mu": 2711.82,
+            "part_id": "Mat_Sample_0009"
+        },
+        {
+            "mu": 1584.6,
+            "part_id": "Mat_Sample_0010"
+        },
+        {
+            "mu": 2366.59,
+            "part_id": "Mat_Sample_0011"
+        },
+        {
+            "mu": 2869.92,
+            "part_id": "Mat_Sample_0012"
+        },
+        {
+            "mu": 1049.09,
+            "part_id": "Mat_Sample_0013"
+        },
+        {
+            "mu": 1941.05,
+            "part_id": "Mat_Sample_0014"
+        },
+        {
+            "mu": 2572.37,
+            "part_id": "Mat_Sample_0015"
+        },
+        {
+            "mu": 2762.88,
+            "part_id": "Mat_Sample_0016"
+        },
+        {
+            "mu": 1434.77,
+            "part_id": "Mat_Sample_0017"
+        },
+        {
+            "mu": 2208.11,
+            "part_id": "Mat_Sample_0018"
+        },
+        {
+            "mu": 2320.01,
+            "part_id": "Mat_Sample_0019"
+        },
+        {
+            "mu": 2137.6,
+            "part_id": "Mat_Sample_0020"
+        },
+        {
+            "mu": 1231.15,
+            "part_id": "Mat_Sample_0021"
+        },
+        {
+            "mu": 1064.83,
+            "part_id": "Mat_Sample_0022"
+        },
+        {
+            "mu": 1983.89,
+            "part_id": "Mat_Sample_0023"
+        },
+        {
+            "mu": 1311.74,
+            "part_id": "Mat_Sample_0024"
+        },
+        {
+            "mu": 1123.67,
+            "part_id": "Mat_Sample_0025"
+        },
+        {
+            "mu": 2049.46,
+            "part_id": "Mat_Sample_0026"
+        },
+        {
+            "mu": 2071.2,
+            "part_id": "Mat_Sample_0027"
+        },
+        {
+            "mu": 1445.32,
+            "part_id": "Mat_Sample_0028"
+        },
+        {
+            "mu": 2551.64,
+            "part_id": "Mat_Sample_0029"
+        },
+        {
+            "mu": 1188.68,
+            "part_id": "Mat_Sample_0030"
+        },
+        {
+            "mu": 1978.94,
+            "part_id": "Mat_Sample_0031"
+        },
+        {
+            "mu": 1102.86,
+            "part_id": "Mat_Sample_0032"
+        },
+        {
+            "mu": 1293.79,
+            "part_id": "Mat_Sample_0033"
+        },
+        {
+            "mu": 1592.86,
+            "part_id": "Mat_Sample_0034"
+        },
+        {
+            "mu": 1726.13,
+            "part_id": "Mat_Sample_0035"
+        },
+        {
+            "mu": 1571.83,
+            "part_id": "Mat_Sample_0036"
+        },
+        {
+            "mu": 2409.77,
+            "part_id": "Mat_Sample_0037"
+        },
+        {
+            "mu": 2004.15,
+            "part_id": "Mat_Sample_0038"
+        },
+        {
+            "mu": 2266.44,
+            "part_id": "Mat_Sample_0039"
+        },
+        {
+            "mu": 2196.9,
+            "part_id": "Mat_Sample_0040"
+        },
+        {
+            "mu": 1926.19,
+            "part_id": "Mat_Sample_0041"
+        },
+        {
+            "mu": 2878.87,
+            "part_id": "Mat_Sample_0042"
+        },
+        {
+            "mu": 1171.82,
+            "part_id": "Mat_Sample_0043"
+        },
+        {
+            "mu": 1589.31,
+            "part_id": "Mat_Sample_0044"
+        },
+        {
+            "mu": 1954.0,
+            "part_id": "Mat_Sample_0045"
+        },
+        {
+            "mu": 2526.02,
+            "part_id": "Mat_Sample_0046"
+        },
+        {
+            "mu": 1618.32,
+            "part_id": "Mat_Sample_0047"
+        },
+        {
+            "mu": 2008.87,
+            "part_id": "Mat_Sample_0048"
+        },
+        {
+            "mu": 1296.43,
+            "part_id": "Mat_Sample_0049"
+        },
+        {
+            "mu": 1262.6,
+            "part_id": "Mat_Sample_0050"
+        },
+        {
+            "mu": 1840.36,
+            "part_id": "Mat_Sample_0051"
+        },
+        {
+            "mu": 2888.98,
+            "part_id": "Mat_Sample_0052"
+        },
+        {
+            "mu": 2301.53,
+            "part_id": "Mat_Sample_0053"
+        },
+        {
+            "mu": 1621.55,
+            "part_id": "Mat_Sample_0054"
+        },
+        {
+            "mu": 1524.12,
+            "part_id": "Mat_Sample_0055"
+        },
+        {
+            "mu": 2597.51,
+            "part_id": "Mat_Sample_0056"
+        },
+        {
+            "mu": 1627.73,
+            "part_id": "Mat_Sample_0057"
+        },
+        {
+            "mu": 1544.17,
+            "part_id": "Mat_Sample_0058"
+        },
+        {
+            "mu": 1695.58,
+            "part_id": "Mat_Sample_0059"
+        },
+        {
+            "mu": 2185.23,
+            "part_id": "Mat_Sample_0060"
+        },
+        {
+            "mu": 2243.29,
+            "part_id": "Mat_Sample_0061"
+        },
+        {
+            "mu": 1559.79,
+            "part_id": "Mat_Sample_0062"
+        },
+        {
+            "mu": 1222.68,
+            "part_id": "Mat_Sample_0063"
+        },
+        {
+            "mu": 1068.32,
+            "part_id": "Mat_Sample_0064"
+        },
+        {
+            "mu": 1792.42,
+            "part_id": "Mat_Sample_0065"
+        },
+        {
+            "mu": 1020.58,
+            "part_id": "Mat_Sample_0066"
+        },
+        {
+            "mu": 2432.08,
+            "part_id": "Mat_Sample_0067"
+        },
+        {
+            "mu": 1273.24,
+            "part_id": "Mat_Sample_0068"
+        },
+        {
+            "mu": 1986.61,
+            "part_id": "Mat_Sample_0069"
+        },
+        {
+            "mu": 1079.0,
+            "part_id": "Mat_Sample_0070"
+        },
+        {
+            "mu": 2730.25,
+            "part_id": "Mat_Sample_0071"
+        },
+        {
+            "mu": 2030.72,
+            "part_id": "Mat_Sample_0072"
+        },
+        {
+            "mu": 2195.7,
+            "part_id": "Mat_Sample_0073"
+        },
+        {
+            "mu": 2471.21,
+            "part_id": "Mat_Sample_0074"
+        },
+        {
+            "mu": 1851.25,
+            "part_id": "Mat_Sample_0075"
+        },
+        {
+            "mu": 2445.4,
+            "part_id": "Mat_Sample_0076"
+        },
+        {
+            "mu": 2704.33,
+            "part_id": "Mat_Sample_0077"
+        },
+        {
+            "mu": 1646.24,
+            "part_id": "Mat_Sample_0078"
+        },
+        {
+            "mu": 2245.32,
+            "part_id": "Mat_Sample_0079"
+        },
+        {
+            "mu": 1876.22,
+            "part_id": "Mat_Sample_0080"
+        },
+        {
+            "mu": 1213.76,
+            "part_id": "Mat_Sample_0081"
+        },
+        {
+            "mu": 2780.93,
+            "part_id": "Mat_Sample_0082"
+        },
+        {
+            "mu": 1541.93,
+            "part_id": "Mat_Sample_0083"
+        },
+        {
+            "mu": 1496.26,
+            "part_id": "Mat_Sample_0084"
+        },
+        {
+            "mu": 1683.6,
+            "part_id": "Mat_Sample_0085"
+        },
+        {
+            "mu": 1615.82,
+            "part_id": "Mat_Sample_0086"
+        },
+        {
+            "mu": 1301.86,
+            "part_id": "Mat_Sample_0087"
+        },
+        {
+            "mu": 1381.16,
+            "part_id": "Mat_Sample_0088"
+        },
+        {
+            "mu": 2415.95,
+            "part_id": "Mat_Sample_0089"
+        },
+        {
+            "mu": 1950.43,
+            "part_id": "Mat_Sample_0090"
+        },
+        {
+            "mu": 1211.57,
+            "part_id": "Mat_Sample_0091"
+        },
+        {
+            "mu": 1719.76,
+            "part_id": "Mat_Sample_0092"
+        },
+        {
+            "mu": 2013.41,
+            "part_id": "Mat_Sample_0093"
+        },
+        {
+            "mu": 2629.65,
+            "part_id": "Mat_Sample_0094"
+        },
+        {
+            "mu": 1630.55,
+            "part_id": "Mat_Sample_0095"
+        },
+        {
+            "mu": 1805.2,
+            "part_id": "Mat_Sample_0096"
+        },
+        {
+            "mu": 1471.09,
+            "part_id": "Mat_Sample_0097"
+        },
+        {
+            "mu": 1285.51,
+            "part_id": "Mat_Sample_0098"
+        },
+        {
+            "mu": 2565.52,
+            "part_id": "Mat_Sample_0099"
+        },
+        {
+            "mu": 2379.43,
+            "part_id": "Mat_Sample_0100"
+        },
+        {
+            "mu": 2683.47,
+            "part_id": "Mat_Sample_0101"
+        },
+        {
+            "mu": 2457.88,
+            "part_id": "Mat_Sample_0102"
+        },
+        {
+            "mu": 2845.11,
+            "part_id": "Mat_Sample_0103"
+        },
+        {
+            "mu": 2205.08,
+            "part_id": "Mat_Sample_0104"
+        },
+        {
+            "mu": 1759.13,
+            "part_id": "Mat_Sample_0105"
+        },
+        {
+            "mu": 2679.97,
+            "part_id": "Mat_Sample_0106"
+        },
+        {
+            "mu": 1947.77,
+            "part_id": "Mat_Sample_0107"
+        },
+        {
+            "mu": 2074.26,
+            "part_id": "Mat_Sample_0108"
+        },
+        {
+            "mu": 1096.98,
+            "part_id": "Mat_Sample_0109"
+        },
+        {
+            "mu": 1267.8,
+            "part_id": "Mat_Sample_0110"
+        },
+        {
+            "mu": 1607.43,
+            "part_id": "Mat_Sample_0111"
+        },
+        {
+            "mu": 1355.14,
+            "part_id": "Mat_Sample_0112"
+        },
+        {
+            "mu": 1939.93,
+            "part_id": "Mat_Sample_0113"
+        },
+        {
+            "mu": 2684.23,
+            "part_id": "Mat_Sample_0114"
+        },
+        {
+            "mu": 2312.44,
+            "part_id": "Mat_Sample_0115"
+        },
+        {
+            "mu": 1521.93,
+            "part_id": "Mat_Sample_0116"
+        },
+        {
+            "mu": 2419.67,
+            "part_id": "Mat_Sample_0117"
+        },
+        {
+            "mu": 2172.69,
+            "part_id": "Mat_Sample_0118"
+        },
+        {
+            "mu": 1304.38,
+            "part_id": "Mat_Sample_0119"
+        },
+        {
+            "mu": 2040.89,
+            "part_id": "Mat_Sample_0120"
+        },
+        {
+            "mu": 2810.73,
+            "part_id": "Mat_Sample_0121"
+        },
+        {
+            "mu": 2217.03,
+            "part_id": "Mat_Sample_0122"
+        },
+        {
+            "mu": 2276.27,
+            "part_id": "Mat_Sample_0123"
+        },
+        {
+            "mu": 2227.64,
+            "part_id": "Mat_Sample_0124"
+        },
+        {
+            "mu": 2633.71,
+            "part_id": "Mat_Sample_0125"
+        },
+        {
+            "mu": 1785.31,
+            "part_id": "Mat_Sample_0126"
+        },
+        {
+            "mu": 2723.63,
+            "part_id": "Mat_Sample_0127"
+        },
+        {
+            "mu": 2371.64,
+            "part_id": "Mat_Sample_0128"
+        },
+        {
+            "mu": 2835.95,
+            "part_id": "Mat_Sample_0129"
+        },
+        {
+            "mu": 2546.49,
+            "part_id": "Mat_Sample_0130"
+        },
+        {
+            "mu": 2976.34,
+            "part_id": "Mat_Sample_0131"
+        },
+        {
+            "mu": 2851.31,
+            "part_id": "Mat_Sample_0132"
+        },
+        {
+            "mu": 1643.71,
+            "part_id": "Mat_Sample_0133"
+        },
+        {
+            "mu": 2436.57,
+            "part_id": "Mat_Sample_0134"
+        },
+        {
+            "mu": 2508.45,
+            "part_id": "Mat_Sample_0135"
+        },
+        {
+            "mu": 2812.22,
+            "part_id": "Mat_Sample_0136"
+        },
+        {
+            "mu": 1996.16,
+            "part_id": "Mat_Sample_0137"
+        },
+        {
+            "mu": 1685.01,
+            "part_id": "Mat_Sample_0138"
+        },
+        {
+            "mu": 1531.69,
+            "part_id": "Mat_Sample_0139"
+        },
+        {
+            "mu": 1199.13,
+            "part_id": "Mat_Sample_0140"
+        },
+        {
+            "mu": 1177.84,
+            "part_id": "Mat_Sample_0141"
+        },
+        {
+            "mu": 2177.56,
+            "part_id": "Mat_Sample_0142"
+        },
+        {
+            "mu": 1767.11,
+            "part_id": "Mat_Sample_0143"
+        },
+        {
+            "mu": 2992.03,
+            "part_id": "Mat_Sample_0144"
+        },
+        {
+            "mu": 2273.16,
+            "part_id": "Mat_Sample_0145"
+        },
+        {
+            "mu": 2157.61,
+            "part_id": "Mat_Sample_0146"
+        },
+        {
+            "mu": 1755.77,
+            "part_id": "Mat_Sample_0147"
+        },
+        {
+            "mu": 2142.47,
+            "part_id": "Mat_Sample_0148"
+        },
+        {
+            "mu": 2489.97,
+            "part_id": "Mat_Sample_0149"
+        },
+        {
+            "mu": 2789.96,
+            "part_id": "Mat_Sample_0150"
+        },
+        {
+            "mu": 2289.55,
+            "part_id": "Mat_Sample_0151"
+        },
+        {
+            "mu": 1330.0,
+            "part_id": "Mat_Sample_0152"
+        },
+        {
+            "mu": 2531.76,
+            "part_id": "Mat_Sample_0153"
+        },
+        {
+            "mu": 2933.9,
+            "part_id": "Mat_Sample_0154"
+        },
+        {
+            "mu": 2972.75,
+            "part_id": "Mat_Sample_0155"
+        },
+        {
+            "mu": 2872.65,
+            "part_id": "Mat_Sample_0156"
+        },
+        {
+            "mu": 1448.34,
+            "part_id": "Mat_Sample_0157"
+        },
+        {
+            "mu": 2100.18,
+            "part_id": "Mat_Sample_0158"
+        },
+        {
+            "mu": 1409.9,
+            "part_id": "Mat_Sample_0159"
+        },
+        {
+            "mu": 2792.92,
+            "part_id": "Mat_Sample_0160"
+        },
+        {
+            "mu": 1852.16,
+            "part_id": "Mat_Sample_0161"
+        },
+        {
+            "mu": 1146.58,
+            "part_id": "Mat_Sample_0162"
+        },
+        {
+            "mu": 2346.2,
+            "part_id": "Mat_Sample_0163"
+        },
+        {
+            "mu": 1837.1,
+            "part_id": "Mat_Sample_0164"
+        },
+        {
+            "mu": 1661.2,
+            "part_id": "Mat_Sample_0165"
+        },
+        {
+            "mu": 2514.49,
+            "part_id": "Mat_Sample_0166"
+        },
+        {
+            "mu": 2251.93,
+            "part_id": "Mat_Sample_0167"
+        },
+        {
+            "mu": 2033.3,
+            "part_id": "Mat_Sample_0168"
+        },
+        {
+            "mu": 1126.09,
+            "part_id": "Mat_Sample_0169"
+        },
+        {
+            "mu": 1782.04,
+            "part_id": "Mat_Sample_0170"
+        },
+        {
+            "mu": 1730.21,
+            "part_id": "Mat_Sample_0171"
+        },
+        {
+            "mu": 1920.51,
+            "part_id": "Mat_Sample_0172"
+        },
+        {
+            "mu": 2592.24,
+            "part_id": "Mat_Sample_0173"
+        },
+        {
+            "mu": 1216.66,
+            "part_id": "Mat_Sample_0174"
+        },
+        {
+            "mu": 2862.52,
+            "part_id": "Mat_Sample_0175"
+        },
+        {
+            "mu": 2229.9,
+            "part_id": "Mat_Sample_0176"
+        },
+        {
+            "mu": 1688.55,
+            "part_id": "Mat_Sample_0177"
+        },
+        {
+            "mu": 2220.94,
+            "part_id": "Mat_Sample_0178"
+        },
+        {
+            "mu": 2405.58,
+            "part_id": "Mat_Sample_0179"
+        },
+        {
+            "mu": 1723.17,
+            "part_id": "Mat_Sample_0180"
+        },
+        {
+            "mu": 1482.89,
+            "part_id": "Mat_Sample_0181"
+        },
+        {
+            "mu": 2430.53,
+            "part_id": "Mat_Sample_0182"
+        },
+        {
+            "mu": 2475.82,
+            "part_id": "Mat_Sample_0183"
+        },
+        {
+            "mu": 1254.6,
+            "part_id": "Mat_Sample_0184"
+        },
+        {
+            "mu": 1993.98,
+            "part_id": "Mat_Sample_0185"
+        },
+        {
+            "mu": 1289.0,
+            "part_id": "Mat_Sample_0186"
+        },
+        {
+            "mu": 2926.38,
+            "part_id": "Mat_Sample_0187"
+        },
+        {
+            "mu": 1874.75,
+            "part_id": "Mat_Sample_0188"
+        },
+        {
+            "mu": 2557.45,
+            "part_id": "Mat_Sample_0189"
+        },
+        {
+            "mu": 1596.15,
+            "part_id": "Mat_Sample_0190"
+        },
+        {
+            "mu": 2988.37,
+            "part_id": "Mat_Sample_0191"
+        },
+        {
+            "mu": 2637.75,
+            "part_id": "Mat_Sample_0192"
+        },
+        {
+            "mu": 1576.37,
+            "part_id": "Mat_Sample_0193"
+        },
+        {
+            "mu": 1909.85,
+            "part_id": "Mat_Sample_0194"
+        },
+        {
+            "mu": 2121.83,
+            "part_id": "Mat_Sample_0195"
+        },
+        {
+            "mu": 1054.45,
+            "part_id": "Mat_Sample_0196"
+        },
+        {
+            "mu": 1608.24,
+            "part_id": "Mat_Sample_0197"
+        },
+        {
+            "mu": 2164.69,
+            "part_id": "Mat_Sample_0198"
+        },
+        {
+            "mu": 1396.44,
+            "part_id": "Mat_Sample_0199"
+        },
+        {
+            "mu": 1441.66,
+            "part_id": "Mat_Sample_0200"
+        },
+        {
+            "mu": 1104.63,
+            "part_id": "Mat_Sample_0201"
+        },
+        {
+            "mu": 2837.35,
+            "part_id": "Mat_Sample_0202"
+        },
+        {
+            "mu": 2464.71,
+            "part_id": "Mat_Sample_0203"
+        },
+        {
+            "mu": 1207.33,
+            "part_id": "Mat_Sample_0204"
+        },
+        {
+            "mu": 2045.28,
+            "part_id": "Mat_Sample_0205"
+        },
+        {
+            "mu": 2287.14,
+            "part_id": "Mat_Sample_0206"
+        },
+        {
+            "mu": 1167.35,
+            "part_id": "Mat_Sample_0207"
+        },
+        {
+            "mu": 1374.23,
+            "part_id": "Mat_Sample_0208"
+        },
+        {
+            "mu": 2324.95,
+            "part_id": "Mat_Sample_0209"
+        },
+        {
+            "mu": 1956.84,
+            "part_id": "Mat_Sample_0210"
+        },
+        {
+            "mu": 2110.28,
+            "part_id": "Mat_Sample_0211"
+        },
+        {
+            "mu": 1173.19,
+            "part_id": "Mat_Sample_0212"
+        },
+        {
+            "mu": 1533.95,
+            "part_id": "Mat_Sample_0213"
+        },
+        {
+            "mu": 2571.53,
+            "part_id": "Mat_Sample_0214"
+        },
+        {
+            "mu": 2393.1,
+            "part_id": "Mat_Sample_0215"
+        },
+        {
+            "mu": 1039.55,
+            "part_id": "Mat_Sample_0216"
+        },
+        {
+            "mu": 2022.62,
+            "part_id": "Mat_Sample_0217"
+        },
+        {
+            "mu": 2928.25,
+            "part_id": "Mat_Sample_0218"
+        },
+        {
+            "mu": 2283.6,
+            "part_id": "Mat_Sample_0219"
+        },
+        {
+            "mu": 2460.55,
+            "part_id": "Mat_Sample_0220"
+        },
+        {
+            "mu": 2613.14,
+            "part_id": "Mat_Sample_0221"
+        },
+        {
+            "mu": 1386.77,
+            "part_id": "Mat_Sample_0222"
+        },
+        {
+            "mu": 1490.7,
+            "part_id": "Mat_Sample_0223"
+        },
+        {
+            "mu": 1428.59,
+            "part_id": "Mat_Sample_0224"
+        },
+        {
+            "mu": 1423.85,
+            "part_id": "Mat_Sample_0225"
+        },
+        {
+            "mu": 1128.48,
+            "part_id": "Mat_Sample_0226"
+        },
+        {
+            "mu": 1549.18,
+            "part_id": "Mat_Sample_0227"
+        },
+        {
+            "mu": 1216.17,
+            "part_id": "Mat_Sample_0228"
+        },
+        {
+            "mu": 1068.86,
+            "part_id": "Mat_Sample_0229"
+        },
+        {
+            "mu": 2095.08,
+            "part_id": "Mat_Sample_0230"
+        },
+        {
+            "mu": 1275.19,
+            "part_id": "Mat_Sample_0231"
+        },
+        {
+            "mu": 2728.08,
+            "part_id": "Mat_Sample_0232"
+        },
+        {
+            "mu": 1298.04,
+            "part_id": "Mat_Sample_0233"
+        },
+        {
+            "mu": 1542.18,
+            "part_id": "Mat_Sample_0234"
+        },
+        {
+            "mu": 1009.54,
+            "part_id": "Mat_Sample_0235"
+        },
+        {
+            "mu": 2110.16,
+            "part_id": "Mat_Sample_0236"
+        },
+        {
+            "mu": 2541.03,
+            "part_id": "Mat_Sample_0237"
+        },
+        {
+            "mu": 2659.98,
+            "part_id": "Mat_Sample_0238"
+        },
+        {
+            "mu": 1747.99,
+            "part_id": "Mat_Sample_0239"
+        },
+        {
+            "mu": 1922.15,
+            "part_id": "Mat_Sample_0240"
+        },
+        {
+            "mu": 2957.71,
+            "part_id": "Mat_Sample_0241"
+        },
+        {
+            "mu": 2242.15,
+            "part_id": "Mat_Sample_0242"
+        },
+        {
+            "mu": 2057.43,
+            "part_id": "Mat_Sample_0243"
+        },
+        {
+            "mu": 2481.1,
+            "part_id": "Mat_Sample_0244"
+        },
+        {
+            "mu": 2434.81,
+            "part_id": "Mat_Sample_0245"
+        },
+        {
+            "mu": 1204.84,
+            "part_id": "Mat_Sample_0246"
+        },
+        {
+            "mu": 2949.27,
+            "part_id": "Mat_Sample_0247"
+        },
+        {
+            "mu": 2717.99,
+            "part_id": "Mat_Sample_0248"
+        },
+        {
+            "mu": 2090.31,
+            "part_id": "Mat_Sample_0249"
+        },
+        {
+            "mu": 1378.84,
+            "part_id": "Mat_Sample_0250"
+        },
+        {
+            "mu": 1034.44,
+            "part_id": "Mat_Sample_0251"
+        },
+        {
+            "mu": 1624.73,
+            "part_id": "Mat_Sample_0252"
+        },
+        {
+            "mu": 1700.75,
+            "part_id": "Mat_Sample_0253"
+        },
+        {
+            "mu": 2192.77,
+            "part_id": "Mat_Sample_0254"
+        },
+        {
+            "mu": 1193.82,
+            "part_id": "Mat_Sample_0255"
+        },
+        {
+            "mu": 2102.27,
+            "part_id": "Mat_Sample_0256"
+        },
+        {
+            "mu": 2847.89,
+            "part_id": "Mat_Sample_0257"
+        },
+        {
+            "mu": 2906.94,
+            "part_id": "Mat_Sample_0258"
+        },
+        {
+            "mu": 2377.81,
+            "part_id": "Mat_Sample_0259"
+        },
+        {
+            "mu": 2615.5,
+            "part_id": "Mat_Sample_0260"
+        },
+        {
+            "mu": 2562.45,
+            "part_id": "Mat_Sample_0261"
+        },
+        {
+            "mu": 2855.48,
+            "part_id": "Mat_Sample_0262"
+        },
+        {
+            "mu": 2781.26,
+            "part_id": "Mat_Sample_0263"
+        },
+        {
+            "mu": 2743.76,
+            "part_id": "Mat_Sample_0264"
+        },
+        {
+            "mu": 2280.83,
+            "part_id": "Mat_Sample_0265"
+        },
+        {
+            "mu": 1727.08,
+            "part_id": "Mat_Sample_0266"
+        },
+        {
+            "mu": 1573.55,
+            "part_id": "Mat_Sample_0267"
+        },
+        {
+            "mu": 1992.76,
+            "part_id": "Mat_Sample_0268"
+        },
+        {
+            "mu": 1871.66,
+            "part_id": "Mat_Sample_0269"
+        },
+        {
+            "mu": 1985.44,
+            "part_id": "Mat_Sample_0270"
+        },
+        {
+            "mu": 1570.82,
+            "part_id": "Mat_Sample_0271"
+        },
+        {
+            "mu": 2661.24,
+            "part_id": "Mat_Sample_0272"
+        },
+        {
+            "mu": 2171.55,
+            "part_id": "Mat_Sample_0273"
+        },
+        {
+            "mu": 1967.7,
+            "part_id": "Mat_Sample_0274"
+        },
+        {
+            "mu": 2917.16,
+            "part_id": "Mat_Sample_0275"
+        },
+        {
+            "mu": 1937.27,
+            "part_id": "Mat_Sample_0276"
+        },
+        {
+            "mu": 2387.05,
+            "part_id": "Mat_Sample_0277"
+        },
+        {
+            "mu": 1233.22,
+            "part_id": "Mat_Sample_0278"
+        },
+        {
+            "mu": 1555.68,
+            "part_id": "Mat_Sample_0279"
+        },
+        {
+            "mu": 2637.55,
+            "part_id": "Mat_Sample_0280"
+        },
+        {
+            "mu": 2580.21,
+            "part_id": "Mat_Sample_0281"
+        },
+        {
+            "mu": 2389.46,
+            "part_id": "Mat_Sample_0282"
+        },
+        {
+            "mu": 1811.57,
+            "part_id": "Mat_Sample_0283"
+        },
+        {
+            "mu": 1448.01,
+            "part_id": "Mat_Sample_0284"
+        },
+        {
+            "mu": 2348.01,
+            "part_id": "Mat_Sample_0285"
+        },
+        {
+            "mu": 2470.94,
+            "part_id": "Mat_Sample_0286"
+        },
+        {
+            "mu": 1481.86,
+            "part_id": "Mat_Sample_0287"
+        },
+        {
+            "mu": 1132.69,
+            "part_id": "Mat_Sample_0288"
+        },
+        {
+            "mu": 2180.28,
+            "part_id": "Mat_Sample_0289"
+        },
+        {
+            "mu": 2778.76,
+            "part_id": "Mat_Sample_0290"
+        },
+        {
+            "mu": 1580.9,
+            "part_id": "Mat_Sample_0291"
+        },
+        {
+            "mu": 2166.24,
+            "part_id": "Mat_Sample_0292"
+        },
+        {
+            "mu": 2441.77,
+            "part_id": "Mat_Sample_0293"
+        },
+        {
+            "mu": 1955.76,
+            "part_id": "Mat_Sample_0294"
+        },
+        {
+            "mu": 1713.34,
+            "part_id": "Mat_Sample_0295"
+        },
+        {
+            "mu": 1293.55,
+            "part_id": "Mat_Sample_0296"
+        },
+        {
+            "mu": 2667.24,
+            "part_id": "Mat_Sample_0297"
+        },
+        {
+            "mu": 1855.16,
+            "part_id": "Mat_Sample_0298"
+        },
+        {
+            "mu": 1001.86,
+            "part_id": "Mat_Sample_0299"
+        },
+        {
+            "mu": 1762.71,
+            "part_id": "Mat_Sample_0300"
+        },
+        {
+            "mu": 2219.72,
+            "part_id": "Mat_Sample_0301"
+        },
+        {
+            "mu": 2246.71,
+            "part_id": "Mat_Sample_0302"
+        },
+        {
+            "mu": 2879.69,
+            "part_id": "Mat_Sample_0303"
+        },
+        {
+            "mu": 1339.16,
+            "part_id": "Mat_Sample_0304"
+        },
+        {
+            "mu": 2547.7,
+            "part_id": "Mat_Sample_0305"
+        },
+        {
+            "mu": 1696.35,
+            "part_id": "Mat_Sample_0306"
+        },
+        {
+            "mu": 1918.12,
+            "part_id": "Mat_Sample_0307"
+        },
+        {
+            "mu": 1333.78,
+            "part_id": "Mat_Sample_0308"
+        },
+        {
+            "mu": 1106.35,
+            "part_id": "Mat_Sample_0309"
+        },
+        {
+            "mu": 2074.23,
+            "part_id": "Mat_Sample_0310"
+        },
+        {
+            "mu": 1666.79,
+            "part_id": "Mat_Sample_0311"
+        },
+        {
+            "mu": 2706.51,
+            "part_id": "Mat_Sample_0312"
+        },
+        {
+            "mu": 2224.7,
+            "part_id": "Mat_Sample_0313"
+        },
+        {
+            "mu": 2856.52,
+            "part_id": "Mat_Sample_0314"
+        },
+        {
+            "mu": 1076.23,
+            "part_id": "Mat_Sample_0315"
+        },
+        {
+            "mu": 1485.31,
+            "part_id": "Mat_Sample_0316"
+        },
+        {
+            "mu": 1203.16,
+            "part_id": "Mat_Sample_0317"
+        },
+        {
+            "mu": 2279.09,
+            "part_id": "Mat_Sample_0318"
+        },
+        {
+            "mu": 2523.62,
+            "part_id": "Mat_Sample_0319"
+        },
+        {
+            "mu": 2383.58,
+            "part_id": "Mat_Sample_0320"
+        },
+        {
+            "mu": 2423.16,
+            "part_id": "Mat_Sample_0321"
+        },
+        {
+            "mu": 1055.44,
+            "part_id": "Mat_Sample_0322"
+        },
+        {
+            "mu": 1065.25,
+            "part_id": "Mat_Sample_0323"
+        },
+        {
+            "mu": 2317.93,
+            "part_id": "Mat_Sample_0324"
+        },
+        {
+            "mu": 2408.99,
+            "part_id": "Mat_Sample_0325"
+        },
+        {
+            "mu": 2589.0,
+            "part_id": "Mat_Sample_0326"
+        },
+        {
+            "mu": 1391.06,
+            "part_id": "Mat_Sample_0327"
+        },
+        {
+            "mu": 1062.55,
+            "part_id": "Mat_Sample_0328"
+        },
+        {
+            "mu": 2558.72,
+            "part_id": "Mat_Sample_0329"
+        },
+        {
+            "mu": 2053.77,
+            "part_id": "Mat_Sample_0330"
+        },
+        {
+            "mu": 2702.2,
+            "part_id": "Mat_Sample_0331"
+        },
+        {
+            "mu": 1544.47,
+            "part_id": "Mat_Sample_0332"
+        },
+        {
+            "mu": 1460.26,
+            "part_id": "Mat_Sample_0333"
+        },
+        {
+            "mu": 2867.7,
+            "part_id": "Mat_Sample_0334"
+        },
+        {
+            "mu": 2830.61,
+            "part_id": "Mat_Sample_0335"
+        },
+        {
+            "mu": 1523.94,
+            "part_id": "Mat_Sample_0336"
+        },
+        {
+            "mu": 2326.78,
+            "part_id": "Mat_Sample_0337"
+        },
+        {
+            "mu": 2902.48,
+            "part_id": "Mat_Sample_0338"
+        },
+        {
+            "mu": 2748.74,
+            "part_id": "Mat_Sample_0339"
+        },
+        {
+            "mu": 2220.47,
+            "part_id": "Mat_Sample_0340"
+        },
+        {
+            "mu": 1164.06,
+            "part_id": "Mat_Sample_0341"
+        },
+        {
+            "mu": 2801.37,
+            "part_id": "Mat_Sample_0342"
+        },
+        {
+            "mu": 2426.74,
+            "part_id": "Mat_Sample_0343"
+        },
+        {
+            "mu": 1857.6,
+            "part_id": "Mat_Sample_0344"
+        },
+        {
+            "mu": 2835.58,
+            "part_id": "Mat_Sample_0345"
+        },
+        {
+            "mu": 1687.49,
+            "part_id": "Mat_Sample_0346"
+        },
+        {
+            "mu": 1023.63,
+            "part_id": "Mat_Sample_0347"
+        },
+        {
+            "mu": 2062.02,
+            "part_id": "Mat_Sample_0348"
+        },
+        {
+            "mu": 2135.73,
+            "part_id": "Mat_Sample_0349"
+        },
+        {
+            "mu": 1560.21,
+            "part_id": "Mat_Sample_0350"
+        },
+        {
+            "mu": 1956.65,
+            "part_id": "Mat_Sample_0351"
+        },
+        {
+            "mu": 1606.18,
+            "part_id": "Mat_Sample_0352"
+        },
+        {
+            "mu": 2806.31,
+            "part_id": "Mat_Sample_0353"
+        },
+        {
+            "mu": 2816.15,
+            "part_id": "Mat_Sample_0354"
+        },
+        {
+            "mu": 1618.6,
+            "part_id": "Mat_Sample_0355"
+        },
+        {
+            "mu": 1100.18,
+            "part_id": "Mat_Sample_0356"
+        },
+        {
+            "mu": 2413.8,
+            "part_id": "Mat_Sample_0357"
+        },
+        {
+            "mu": 2618.6,
+            "part_id": "Mat_Sample_0358"
+        },
+        {
+            "mu": 1577.77,
+            "part_id": "Mat_Sample_0359"
+        },
+        {
+            "mu": 2449.04,
+            "part_id": "Mat_Sample_0360"
+        },
+        {
+            "mu": 2198.08,
+            "part_id": "Mat_Sample_0361"
+        },
+        {
+            "mu": 2863.68,
+            "part_id": "Mat_Sample_0362"
+        },
+        {
+            "mu": 2875.31,
+            "part_id": "Mat_Sample_0363"
+        },
+        {
+            "mu": 1802.61,
+            "part_id": "Mat_Sample_0364"
+        },
+        {
+            "mu": 2578.82,
+            "part_id": "Mat_Sample_0365"
+        },
+        {
+            "mu": 2233.46,
+            "part_id": "Mat_Sample_0366"
+        },
+        {
+            "mu": 2652.5,
+            "part_id": "Mat_Sample_0367"
+        },
+        {
+            "mu": 2681.93,
+            "part_id": "Mat_Sample_0368"
+        },
+        {
+            "mu": 1040.26,
+            "part_id": "Mat_Sample_0369"
+        },
+        {
+            "mu": 1412.15,
+            "part_id": "Mat_Sample_0370"
+        },
+        {
+            "mu": 2264.86,
+            "part_id": "Mat_Sample_0371"
+        },
+        {
+            "mu": 2428.8,
+            "part_id": "Mat_Sample_0372"
+        },
+        {
+            "mu": 1098.97,
+            "part_id": "Mat_Sample_0373"
+        },
+        {
+            "mu": 2455.28,
+            "part_id": "Mat_Sample_0374"
+        },
+        {
+            "mu": 2610.35,
+            "part_id": "Mat_Sample_0375"
+        },
+        {
+            "mu": 1925.7,
+            "part_id": "Mat_Sample_0376"
+        },
+        {
+            "mu": 2017.74,
+            "part_id": "Mat_Sample_0377"
+        },
+        {
+            "mu": 1644.62,
+            "part_id": "Mat_Sample_0378"
+        },
+        {
+            "mu": 1386.75,
+            "part_id": "Mat_Sample_0379"
+        },
+        {
+            "mu": 2601.28,
+            "part_id": "Mat_Sample_0380"
+        },
+        {
+            "mu": 2912.52,
+            "part_id": "Mat_Sample_0381"
+        },
+        {
+            "mu": 1436.39,
+            "part_id": "Mat_Sample_0382"
+        },
+        {
+            "mu": 1473.47,
+            "part_id": "Mat_Sample_0383"
+        },
+        {
+            "mu": 2534.28,
+            "part_id": "Mat_Sample_0384"
+        },
+        {
+            "mu": 1862.57,
+            "part_id": "Mat_Sample_0385"
+        },
+        {
+            "mu": 2046.17,
+            "part_id": "Mat_Sample_0386"
+        },
+        {
+            "mu": 2537.28,
+            "part_id": "Mat_Sample_0387"
+        },
+        {
+            "mu": 1091.99,
+            "part_id": "Mat_Sample_0388"
+        },
+        {
+            "mu": 2329.48,
+            "part_id": "Mat_Sample_0389"
+        },
+        {
+            "mu": 1340.66,
+            "part_id": "Mat_Sample_0390"
+        },
+        {
+            "mu": 2136.6,
+            "part_id": "Mat_Sample_0391"
+        },
+        {
+            "mu": 2891.59,
+            "part_id": "Mat_Sample_0392"
+        },
+        {
+            "mu": 2229.64,
+            "part_id": "Mat_Sample_0393"
+        },
+        {
+            "mu": 2367.0,
+            "part_id": "Mat_Sample_0394"
+        },
+        {
+            "mu": 2697.44,
+            "part_id": "Mat_Sample_0395"
+        },
+        {
+            "mu": 1367.29,
+            "part_id": "Mat_Sample_0396"
+        },
+        {
+            "mu": 2173.91,
+            "part_id": "Mat_Sample_0397"
+        },
+        {
+            "mu": 1602.09,
+            "part_id": "Mat_Sample_0398"
+        },
+        {
+            "mu": 2996.93,
+            "part_id": "Mat_Sample_0399"
+        },
+        {
+            "mu": 1732.86,
+            "part_id": "Mat_Sample_0400"
+        },
+        {
+            "mu": 2551.39,
+            "part_id": "Mat_Sample_0401"
+        },
+        {
+            "mu": 1584.75,
+            "part_id": "Mat_Sample_0402"
+        },
+        {
+            "mu": 2000.01,
+            "part_id": "Mat_Sample_0403"
+        },
+        {
+            "mu": 1657.42,
+            "part_id": "Mat_Sample_0404"
+        },
+        {
+            "mu": 2491.87,
+            "part_id": "Mat_Sample_0405"
+        },
+        {
+            "mu": 1220.49,
+            "part_id": "Mat_Sample_0406"
+        },
+        {
+            "mu": 1375.06,
+            "part_id": "Mat_Sample_0407"
+        },
+        {
+            "mu": 1851.2,
+            "part_id": "Mat_Sample_0408"
+        },
+        {
+            "mu": 2437.92,
+            "part_id": "Mat_Sample_0409"
+        },
+        {
+            "mu": 2211.29,
+            "part_id": "Mat_Sample_0410"
+        },
+        {
+            "mu": 1358.51,
+            "part_id": "Mat_Sample_0411"
+        },
+        {
+            "mu": 1270.98,
+            "part_id": "Mat_Sample_0412"
+        },
+        {
+            "mu": 1179.41,
+            "part_id": "Mat_Sample_0413"
+        },
+        {
+            "mu": 1787.33,
+            "part_id": "Mat_Sample_0414"
+        },
+        {
+            "mu": 1976.45,
+            "part_id": "Mat_Sample_0415"
+        },
+        {
+            "mu": 1527.25,
+            "part_id": "Mat_Sample_0416"
+        },
+        {
+            "mu": 1597.8,
+            "part_id": "Mat_Sample_0417"
+        },
+        {
+            "mu": 2673.75,
+            "part_id": "Mat_Sample_0418"
+        },
+        {
+            "mu": 1051.3,
+            "part_id": "Mat_Sample_0419"
+        },
+        {
+            "mu": 2771.69,
+            "part_id": "Mat_Sample_0420"
+        },
+        {
+            "mu": 1047.88,
+            "part_id": "Mat_Sample_0421"
+        },
+        {
+            "mu": 1769.26,
+            "part_id": "Mat_Sample_0422"
+        },
+        {
+            "mu": 2691.76,
+            "part_id": "Mat_Sample_0423"
+        },
+        {
+            "mu": 1881.97,
+            "part_id": "Mat_Sample_0424"
+        },
+        {
+            "mu": 1261.27,
+            "part_id": "Mat_Sample_0425"
+        },
+        {
+            "mu": 2345.38,
+            "part_id": "Mat_Sample_0426"
+        },
+        {
+            "mu": 2940.79,
+            "part_id": "Mat_Sample_0427"
+        },
+        {
+            "mu": 1895.12,
+            "part_id": "Mat_Sample_0428"
+        },
+        {
+            "mu": 1497.33,
+            "part_id": "Mat_Sample_0429"
+        },
+        {
+            "mu": 2300.98,
+            "part_id": "Mat_Sample_0430"
+        },
+        {
+            "mu": 2685.02,
+            "part_id": "Mat_Sample_0431"
+        },
+        {
+            "mu": 2692.39,
+            "part_id": "Mat_Sample_0432"
+        },
+        {
+            "mu": 1407.46,
+            "part_id": "Mat_Sample_0433"
+        },
+        {
+            "mu": 1305.48,
+            "part_id": "Mat_Sample_0434"
+        },
+        {
+            "mu": 1318.3,
+            "part_id": "Mat_Sample_0435"
+        },
+        {
+            "mu": 1240.03,
+            "part_id": "Mat_Sample_0436"
+        },
+        {
+            "mu": 1123.15,
+            "part_id": "Mat_Sample_0437"
+        },
+        {
+            "mu": 1799.87,
+            "part_id": "Mat_Sample_0438"
+        },
+        {
+            "mu": 2127.5,
+            "part_id": "Mat_Sample_0439"
+        },
+        {
+            "mu": 2939.44,
+            "part_id": "Mat_Sample_0440"
+        },
+        {
+            "mu": 2710.15,
+            "part_id": "Mat_Sample_0441"
+        },
+        {
+            "mu": 2461.44,
+            "part_id": "Mat_Sample_0442"
+        },
+        {
+            "mu": 2820.69,
+            "part_id": "Mat_Sample_0443"
+        },
+        {
+            "mu": 1875.6,
+            "part_id": "Mat_Sample_0444"
+        },
+        {
+            "mu": 1432.57,
+            "part_id": "Mat_Sample_0445"
+        },
+        {
+            "mu": 1758.59,
+            "part_id": "Mat_Sample_0446"
+        },
+        {
+            "mu": 2571.7,
+            "part_id": "Mat_Sample_0447"
+        },
+        {
+            "mu": 2756.71,
+            "part_id": "Mat_Sample_0448"
+        },
+        {
+            "mu": 2495.14,
+            "part_id": "Mat_Sample_0449"
+        },
+        {
+            "mu": 1981.5,
+            "part_id": "Mat_Sample_0450"
+        },
+        {
+            "mu": 1355.57,
+            "part_id": "Mat_Sample_0451"
+        },
+        {
+            "mu": 1969.91,
+            "part_id": "Mat_Sample_0452"
+        },
+        {
+            "mu": 1531.02,
+            "part_id": "Mat_Sample_0453"
+        },
+        {
+            "mu": 2102.21,
+            "part_id": "Mat_Sample_0454"
+        },
+        {
+            "mu": 2931.76,
+            "part_id": "Mat_Sample_0455"
+        },
+        {
+            "mu": 2718.94,
+            "part_id": "Mat_Sample_0456"
+        },
+        {
+            "mu": 2035.25,
+            "part_id": "Mat_Sample_0457"
+        },
+        {
+            "mu": 2470.93,
+            "part_id": "Mat_Sample_0458"
+        },
+        {
+            "mu": 2714.89,
+            "part_id": "Mat_Sample_0459"
+        },
+        {
+            "mu": 2337.0,
+            "part_id": "Mat_Sample_0460"
+        },
+        {
+            "mu": 1502.82,
+            "part_id": "Mat_Sample_0461"
+        },
+        {
+            "mu": 1060.15,
+            "part_id": "Mat_Sample_0462"
+        },
+        {
+            "mu": 1275.43,
+            "part_id": "Mat_Sample_0463"
+        },
+        {
+            "mu": 2349.15,
+            "part_id": "Mat_Sample_0464"
+        },
+        {
+            "mu": 1210.69,
+            "part_id": "Mat_Sample_0465"
+        },
+        {
+            "mu": 1091.02,
+            "part_id": "Mat_Sample_0466"
+        },
+        {
+            "mu": 2421.72,
+            "part_id": "Mat_Sample_0467"
+        },
+        {
+            "mu": 2071.54,
+            "part_id": "Mat_Sample_0468"
+        },
+        {
+            "mu": 2216.13,
+            "part_id": "Mat_Sample_0469"
+        },
+        {
+            "mu": 1563.04,
+            "part_id": "Mat_Sample_0470"
+        },
+        {
+            "mu": 2508.4,
+            "part_id": "Mat_Sample_0471"
+        },
+        {
+            "mu": 1425.72,
+            "part_id": "Mat_Sample_0472"
+        },
+        {
+            "mu": 2126.88,
+            "part_id": "Mat_Sample_0473"
+        },
+        {
+            "mu": 1216.86,
+            "part_id": "Mat_Sample_0474"
+        },
+        {
+            "mu": 2383.82,
+            "part_id": "Mat_Sample_0475"
+        },
+        {
+            "mu": 1617.37,
+            "part_id": "Mat_Sample_0476"
+        },
+        {
+            "mu": 1481.99,
+            "part_id": "Mat_Sample_0477"
+        },
+        {
+            "mu": 1418.21,
+            "part_id": "Mat_Sample_0478"
+        },
+        {
+            "mu": 2261.92,
+            "part_id": "Mat_Sample_0479"
+        },
+        {
+            "mu": 2104.87,
+            "part_id": "Mat_Sample_0480"
+        },
+        {
+            "mu": 1707.63,
+            "part_id": "Mat_Sample_0481"
+        },
+        {
+            "mu": 1236.7,
+            "part_id": "Mat_Sample_0482"
+        },
+        {
+            "mu": 1714.79,
+            "part_id": "Mat_Sample_0483"
+        },
+        {
+            "mu": 1401.49,
+            "part_id": "Mat_Sample_0484"
+        },
+        {
+            "mu": 1388.18,
+            "part_id": "Mat_Sample_0485"
+        },
+        {
+            "mu": 2926.07,
+            "part_id": "Mat_Sample_0486"
+        },
+        {
+            "mu": 2892.2,
+            "part_id": "Mat_Sample_0487"
+        },
+        {
+            "mu": 1579.65,
+            "part_id": "Mat_Sample_0488"
+        },
+        {
+            "mu": 2157.21,
+            "part_id": "Mat_Sample_0489"
+        },
+        {
+            "mu": 1153.8,
+            "part_id": "Mat_Sample_0490"
+        },
+        {
+            "mu": 1930.36,
+            "part_id": "Mat_Sample_0491"
+        },
+        {
+            "mu": 1269.84,
+            "part_id": "Mat_Sample_0492"
+        },
+        {
+            "mu": 1513.65,
+            "part_id": "Mat_Sample_0493"
+        },
+        {
+            "mu": 2769.21,
+            "part_id": "Mat_Sample_0494"
+        },
+        {
+            "mu": 1552.57,
+            "part_id": "Mat_Sample_0495"
+        },
+        {
+            "mu": 2355.85,
+            "part_id": "Mat_Sample_0496"
+        },
+        {
+            "mu": 1373.71,
+            "part_id": "Mat_Sample_0497"
+        },
+        {
+            "mu": 2296.52,
+            "part_id": "Mat_Sample_0498"
+        },
+        {
+            "mu": 1499.8,
+            "part_id": "Mat_Sample_0499"
+        },
+        {
+            "mu": 2167.86,
+            "part_id": "Mat_Sample_0500"
+        },
+        {
+            "mu": 2815.3,
+            "part_id": "Mat_Sample_0501"
+        },
+        {
+            "mu": 1507.4,
+            "part_id": "Mat_Sample_0502"
+        },
+        {
+            "mu": 2437.08,
+            "part_id": "Mat_Sample_0503"
+        },
+        {
+            "mu": 2600.01,
+            "part_id": "Mat_Sample_0504"
+        },
+        {
+            "mu": 1860.13,
+            "part_id": "Mat_Sample_0505"
+        },
+        {
+            "mu": 2502.88,
+            "part_id": "Mat_Sample_0506"
+        },
+        {
+            "mu": 1314.36,
+            "part_id": "Mat_Sample_0507"
+        },
+        {
+            "mu": 2479.89,
+            "part_id": "Mat_Sample_0508"
+        },
+        {
+            "mu": 2591.84,
+            "part_id": "Mat_Sample_0509"
+        },
+        {
+            "mu": 1358.67,
+            "part_id": "Mat_Sample_0510"
+        },
+        {
+            "mu": 2201.61,
+            "part_id": "Mat_Sample_0511"
+        },
+        {
+            "mu": 2360.78,
+            "part_id": "Mat_Sample_0512"
+        },
+        {
+            "mu": 1782.37,
+            "part_id": "Mat_Sample_0513"
+        },
+        {
+            "mu": 2573.53,
+            "part_id": "Mat_Sample_0514"
+        },
+        {
+            "mu": 1435.09,
+            "part_id": "Mat_Sample_0515"
+        },
+        {
+            "mu": 2540.71,
+            "part_id": "Mat_Sample_0516"
+        },
+        {
+            "mu": 1825.86,
+            "part_id": "Mat_Sample_0517"
+        },
+        {
+            "mu": 1163.91,
+            "part_id": "Mat_Sample_0518"
+        },
+        {
+            "mu": 2832.6,
+            "part_id": "Mat_Sample_0519"
+        },
+        {
+            "mu": 1940.27,
+            "part_id": "Mat_Sample_0520"
+        },
+        {
+            "mu": 2721.48,
+            "part_id": "Mat_Sample_0521"
+        },
+        {
+            "mu": 1440.06,
+            "part_id": "Mat_Sample_0522"
+        },
+        {
+            "mu": 1466.39,
+            "part_id": "Mat_Sample_0523"
+        },
+        {
+            "mu": 1809.11,
+            "part_id": "Mat_Sample_0524"
+        },
+        {
+            "mu": 1214.12,
+            "part_id": "Mat_Sample_0525"
+        },
+        {
+            "mu": 2005.77,
+            "part_id": "Mat_Sample_0526"
+        },
+        {
+            "mu": 1371.58,
+            "part_id": "Mat_Sample_0527"
+        },
+        {
+            "mu": 2899.62,
+            "part_id": "Mat_Sample_0528"
+        },
+        {
+            "mu": 1131.68,
+            "part_id": "Mat_Sample_0529"
+        },
+        {
+            "mu": 2255.16,
+            "part_id": "Mat_Sample_0530"
+        },
+        {
+            "mu": 2802.52,
+            "part_id": "Mat_Sample_0531"
+        },
+        {
+            "mu": 2908.44,
+            "part_id": "Mat_Sample_0532"
+        },
+        {
+            "mu": 1378.84,
+            "part_id": "Mat_Sample_0533"
+        },
+        {
+            "mu": 1202.88,
+            "part_id": "Mat_Sample_0534"
+        },
+        {
+            "mu": 2787.25,
+            "part_id": "Mat_Sample_0535"
+        },
+        {
+            "mu": 2563.71,
+            "part_id": "Mat_Sample_0536"
+        },
+        {
+            "mu": 1039.47,
+            "part_id": "Mat_Sample_0537"
+        },
+        {
+            "mu": 1874.91,
+            "part_id": "Mat_Sample_0538"
+        },
+        {
+            "mu": 1937.54,
+            "part_id": "Mat_Sample_0539"
+        },
+        {
+            "mu": 2838.86,
+            "part_id": "Mat_Sample_0540"
+        },
+        {
+            "mu": 2824.58,
+            "part_id": "Mat_Sample_0541"
+        },
+        {
+            "mu": 2284.01,
+            "part_id": "Mat_Sample_0542"
+        },
+        {
+            "mu": 1908.32,
+            "part_id": "Mat_Sample_0543"
+        },
+        {
+            "mu": 1756.7,
+            "part_id": "Mat_Sample_0544"
+        },
+        {
+            "mu": 1286.8,
+            "part_id": "Mat_Sample_0545"
+        },
+        {
+            "mu": 1951.52,
+            "part_id": "Mat_Sample_0546"
+        },
+        {
+            "mu": 1118.87,
+            "part_id": "Mat_Sample_0547"
+        },
+        {
+            "mu": 2919.35,
+            "part_id": "Mat_Sample_0548"
+        },
+        {
+            "mu": 2753.15,
+            "part_id": "Mat_Sample_0549"
+        },
+        {
+            "mu": 2847.7,
+            "part_id": "Mat_Sample_0550"
+        },
+        {
+            "mu": 1059.89,
+            "part_id": "Mat_Sample_0551"
+        },
+        {
+            "mu": 2367.86,
+            "part_id": "Mat_Sample_0552"
+        },
+        {
+            "mu": 1120.61,
+            "part_id": "Mat_Sample_0553"
+        },
+        {
+            "mu": 2395.33,
+            "part_id": "Mat_Sample_0554"
+        },
+        {
+            "mu": 1114.47,
+            "part_id": "Mat_Sample_0555"
+        },
+        {
+            "mu": 1041.05,
+            "part_id": "Mat_Sample_0556"
+        },
+        {
+            "mu": 1220.24,
+            "part_id": "Mat_Sample_0557"
+        },
+        {
+            "mu": 1768.5,
+            "part_id": "Mat_Sample_0558"
+        },
+        {
+            "mu": 1476.35,
+            "part_id": "Mat_Sample_0559"
+        },
+        {
+            "mu": 1685.75,
+            "part_id": "Mat_Sample_0560"
+        },
+        {
+            "mu": 1178.59,
+            "part_id": "Mat_Sample_0561"
+        },
+        {
+            "mu": 1051.83,
+            "part_id": "Mat_Sample_0562"
+        },
+        {
+            "mu": 2964.94,
+            "part_id": "Mat_Sample_0563"
+        },
+        {
+            "mu": 1701.35,
+            "part_id": "Mat_Sample_0564"
+        },
+        {
+            "mu": 1743.75,
+            "part_id": "Mat_Sample_0565"
+        },
+        {
+            "mu": 2043.64,
+            "part_id": "Mat_Sample_0566"
+        },
+        {
+            "mu": 1346.03,
+            "part_id": "Mat_Sample_0567"
+        },
+        {
+            "mu": 1183.54,
+            "part_id": "Mat_Sample_0568"
+        },
+        {
+            "mu": 2342.29,
+            "part_id": "Mat_Sample_0569"
+        },
+        {
+            "mu": 1549.09,
+            "part_id": "Mat_Sample_0570"
+        },
+        {
+            "mu": 1600.53,
+            "part_id": "Mat_Sample_0571"
+        },
+        {
+            "mu": 1880.78,
+            "part_id": "Mat_Sample_0572"
+        },
+        {
+            "mu": 1625.85,
+            "part_id": "Mat_Sample_0573"
+        },
+        {
+            "mu": 2817.23,
+            "part_id": "Mat_Sample_0574"
+        },
+        {
+            "mu": 2386.98,
+            "part_id": "Mat_Sample_0575"
+        },
+        {
+            "mu": 1919.02,
+            "part_id": "Mat_Sample_0576"
+        },
+        {
+            "mu": 1407.77,
+            "part_id": "Mat_Sample_0577"
+        },
+        {
+            "mu": 2598.92,
+            "part_id": "Mat_Sample_0578"
+        },
+        {
+            "mu": 1013.85,
+            "part_id": "Mat_Sample_0579"
+        },
+        {
+            "mu": 2242.31,
+            "part_id": "Mat_Sample_0580"
+        },
+        {
+            "mu": 1639.49,
+            "part_id": "Mat_Sample_0581"
+        },
+        {
+            "mu": 2744.79,
+            "part_id": "Mat_Sample_0582"
+        },
+        {
+            "mu": 1952.01,
+            "part_id": "Mat_Sample_0583"
+        },
+        {
+            "mu": 1473.36,
+            "part_id": "Mat_Sample_0584"
+        },
+        {
+            "mu": 1761.14,
+            "part_id": "Mat_Sample_0585"
+        },
+        {
+            "mu": 2269.19,
+            "part_id": "Mat_Sample_0586"
+        },
+        {
+            "mu": 1259.31,
+            "part_id": "Mat_Sample_0587"
+        },
+        {
+            "mu": 1725.86,
+            "part_id": "Mat_Sample_0588"
+        },
+        {
+            "mu": 2302.01,
+            "part_id": "Mat_Sample_0589"
+        },
+        {
+            "mu": 1297.29,
+            "part_id": "Mat_Sample_0590"
+        },
+        {
+            "mu": 1147.81,
+            "part_id": "Mat_Sample_0591"
+        },
+        {
+            "mu": 2903.3,
+            "part_id": "Mat_Sample_0592"
+        },
+        {
+            "mu": 1773.33,
+            "part_id": "Mat_Sample_0593"
+        },
+        {
+            "mu": 1816.16,
+            "part_id": "Mat_Sample_0594"
+        },
+        {
+            "mu": 1784.37,
+            "part_id": "Mat_Sample_0595"
+        },
+        {
+            "mu": 2829.0,
+            "part_id": "Mat_Sample_0596"
+        },
+        {
+            "mu": 1804.99,
+            "part_id": "Mat_Sample_0597"
+        },
+        {
+            "mu": 2554.05,
+            "part_id": "Mat_Sample_0598"
+        },
+        {
+            "mu": 1963.63,
+            "part_id": "Mat_Sample_0599"
+        },
+        {
+            "mu": 2388.97,
+            "part_id": "Mat_Sample_0600"
+        },
+        {
+            "mu": 1575.26,
+            "part_id": "Mat_Sample_0601"
+        },
+        {
+            "mu": 2233.56,
+            "part_id": "Mat_Sample_0602"
+        },
+        {
+            "mu": 2586.2,
+            "part_id": "Mat_Sample_0603"
+        },
+        {
+            "mu": 2799.88,
+            "part_id": "Mat_Sample_0604"
+        },
+        {
+            "mu": 1077.51,
+            "part_id": "Mat_Sample_0605"
+        },
+        {
+            "mu": 2981.53,
+            "part_id": "Mat_Sample_0606"
+        },
+        {
+            "mu": 1328.28,
+            "part_id": "Mat_Sample_0607"
+        },
+        {
+            "mu": 2873.65,
+            "part_id": "Mat_Sample_0608"
+        },
+        {
+            "mu": 2334.65,
+            "part_id": "Mat_Sample_0609"
+        },
+        {
+            "mu": 2808.89,
+            "part_id": "Mat_Sample_0610"
+        },
+        {
+            "mu": 2868.12,
+            "part_id": "Mat_Sample_0611"
+        },
+        {
+            "mu": 1334.91,
+            "part_id": "Mat_Sample_0612"
+        },
+        {
+            "mu": 2890.65,
+            "part_id": "Mat_Sample_0613"
+        },
+        {
+            "mu": 1468.91,
+            "part_id": "Mat_Sample_0614"
+        },
+        {
+            "mu": 1360.41,
+            "part_id": "Mat_Sample_0615"
+        },
+        {
+            "mu": 1302.24,
+            "part_id": "Mat_Sample_0616"
+        },
+        {
+            "mu": 1710.44,
+            "part_id": "Mat_Sample_0617"
+        },
+        {
+            "mu": 2537.06,
+            "part_id": "Mat_Sample_0618"
+        },
+        {
+            "mu": 2347.45,
+            "part_id": "Mat_Sample_0619"
+        },
+        {
+            "mu": 1326.73,
+            "part_id": "Mat_Sample_0620"
+        },
+        {
+            "mu": 2118.61,
+            "part_id": "Mat_Sample_0621"
+        },
+        {
+            "mu": 2222.4,
+            "part_id": "Mat_Sample_0622"
+        },
+        {
+            "mu": 1845.38,
+            "part_id": "Mat_Sample_0623"
+        },
+        {
+            "mu": 1458.27,
+            "part_id": "Mat_Sample_0624"
+        },
+        {
+            "mu": 2327.33,
+            "part_id": "Mat_Sample_0625"
+        },
+        {
+            "mu": 2414.92,
+            "part_id": "Mat_Sample_0626"
+        },
+        {
+            "mu": 1634.35,
+            "part_id": "Mat_Sample_0627"
+        },
+        {
+            "mu": 2632.52,
+            "part_id": "Mat_Sample_0628"
+        },
+        {
+            "mu": 1981.79,
+            "part_id": "Mat_Sample_0629"
+        },
+        {
+            "mu": 1670.56,
+            "part_id": "Mat_Sample_0630"
+        },
+        {
+            "mu": 1693.69,
+            "part_id": "Mat_Sample_0631"
+        },
+        {
+            "mu": 1945.61,
+            "part_id": "Mat_Sample_0632"
+        },
+        {
+            "mu": 2578.62,
+            "part_id": "Mat_Sample_0633"
+        },
+        {
+            "mu": 1925.11,
+            "part_id": "Mat_Sample_0634"
+        },
+        {
+            "mu": 2783.39,
+            "part_id": "Mat_Sample_0635"
+        },
+        {
+            "mu": 2356.31,
+            "part_id": "Mat_Sample_0636"
+        },
+        {
+            "mu": 1893.95,
+            "part_id": "Mat_Sample_0637"
+        },
+        {
+            "mu": 1385.73,
+            "part_id": "Mat_Sample_0638"
+        },
+        {
+            "mu": 2737.9,
+            "part_id": "Mat_Sample_0639"
+        },
+        {
+            "mu": 2426.27,
+            "part_id": "Mat_Sample_0640"
+        },
+        {
+            "mu": 1688.78,
+            "part_id": "Mat_Sample_0641"
+        },
+        {
+            "mu": 1526.9,
+            "part_id": "Mat_Sample_0642"
+        },
+        {
+            "mu": 2514.36,
+            "part_id": "Mat_Sample_0643"
+        },
+        {
+            "mu": 1903.85,
+            "part_id": "Mat_Sample_0644"
+        },
+        {
+            "mu": 2695.15,
+            "part_id": "Mat_Sample_0645"
+        },
+        {
+            "mu": 1226.93,
+            "part_id": "Mat_Sample_0646"
+        },
+        {
+            "mu": 2973.15,
+            "part_id": "Mat_Sample_0647"
+        },
+        {
+            "mu": 1615.35,
+            "part_id": "Mat_Sample_0648"
+        },
+        {
+            "mu": 2732.66,
+            "part_id": "Mat_Sample_0649"
+        },
+        {
+            "mu": 2273.06,
+            "part_id": "Mat_Sample_0650"
+        },
+        {
+            "mu": 1382.24,
+            "part_id": "Mat_Sample_0651"
+        },
+        {
+            "mu": 2860.04,
+            "part_id": "Mat_Sample_0652"
+        },
+        {
+            "mu": 2207.69,
+            "part_id": "Mat_Sample_0653"
+        },
+        {
+            "mu": 1958.17,
+            "part_id": "Mat_Sample_0654"
+        },
+        {
+            "mu": 1518.82,
+            "part_id": "Mat_Sample_0655"
+        },
+        {
+            "mu": 1508.32,
+            "part_id": "Mat_Sample_0656"
+        },
+        {
+            "mu": 1409.8,
+            "part_id": "Mat_Sample_0657"
+        },
+        {
+            "mu": 1976.76,
+            "part_id": "Mat_Sample_0658"
+        },
+        {
+            "mu": 1255.49,
+            "part_id": "Mat_Sample_0659"
+        },
+        {
+            "mu": 1095.63,
+            "part_id": "Mat_Sample_0660"
+        },
+        {
+            "mu": 2865.06,
+            "part_id": "Mat_Sample_0661"
+        },
+        {
+            "mu": 2281.11,
+            "part_id": "Mat_Sample_0662"
+        },
+        {
+            "mu": 2001.52,
+            "part_id": "Mat_Sample_0663"
+        },
+        {
+            "mu": 1679.9,
+            "part_id": "Mat_Sample_0664"
+        },
+        {
+            "mu": 2886.53,
+            "part_id": "Mat_Sample_0665"
+        },
+        {
+            "mu": 1541.52,
+            "part_id": "Mat_Sample_0666"
+        },
+        {
+            "mu": 1899.68,
+            "part_id": "Mat_Sample_0667"
+        },
+        {
+            "mu": 2276.55,
+            "part_id": "Mat_Sample_0668"
+        },
+        {
+            "mu": 2402.68,
+            "part_id": "Mat_Sample_0669"
+        },
+        {
+            "mu": 1055.92,
+            "part_id": "Mat_Sample_0670"
+        },
+        {
+            "mu": 2667.43,
+            "part_id": "Mat_Sample_0671"
+        },
+        {
+            "mu": 1099.14,
+            "part_id": "Mat_Sample_0672"
+        },
+        {
+            "mu": 2952.42,
+            "part_id": "Mat_Sample_0673"
+        },
+        {
+            "mu": 1755.52,
+            "part_id": "Mat_Sample_0674"
+        },
+        {
+            "mu": 1267.78,
+            "part_id": "Mat_Sample_0675"
+        },
+        {
+            "mu": 2038.34,
+            "part_id": "Mat_Sample_0676"
+        },
+        {
+            "mu": 1434.19,
+            "part_id": "Mat_Sample_0677"
+        },
+        {
+            "mu": 1057.83,
+            "part_id": "Mat_Sample_0678"
+        },
+        {
+            "mu": 1604.59,
+            "part_id": "Mat_Sample_0679"
+        },
+        {
+            "mu": 2616.66,
+            "part_id": "Mat_Sample_0680"
+        },
+        {
+            "mu": 1755.06,
+            "part_id": "Mat_Sample_0681"
+        },
+        {
+            "mu": 1318.49,
+            "part_id": "Mat_Sample_0682"
+        },
+        {
+            "mu": 1456.77,
+            "part_id": "Mat_Sample_0683"
+        },
+        {
+            "mu": 2684.0,
+            "part_id": "Mat_Sample_0684"
+        },
+        {
+            "mu": 1353.53,
+            "part_id": "Mat_Sample_0685"
+        },
+        {
+            "mu": 1802.96,
+            "part_id": "Mat_Sample_0686"
+        },
+        {
+            "mu": 1781.01,
+            "part_id": "Mat_Sample_0687"
+        },
+        {
+            "mu": 1877.58,
+            "part_id": "Mat_Sample_0688"
+        },
+        {
+            "mu": 1638.0,
+            "part_id": "Mat_Sample_0689"
+        },
+        {
+            "mu": 2231.8,
+            "part_id": "Mat_Sample_0690"
+        },
+        {
+            "mu": 1658.08,
+            "part_id": "Mat_Sample_0691"
+        },
+        {
+            "mu": 2512.89,
+            "part_id": "Mat_Sample_0692"
+        },
+        {
+            "mu": 1383.88,
+            "part_id": "Mat_Sample_0693"
+        },
+        {
+            "mu": 1743.58,
+            "part_id": "Mat_Sample_0694"
+        },
+        {
+            "mu": 2581.55,
+            "part_id": "Mat_Sample_0695"
+        },
+        {
+            "mu": 2573.43,
+            "part_id": "Mat_Sample_0696"
+        },
+        {
+            "mu": 1569.55,
+            "part_id": "Mat_Sample_0697"
+        },
+        {
+            "mu": 1898.52,
+            "part_id": "Mat_Sample_0698"
+        },
+        {
+            "mu": 2411.71,
+            "part_id": "Mat_Sample_0699"
+        },
+        {
+            "mu": 1510.67,
+            "part_id": "Mat_Sample_0700"
+        },
+        {
+            "mu": 1045.62,
+            "part_id": "Mat_Sample_0701"
+        },
+        {
+            "mu": 2759.74,
+            "part_id": "Mat_Sample_0702"
+        },
+        {
+            "mu": 2110.66,
+            "part_id": "Mat_Sample_0703"
+        },
+        {
+            "mu": 1834.06,
+            "part_id": "Mat_Sample_0704"
+        },
+        {
+            "mu": 2191.81,
+            "part_id": "Mat_Sample_0705"
+        },
+        {
+            "mu": 2795.31,
+            "part_id": "Mat_Sample_0706"
+        },
+        {
+            "mu": 1258.87,
+            "part_id": "Mat_Sample_0707"
+        },
+        {
+            "mu": 2431.08,
+            "part_id": "Mat_Sample_0708"
+        },
+        {
+            "mu": 1494.52,
+            "part_id": "Mat_Sample_0709"
+        },
+        {
+            "mu": 2611.25,
+            "part_id": "Mat_Sample_0710"
+        },
+        {
+            "mu": 2857.9,
+            "part_id": "Mat_Sample_0711"
+        },
+        {
+            "mu": 1481.49,
+            "part_id": "Mat_Sample_0712"
+        },
+        {
+            "mu": 1631.11,
+            "part_id": "Mat_Sample_0713"
+        },
+        {
+            "mu": 2011.45,
+            "part_id": "Mat_Sample_0714"
+        },
+        {
+            "mu": 1429.68,
+            "part_id": "Mat_Sample_0715"
+        },
+        {
+            "mu": 2153.46,
+            "part_id": "Mat_Sample_0716"
+        },
+        {
+            "mu": 2814.99,
+            "part_id": "Mat_Sample_0717"
+        },
+        {
+            "mu": 1871.27,
+            "part_id": "Mat_Sample_0718"
+        },
+        {
+            "mu": 1165.69,
+            "part_id": "Mat_Sample_0719"
+        },
+        {
+            "mu": 2024.95,
+            "part_id": "Mat_Sample_0720"
+        },
+        {
+            "mu": 2534.02,
+            "part_id": "Mat_Sample_0721"
+        },
+        {
+            "mu": 1415.01,
+            "part_id": "Mat_Sample_0722"
+        },
+        {
+            "mu": 2692.39,
+            "part_id": "Mat_Sample_0723"
+        },
+        {
+            "mu": 2521.42,
+            "part_id": "Mat_Sample_0724"
+        },
+        {
+            "mu": 2048.87,
+            "part_id": "Mat_Sample_0725"
+        },
+        {
+            "mu": 2348.55,
+            "part_id": "Mat_Sample_0726"
+        },
+        {
+            "mu": 2499.02,
+            "part_id": "Mat_Sample_0727"
+        },
+        {
+            "mu": 2272.66,
+            "part_id": "Mat_Sample_0728"
+        },
+        {
+            "mu": 2310.7,
+            "part_id": "Mat_Sample_0729"
+        },
+        {
+            "mu": 2717.72,
+            "part_id": "Mat_Sample_0730"
+        },
+        {
+            "mu": 2924.71,
+            "part_id": "Mat_Sample_0731"
+        },
+        {
+            "mu": 2085.55,
+            "part_id": "Mat_Sample_0732"
+        },
+        {
+            "mu": 1690.37,
+            "part_id": "Mat_Sample_0733"
+        },
+        {
+            "mu": 1734.25,
+            "part_id": "Mat_Sample_0734"
+        },
+        {
+            "mu": 2043.85,
+            "part_id": "Mat_Sample_0735"
+        },
+        {
+            "mu": 1326.47,
+            "part_id": "Mat_Sample_0736"
+        },
+        {
+            "mu": 2830.06,
+            "part_id": "Mat_Sample_0737"
+        },
+        {
+            "mu": 1242.7,
+            "part_id": "Mat_Sample_0738"
+        },
+        {
+            "mu": 1391.57,
+            "part_id": "Mat_Sample_0739"
+        },
+        {
+            "mu": 1443.58,
+            "part_id": "Mat_Sample_0740"
+        },
+        {
+            "mu": 1330.16,
+            "part_id": "Mat_Sample_0741"
+        },
+        {
+            "mu": 1779.82,
+            "part_id": "Mat_Sample_0742"
+        },
+        {
+            "mu": 2655.12,
+            "part_id": "Mat_Sample_0743"
+        },
+        {
+            "mu": 2227.72,
+            "part_id": "Mat_Sample_0744"
+        },
+        {
+            "mu": 2118.34,
+            "part_id": "Mat_Sample_0745"
+        },
+        {
+            "mu": 2018.19,
+            "part_id": "Mat_Sample_0746"
+        },
+        {
+            "mu": 2744.67,
+            "part_id": "Mat_Sample_0747"
+        },
+        {
+            "mu": 2591.96,
+            "part_id": "Mat_Sample_0748"
+        },
+        {
+            "mu": 1545.85,
+            "part_id": "Mat_Sample_0749"
+        },
+        {
+            "mu": 1016.99,
+            "part_id": "Mat_Sample_0750"
+        },
+        {
+            "mu": 1887.51,
+            "part_id": "Mat_Sample_0751"
+        },
+        {
+            "mu": 2358.3,
+            "part_id": "Mat_Sample_0752"
+        },
+        {
+            "mu": 1930.5,
+            "part_id": "Mat_Sample_0753"
+        },
+        {
+            "mu": 2475.87,
+            "part_id": "Mat_Sample_0754"
+        },
+        {
+            "mu": 1593.51,
+            "part_id": "Mat_Sample_0755"
+        },
+        {
+            "mu": 2710.03,
+            "part_id": "Mat_Sample_0756"
+        },
+        {
+            "mu": 1032.99,
+            "part_id": "Mat_Sample_0757"
+        },
+        {
+            "mu": 2389.11,
+            "part_id": "Mat_Sample_0758"
+        },
+        {
+            "mu": 1633.89,
+            "part_id": "Mat_Sample_0759"
+        },
+        {
+            "mu": 1009.75,
+            "part_id": "Mat_Sample_0760"
+        },
+        {
+            "mu": 2822.27,
+            "part_id": "Mat_Sample_0761"
+        },
+        {
+            "mu": 2128.87,
+            "part_id": "Mat_Sample_0762"
+        },
+        {
+            "mu": 1230.37,
+            "part_id": "Mat_Sample_0763"
+        },
+        {
+            "mu": 2319.68,
+            "part_id": "Mat_Sample_0764"
+        },
+        {
+            "mu": 2384.31,
+            "part_id": "Mat_Sample_0765"
+        },
+        {
+            "mu": 2834.75,
+            "part_id": "Mat_Sample_0766"
+        },
+        {
+            "mu": 1720.23,
+            "part_id": "Mat_Sample_0767"
+        },
+        {
+            "mu": 1000.89,
+            "part_id": "Mat_Sample_0768"
+        },
+        {
+            "mu": 1750.35,
+            "part_id": "Mat_Sample_0769"
+        },
+        {
+            "mu": 1757.39,
+            "part_id": "Mat_Sample_0770"
+        },
+        {
+            "mu": 1109.43,
+            "part_id": "Mat_Sample_0771"
+        },
+        {
+            "mu": 2507.22,
+            "part_id": "Mat_Sample_0772"
+        },
+        {
+            "mu": 1673.21,
+            "part_id": "Mat_Sample_0773"
+        },
+        {
+            "mu": 1519.62,
+            "part_id": "Mat_Sample_0774"
+        },
+        {
+            "mu": 2879.61,
+            "part_id": "Mat_Sample_0775"
+        },
+        {
+            "mu": 1934.24,
+            "part_id": "Mat_Sample_0776"
+        },
+        {
+            "mu": 1506.51,
+            "part_id": "Mat_Sample_0777"
+        },
+        {
+            "mu": 1965.73,
+            "part_id": "Mat_Sample_0778"
+        },
+        {
+            "mu": 2039.34,
+            "part_id": "Mat_Sample_0779"
+        },
+        {
+            "mu": 1959.02,
+            "part_id": "Mat_Sample_0780"
+        },
+        {
+            "mu": 2184.82,
+            "part_id": "Mat_Sample_0781"
+        },
+        {
+            "mu": 1842.83,
+            "part_id": "Mat_Sample_0782"
+        },
+        {
+            "mu": 2950.77,
+            "part_id": "Mat_Sample_0783"
+        },
+        {
+            "mu": 2061.62,
+            "part_id": "Mat_Sample_0784"
+        },
+        {
+            "mu": 2594.71,
+            "part_id": "Mat_Sample_0785"
+        },
+        {
+            "mu": 1854.39,
+            "part_id": "Mat_Sample_0786"
+        },
+        {
+            "mu": 1998.63,
+            "part_id": "Mat_Sample_0787"
+        },
+        {
+            "mu": 2935.99,
+            "part_id": "Mat_Sample_0788"
+        },
+        {
+            "mu": 1872.5,
+            "part_id": "Mat_Sample_0789"
+        },
+        {
+            "mu": 1024.78,
+            "part_id": "Mat_Sample_0790"
+        },
+        {
+            "mu": 1583.74,
+            "part_id": "Mat_Sample_0791"
+        },
+        {
+            "mu": 1939.35,
+            "part_id": "Mat_Sample_0792"
+        },
+        {
+            "mu": 1121.26,
+            "part_id": "Mat_Sample_0793"
+        },
+        {
+            "mu": 1268.19,
+            "part_id": "Mat_Sample_0794"
+        },
+        {
+            "mu": 1450.52,
+            "part_id": "Mat_Sample_0795"
+        },
+        {
+            "mu": 1263.4,
+            "part_id": "Mat_Sample_0796"
+        },
+        {
+            "mu": 2918.18,
+            "part_id": "Mat_Sample_0797"
+        },
+        {
+            "mu": 2361.62,
+            "part_id": "Mat_Sample_0798"
+        },
+        {
+            "mu": 2806.49,
+            "part_id": "Mat_Sample_0799"
+        },
+        {
+            "mu": 1684.49,
+            "part_id": "Mat_Sample_0800"
+        },
+        {
+            "mu": 2943.18,
+            "part_id": "Mat_Sample_0801"
+        },
+        {
+            "mu": 1848.1,
+            "part_id": "Mat_Sample_0802"
+        },
+        {
+            "mu": 1986.32,
+            "part_id": "Mat_Sample_0803"
+        },
+        {
+            "mu": 1247.85,
+            "part_id": "Mat_Sample_0804"
+        },
+        {
+            "mu": 2344.49,
+            "part_id": "Mat_Sample_0805"
+        },
+        {
+            "mu": 2400.26,
+            "part_id": "Mat_Sample_0806"
+        },
+        {
+            "mu": 2931.57,
+            "part_id": "Mat_Sample_0807"
+        },
+        {
+            "mu": 1170.48,
+            "part_id": "Mat_Sample_0808"
+        },
+        {
+            "mu": 2798.04,
+            "part_id": "Mat_Sample_0809"
+        },
+        {
+            "mu": 2081.03,
+            "part_id": "Mat_Sample_0810"
+        },
+        {
+            "mu": 2030.57,
+            "part_id": "Mat_Sample_0811"
+        },
+        {
+            "mu": 2558.4,
+            "part_id": "Mat_Sample_0812"
+        },
+        {
+            "mu": 1641.06,
+            "part_id": "Mat_Sample_0813"
+        },
+        {
+            "mu": 2455.09,
+            "part_id": "Mat_Sample_0814"
+        },
+        {
+            "mu": 2088.15,
+            "part_id": "Mat_Sample_0815"
+        },
+        {
+            "mu": 1180.92,
+            "part_id": "Mat_Sample_0816"
+        },
+        {
+            "mu": 1012.5,
+            "part_id": "Mat_Sample_0817"
+        },
+        {
+            "mu": 1701.89,
+            "part_id": "Mat_Sample_0818"
+        },
+        {
+            "mu": 1968.13,
+            "part_id": "Mat_Sample_0819"
+        },
+        {
+            "mu": 2287.14,
+            "part_id": "Mat_Sample_0820"
+        },
+        {
+            "mu": 1306.7,
+            "part_id": "Mat_Sample_0821"
+        },
+        {
+            "mu": 1362.43,
+            "part_id": "Mat_Sample_0822"
+        },
+        {
+            "mu": 2729.91,
+            "part_id": "Mat_Sample_0823"
+        },
+        {
+            "mu": 1276.93,
+            "part_id": "Mat_Sample_0824"
+        },
+        {
+            "mu": 2531.97,
+            "part_id": "Mat_Sample_0825"
+        },
+        {
+            "mu": 2909.38,
+            "part_id": "Mat_Sample_0826"
+        },
+        {
+            "mu": 2172.86,
+            "part_id": "Mat_Sample_0827"
+        },
+        {
+            "mu": 1953.87,
+            "part_id": "Mat_Sample_0828"
+        },
+        {
+            "mu": 2305.46,
+            "part_id": "Mat_Sample_0829"
+        },
+        {
+            "mu": 2327.04,
+            "part_id": "Mat_Sample_0830"
+        },
+        {
+            "mu": 2598.08,
+            "part_id": "Mat_Sample_0831"
+        },
+        {
+            "mu": 1624.07,
+            "part_id": "Mat_Sample_0832"
+        },
+        {
+            "mu": 1021.43,
+            "part_id": "Mat_Sample_0833"
+        },
+        {
+            "mu": 1501.88,
+            "part_id": "Mat_Sample_0834"
+        },
+        {
+            "mu": 2232.26,
+            "part_id": "Mat_Sample_0835"
+        },
+        {
+            "mu": 2733.19,
+            "part_id": "Mat_Sample_0836"
+        },
+        {
+            "mu": 2898.79,
+            "part_id": "Mat_Sample_0837"
+        },
+        {
+            "mu": 2907.85,
+            "part_id": "Mat_Sample_0838"
+        },
+        {
+            "mu": 1565.1,
+            "part_id": "Mat_Sample_0839"
+        },
+        {
+            "mu": 1239.04,
+            "part_id": "Mat_Sample_0840"
+        },
+        {
+            "mu": 2150.12,
+            "part_id": "Mat_Sample_0841"
+        },
+        {
+            "mu": 1610.09,
+            "part_id": "Mat_Sample_0842"
+        },
+        {
+            "mu": 1747.74,
+            "part_id": "Mat_Sample_0843"
+        },
+        {
+            "mu": 1172.15,
+            "part_id": "Mat_Sample_0844"
+        },
+        {
+            "mu": 1774.82,
+            "part_id": "Mat_Sample_0845"
+        },
+        {
+            "mu": 1615.91,
+            "part_id": "Mat_Sample_0846"
+        },
+        {
+            "mu": 1665.59,
+            "part_id": "Mat_Sample_0847"
+        },
+        {
+            "mu": 2620.91,
+            "part_id": "Mat_Sample_0848"
+        },
+        {
+            "mu": 2649.68,
+            "part_id": "Mat_Sample_0849"
+        },
+        {
+            "mu": 2243.7,
+            "part_id": "Mat_Sample_0850"
+        },
+        {
+            "mu": 1715.03,
+            "part_id": "Mat_Sample_0851"
+        },
+        {
+            "mu": 1946.91,
+            "part_id": "Mat_Sample_0852"
+        },
+        {
+            "mu": 2702.14,
+            "part_id": "Mat_Sample_0853"
+        },
+        {
+            "mu": 2167.12,
+            "part_id": "Mat_Sample_0854"
+        },
+        {
+            "mu": 2056.34,
+            "part_id": "Mat_Sample_0855"
+        },
+        {
+            "mu": 2006.21,
+            "part_id": "Mat_Sample_0856"
+        },
+        {
+            "mu": 2364.21,
+            "part_id": "Mat_Sample_0857"
+        },
+        {
+            "mu": 1820.96,
+            "part_id": "Mat_Sample_0858"
+        },
+        {
+            "mu": 1617.91,
+            "part_id": "Mat_Sample_0859"
+        },
+        {
+            "mu": 1208.79,
+            "part_id": "Mat_Sample_0860"
+        },
+        {
+            "mu": 1453.49,
+            "part_id": "Mat_Sample_0861"
+        },
+        {
+            "mu": 2487.9,
+            "part_id": "Mat_Sample_0862"
+        },
+        {
+            "mu": 1477.83,
+            "part_id": "Mat_Sample_0863"
+        },
+        {
+            "mu": 1274.03,
+            "part_id": "Mat_Sample_0864"
+        },
+        {
+            "mu": 2571.11,
+            "part_id": "Mat_Sample_0865"
+        },
+        {
+            "mu": 1048.49,
+            "part_id": "Mat_Sample_0866"
+        },
+        {
+            "mu": 1194.38,
+            "part_id": "Mat_Sample_0867"
+        },
+        {
+            "mu": 2255.43,
+            "part_id": "Mat_Sample_0868"
+        },
+        {
+            "mu": 1549.95,
+            "part_id": "Mat_Sample_0869"
+        },
+        {
+            "mu": 1644.7,
+            "part_id": "Mat_Sample_0870"
+        },
+        {
+            "mu": 1542.95,
+            "part_id": "Mat_Sample_0871"
+        },
+        {
+            "mu": 1699.76,
+            "part_id": "Mat_Sample_0872"
+        },
+        {
+            "mu": 2982.39,
+            "part_id": "Mat_Sample_0873"
+        },
+        {
+            "mu": 2490.01,
+            "part_id": "Mat_Sample_0874"
+        },
+        {
+            "mu": 1075.44,
+            "part_id": "Mat_Sample_0875"
+        },
+        {
+            "mu": 1602.8,
+            "part_id": "Mat_Sample_0876"
+        },
+        {
+            "mu": 2103.26,
+            "part_id": "Mat_Sample_0877"
+        },
+        {
+            "mu": 1312.54,
+            "part_id": "Mat_Sample_0878"
+        },
+        {
+            "mu": 2516.01,
+            "part_id": "Mat_Sample_0879"
+        },
+        {
+            "mu": 2161.25,
+            "part_id": "Mat_Sample_0880"
+        },
+        {
+            "mu": 1694.64,
+            "part_id": "Mat_Sample_0881"
+        },
+        {
+            "mu": 2550.11,
+            "part_id": "Mat_Sample_0882"
+        },
+        {
+            "mu": 2947.55,
+            "part_id": "Mat_Sample_0883"
+        },
+        {
+            "mu": 2249.1,
+            "part_id": "Mat_Sample_0884"
+        },
+        {
+            "mu": 2839.59,
+            "part_id": "Mat_Sample_0885"
+        },
+        {
+            "mu": 2881.08,
+            "part_id": "Mat_Sample_0886"
+        },
+        {
+            "mu": 2427.31,
+            "part_id": "Mat_Sample_0887"
+        },
+        {
+            "mu": 2923.57,
+            "part_id": "Mat_Sample_0888"
+        },
+        {
+            "mu": 1736.78,
+            "part_id": "Mat_Sample_0889"
+        },
+        {
+            "mu": 2144.11,
+            "part_id": "Mat_Sample_0890"
+        },
+        {
+            "mu": 1124.18,
+            "part_id": "Mat_Sample_0891"
+        },
+        {
+            "mu": 1079.07,
+            "part_id": "Mat_Sample_0892"
+        },
+        {
+            "mu": 1112.57,
+            "part_id": "Mat_Sample_0893"
+        },
+        {
+            "mu": 2986.26,
+            "part_id": "Mat_Sample_0894"
+        },
+        {
+            "mu": 2315.58,
+            "part_id": "Mat_Sample_0895"
+        },
+        {
+            "mu": 1117.3,
+            "part_id": "Mat_Sample_0896"
+        },
+        {
+            "mu": 2436.12,
+            "part_id": "Mat_Sample_0897"
+        },
+        {
+            "mu": 2901.5,
+            "part_id": "Mat_Sample_0898"
+        },
+        {
+            "mu": 1287.83,
+            "part_id": "Mat_Sample_0899"
+        },
+        {
+            "mu": 2244.24,
+            "part_id": "Mat_Sample_0900"
+        },
+        {
+            "mu": 2136.29,
+            "part_id": "Mat_Sample_0901"
+        },
+        {
+            "mu": 1951.95,
+            "part_id": "Mat_Sample_0902"
+        },
+        {
+            "mu": 1812.28,
+            "part_id": "Mat_Sample_0903"
+        },
+        {
+            "mu": 1161.23,
+            "part_id": "Mat_Sample_0904"
+        },
+        {
+            "mu": 2774.55,
+            "part_id": "Mat_Sample_0905"
+        },
+        {
+            "mu": 2699.81,
+            "part_id": "Mat_Sample_0906"
+        },
+        {
+            "mu": 1553.33,
+            "part_id": "Mat_Sample_0907"
+        },
+        {
+            "mu": 2376.8,
+            "part_id": "Mat_Sample_0908"
+        },
+        {
+            "mu": 2815.92,
+            "part_id": "Mat_Sample_0909"
+        },
+        {
+            "mu": 2344.94,
+            "part_id": "Mat_Sample_0910"
+        },
+        {
+            "mu": 2744.04,
+            "part_id": "Mat_Sample_0911"
+        },
+        {
+            "mu": 1758.94,
+            "part_id": "Mat_Sample_0912"
+        },
+        {
+            "mu": 2338.58,
+            "part_id": "Mat_Sample_0913"
+        },
+        {
+            "mu": 2212.02,
+            "part_id": "Mat_Sample_0914"
+        },
+        {
+            "mu": 2784.04,
+            "part_id": "Mat_Sample_0915"
+        },
+        {
+            "mu": 1861.46,
+            "part_id": "Mat_Sample_0916"
+        },
+        {
+            "mu": 2399.86,
+            "part_id": "Mat_Sample_0917"
+        },
+        {
+            "mu": 2909.58,
+            "part_id": "Mat_Sample_0918"
+        },
+        {
+            "mu": 2477.96,
+            "part_id": "Mat_Sample_0919"
+        },
+        {
+            "mu": 1107.16,
+            "part_id": "Mat_Sample_0920"
+        },
+        {
+            "mu": 1491.68,
+            "part_id": "Mat_Sample_0921"
+        },
+        {
+            "mu": 1032.42,
+            "part_id": "Mat_Sample_0922"
+        },
+        {
+            "mu": 2962.71,
+            "part_id": "Mat_Sample_0923"
+        },
+        {
+            "mu": 2351.09,
+            "part_id": "Mat_Sample_0924"
+        },
+        {
+            "mu": 2669.75,
+            "part_id": "Mat_Sample_0925"
+        },
+        {
+            "mu": 2512.34,
+            "part_id": "Mat_Sample_0926"
+        },
+        {
+            "mu": 1205.24,
+            "part_id": "Mat_Sample_0927"
+        },
+        {
+            "mu": 2097.25,
+            "part_id": "Mat_Sample_0928"
+        },
+        {
+            "mu": 1379.85,
+            "part_id": "Mat_Sample_0929"
+        },
+        {
+            "mu": 1959.15,
+            "part_id": "Mat_Sample_0930"
+        },
+        {
+            "mu": 2475.43,
+            "part_id": "Mat_Sample_0931"
+        },
+        {
+            "mu": 2779.96,
+            "part_id": "Mat_Sample_0932"
+        },
+        {
+            "mu": 2313.23,
+            "part_id": "Mat_Sample_0933"
+        },
+        {
+            "mu": 2030.74,
+            "part_id": "Mat_Sample_0934"
+        },
+        {
+            "mu": 2942.65,
+            "part_id": "Mat_Sample_0935"
+        },
+        {
+            "mu": 1674.45,
+            "part_id": "Mat_Sample_0936"
+        },
+        {
+            "mu": 2104.41,
+            "part_id": "Mat_Sample_0937"
+        },
+        {
+            "mu": 1142.42,
+            "part_id": "Mat_Sample_0938"
+        },
+        {
+            "mu": 1584.47,
+            "part_id": "Mat_Sample_0939"
+        },
+        {
+            "mu": 1347.5,
+            "part_id": "Mat_Sample_0940"
+        },
+        {
+            "mu": 1624.57,
+            "part_id": "Mat_Sample_0941"
+        },
+        {
+            "mu": 2392.24,
+            "part_id": "Mat_Sample_0942"
+        },
+        {
+            "mu": 2173.05,
+            "part_id": "Mat_Sample_0943"
+        },
+        {
+            "mu": 2134.32,
+            "part_id": "Mat_Sample_0944"
+        },
+        {
+            "mu": 2269.06,
+            "part_id": "Mat_Sample_0945"
+        },
+        {
+            "mu": 1362.84,
+            "part_id": "Mat_Sample_0946"
+        },
+        {
+            "mu": 2155.81,
+            "part_id": "Mat_Sample_0947"
+        },
+        {
+            "mu": 1402.74,
+            "part_id": "Mat_Sample_0948"
+        },
+        {
+            "mu": 1348.89,
+            "part_id": "Mat_Sample_0949"
+        },
+        {
+            "mu": 2879.85,
+            "part_id": "Mat_Sample_0950"
+        },
+        {
+            "mu": 2672.36,
+            "part_id": "Mat_Sample_0951"
+        },
+        {
+            "mu": 1409.54,
+            "part_id": "Mat_Sample_0952"
+        },
+        {
+            "mu": 1883.62,
+            "part_id": "Mat_Sample_0953"
+        },
+        {
+            "mu": 1926.99,
+            "part_id": "Mat_Sample_0954"
+        },
+        {
+            "mu": 1352.27,
+            "part_id": "Mat_Sample_0955"
+        },
+        {
+            "mu": 2293.37,
+            "part_id": "Mat_Sample_0956"
+        },
+        {
+            "mu": 2939.29,
+            "part_id": "Mat_Sample_0957"
+        },
+        {
+            "mu": 2595.63,
+            "part_id": "Mat_Sample_0958"
+        },
+        {
+            "mu": 2183.7,
+            "part_id": "Mat_Sample_0959"
+        },
+        {
+            "mu": 2589.19,
+            "part_id": "Mat_Sample_0960"
+        },
+        {
+            "mu": 2483.22,
+            "part_id": "Mat_Sample_0961"
+        },
+        {
+            "mu": 1393.92,
+            "part_id": "Mat_Sample_0962"
+        },
+        {
+            "mu": 2250.89,
+            "part_id": "Mat_Sample_0963"
+        },
+        {
+            "mu": 1136.01,
+            "part_id": "Mat_Sample_0964"
+        },
+        {
+            "mu": 1704.22,
+            "part_id": "Mat_Sample_0965"
+        },
+        {
+            "mu": 2950.41,
+            "part_id": "Mat_Sample_0966"
+        },
+        {
+            "mu": 2233.56,
+            "part_id": "Mat_Sample_0967"
+        },
+        {
+            "mu": 1878.1,
+            "part_id": "Mat_Sample_0968"
+        },
+        {
+            "mu": 2024.7,
+            "part_id": "Mat_Sample_0969"
+        },
+        {
+            "mu": 1278.4,
+            "part_id": "Mat_Sample_0970"
+        },
+        {
+            "mu": 1651.6,
+            "part_id": "Mat_Sample_0971"
+        },
+        {
+            "mu": 1272.1,
+            "part_id": "Mat_Sample_0972"
+        },
+        {
+            "mu": 1546.55,
+            "part_id": "Mat_Sample_0973"
+        },
+        {
+            "mu": 2323.0,
+            "part_id": "Mat_Sample_0974"
+        },
+        {
+            "mu": 1747.44,
+            "part_id": "Mat_Sample_0975"
+        },
+        {
+            "mu": 2642.28,
+            "part_id": "Mat_Sample_0976"
+        },
+        {
+            "mu": 1983.4,
+            "part_id": "Mat_Sample_0977"
+        },
+        {
+            "mu": 1263.33,
+            "part_id": "Mat_Sample_0978"
+        },
+        {
+            "mu": 1256.46,
+            "part_id": "Mat_Sample_0979"
+        },
+        {
+            "mu": 2566.12,
+            "part_id": "Mat_Sample_0980"
+        },
+        {
+            "mu": 2239.87,
+            "part_id": "Mat_Sample_0981"
+        },
+        {
+            "mu": 1549.74,
+            "part_id": "Mat_Sample_0982"
+        },
+        {
+            "mu": 2581.29,
+            "part_id": "Mat_Sample_0983"
+        },
+        {
+            "mu": 1364.83,
+            "part_id": "Mat_Sample_0984"
+        },
+        {
+            "mu": 2170.39,
+            "part_id": "Mat_Sample_0985"
+        },
+        {
+            "mu": 2797.07,
+            "part_id": "Mat_Sample_0986"
+        },
+        {
+            "mu": 1897.11,
+            "part_id": "Mat_Sample_0987"
+        },
+        {
+            "mu": 2369.12,
+            "part_id": "Mat_Sample_0988"
+        },
+        {
+            "mu": 1943.01,
+            "part_id": "Mat_Sample_0989"
+        },
+        {
+            "mu": 2975.88,
+            "part_id": "Mat_Sample_0990"
+        },
+        {
+            "mu": 1866.08,
+            "part_id": "Mat_Sample_0991"
+        },
+        {
+            "mu": 2880.31,
+            "part_id": "Mat_Sample_0992"
+        },
+        {
+            "mu": 2575.3,
+            "part_id": "Mat_Sample_0993"
+        },
+        {
+            "mu": 1536.1,
+            "part_id": "Mat_Sample_0994"
+        },
+        {
+            "mu": 2944.9,
+            "part_id": "Mat_Sample_0995"
+        },
+        {
+            "mu": 2953.61,
+            "part_id": "Mat_Sample_0996"
+        },
+        {
+            "mu": 1529.7,
+            "part_id": "Mat_Sample_0997"
+        },
+        {
+            "mu": 2376.01,
+            "part_id": "Mat_Sample_0998"
+        },
+        {
+            "mu": 2211.38,
+            "part_id": "Mat_Sample_0999"
+        },
+        {
+            "mu": 2456.25,
+            "part_id": "Mat_Sample_1000"
+        }
+    ]
+}
