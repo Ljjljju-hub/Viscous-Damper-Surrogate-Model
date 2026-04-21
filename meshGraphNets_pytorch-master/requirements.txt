@@ -1,0 +1,10 @@
+matplotlib
+numpy
+opencv_python
+packaging
+Pillow
+torch
+torch_geometric
+torch_scatter
+tqdm
+tensorboard
