@@ -15,6 +15,20 @@ except ImportError:
     from utils.utils import NodeType
 
 
+CASE_FEATURE_NAMES = (
+    "c",
+    "sx",
+    "sy",
+    "r1",
+    "a2",
+    "b1",
+    "b2",
+    "A",
+    "Ts",
+    "mu",
+)
+
+
 def load_case_parameters(json_path: Path) -> Dict[str, dict]:
     with open(json_path, "r", encoding="utf-8") as f:
         raw = json.load(f)
@@ -25,19 +39,29 @@ def case_id_from_path(path: Path) -> str:
     return path.stem
 
 
+def build_case_features(params: dict, unit_scale: float) -> torch.Tensor:
+    geometry = params["geometry"]
+    loading = params["loading"]
+    material = params["material"]
+    values = [
+        float(geometry["c"]) * unit_scale,
+        float(geometry["sx"]) * unit_scale,
+        float(geometry["sy"]) * unit_scale,
+        float(geometry["r1"]) * unit_scale,
+        float(geometry["a2"]) * unit_scale,
+        float(geometry["b1"]) * unit_scale,
+        float(geometry["b2"]) * unit_scale,
+        float(loading["A"]) * unit_scale,
+        float(loading["Ts"]),
+        float(material["mu"]),
+    ]
+    return torch.tensor([values], dtype=torch.float32)
+
+
 def find_default_parameters_json(data_root: Path) -> Optional[Path]:
     candidates = [
         data_root / "4_Combined_Master_Dataset.json",
         data_root.parent / "4_Combined_Master_Dataset.json",
-        data_root.parents[1] / "计算有限元数据" / "4_Combined_Master_Dataset.json"
-        if len(data_root.parents) > 1
-        else None,
-        data_root.parents[1]
-        / "生成数据集参数"
-        / "Damper_Parameters_Datasets"
-        / "4_Combined_Master_Dataset.json"
-        if len(data_root.parents) > 1
-        else None,
     ]
     for candidate in candidates:
         if candidate is not None and candidate.exists():
@@ -189,6 +213,7 @@ class FpcDataset(Dataset):
             piston_velocity=torch.tensor(
                 [state.piston_velocity], dtype=torch.float32
             ),
+            case_features=build_case_features(mesh["params"], self.unit_scale),
             time=torch.tensor([state.time], dtype=torch.float32),
             case_id=case_id_from_path(file_path),
         )
