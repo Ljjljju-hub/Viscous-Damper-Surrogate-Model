@@ -2,14 +2,19 @@ from typing import Tuple
 
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 from torch_geometric.data import Data
 
 from .network import EncoderProcessorDecoder
 
 try:
+    from ..features import (
+        current_fields,
+        normalize_graph_features,
+        target_field_delta,
+    )
     from ..utils.normalization import Normalizer
 except ImportError:
+    from features import current_fields, normalize_graph_features, target_field_delta
     from utils.normalization import Normalizer
 
 
@@ -53,48 +58,21 @@ class SurrogateSimulator(nn.Module):
             if module.bias is not None:
                 nn.init.zeros_(module.bias)
 
-    def _graph_context(self, graph: Data) -> Tuple[torch.Tensor, torch.Tensor]:
-        case_features = graph.case_features.reshape(-1, self.case_feature_count)
-        time = graph.time.reshape(-1, 1)
-        displacement = graph.piston_displacement.reshape(-1, 1)
-        velocity = graph.piston_velocity.reshape(-1, 1)
-        context = torch.cat([case_features, time, displacement, velocity], dim=-1)
-
-        if hasattr(graph, "batch") and graph.batch is not None:
-            graph_index = graph.batch
-        else:
-            graph_index = torch.zeros(
-                graph.num_nodes, dtype=torch.long, device=graph.x.device
-            )
-        return context, graph_index
-
     def _build_model_graph(self, graph: Data, accumulate: bool) -> Data:
-        current_fields = graph.x[:, 1 : 1 + self.field_count]
-        context, graph_index = self._graph_context(graph)
-
-        field_features = self.field_normalizer(current_fields, accumulate)
-        position_features = self.position_normalizer(graph.pos, accumulate)
-        velocity_features = self.mesh_velocity_normalizer(
-            graph.mesh_velocity, accumulate
-        )
-        context_features = self.context_normalizer(context, accumulate)[graph_index]
-        region_features = F.one_hot(
-            graph.mesh_region.long(), num_classes=self.region_count
-        ).to(current_fields.dtype)
-
-        node_features = torch.cat(
-            [
-                field_features,
-                position_features,
-                velocity_features,
-                region_features,
-                context_features,
-            ],
-            dim=-1,
+        features = normalize_graph_features(
+            graph,
+            field_count=self.field_count,
+            case_feature_count=self.case_feature_count,
+            region_count=self.region_count,
+            field_normalizer=self.field_normalizer,
+            position_normalizer=self.position_normalizer,
+            mesh_velocity_normalizer=self.mesh_velocity_normalizer,
+            context_normalizer=self.context_normalizer,
+            accumulate=accumulate,
         )
         edge_features = self.edge_normalizer(graph.edge_attr, accumulate)
         return Data(
-            x=node_features,
+            x=features.combined,
             edge_attr=edge_features,
             edge_index=graph.edge_index,
         )
@@ -104,16 +82,16 @@ class SurrogateSimulator(nn.Module):
     ) -> Tuple[torch.Tensor, torch.Tensor]:
         model_graph = self._build_model_graph(graph, accumulate)
         predicted_delta = self.network(model_graph)
-        current_fields = graph.x[:, 1 : 1 + self.field_count]
-        target_delta = graph.y - current_fields
+        target_delta = target_field_delta(graph, self.field_count)
         normalized_target = self.output_normalizer(target_delta, accumulate)
         return predicted_delta, normalized_target
 
     def predict_next(self, graph: Data) -> torch.Tensor:
         model_graph = self._build_model_graph(graph, accumulate=False)
         normalized_delta = self.network(model_graph)
-        current_fields = graph.x[:, 1 : 1 + self.field_count]
-        return current_fields + self.output_normalizer.inverse(normalized_delta)
+        return current_fields(
+            graph, self.field_count
+        ) + self.output_normalizer.inverse(normalized_delta)
 
     def forward(self, graph: Data):
         if self.training:
