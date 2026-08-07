@@ -6,3 +6,5 @@ meshGraphNet_self/checkpoints/
 meshGraphNet_self/runs/
 /计算有限元数据/comsol_output/
 /计算有限元数据/comsol_hdf5/
+/计算有限元数据/batch_logs/
+/计算有限元数据/batch_state.json

@@ -1,127 +1,181 @@
-import pyvista as pv
+"""Incrementally convert COMSOL VTU exports to atomic HDF5 files."""
+
+from __future__ import annotations
+
+import argparse
+import os
+import re
+import traceback
+from pathlib import Path
+
 import h5py
 import numpy as np
-import re
-from pathlib import Path
-import traceback
+import pyvista as pv
 
 
-def vtu_to_hdf5(vtu_filepath: Path, h5_filepath: Path):
-    """核心转换逻辑（支持动态捕获移动网格的所有场变量）"""
-    print(f"📥 正在读取: {vtu_filepath.name}")
+BASE_DIR = Path(__file__).parent.resolve()
+DEFAULT_INPUT_DIR = BASE_DIR / "comsol_output"
+DEFAULT_OUTPUT_DIR = BASE_DIR / "comsol_hdf5"
+FIELD_PATTERN = re.compile(r"(.+)_@_t=(.*)")
+
+
+def is_valid_hdf5(path: Path) -> bool:
+    if not path.is_file() or path.stat().st_size <= 1024:
+        return False
+    try:
+        with h5py.File(path, "r") as handle:
+            coordinates = handle["mesh/coordinates"]
+            connectivity = handle["mesh/connectivity"]
+            time_steps = handle["time_steps"]
+            fields = handle["fields"]
+            if coordinates.ndim != 2 or coordinates.shape[0] == 0:
+                return False
+            if connectivity.size == 0 or time_steps.ndim != 1 or time_steps.size == 0:
+                return False
+            if not fields.keys():
+                return False
+            return all(
+                dataset.shape == (time_steps.size, coordinates.shape[0])
+                for dataset in fields.values()
+            )
+    except (OSError, KeyError, ValueError):
+        return False
+
+
+def vtu_to_hdf5(vtu_filepath: Path, h5_filepath: Path) -> list[str]:
+    """Convert one VTU and atomically publish the resulting HDF5 file."""
+    print(f"读取 {vtu_filepath.name}")
     mesh = pv.read(str(vtu_filepath))
+    fields_by_time: dict[str, dict[float, np.ndarray]] = {}
+    time_steps: set[float] = set()
 
-    array_names = mesh.point_data.keys()
+    for name in mesh.point_data.keys():
+        match = FIELD_PATTERN.fullmatch(name)
+        if not match:
+            continue
+        field_name = match.group(1).strip()
+        time_value = float(match.group(2))
+        values = np.asarray(mesh.point_data[name]).squeeze()
+        if values.shape != (mesh.number_of_points,):
+            raise ValueError(
+                f"场 {name} 不是节点标量场，形状为 {values.shape}"
+            )
+        time_steps.add(time_value)
+        fields_by_time.setdefault(field_name, {})[time_value] = values
 
-    # 【核心修复 1】放宽正则表达式：捕获任何变量名 (包括 u, v, x, y, 或带下划线的变量)
-    pattern = re.compile(r"(.+)_@_t=(.*)")
+    if not time_steps or not fields_by_time:
+        raise ValueError(f"{vtu_filepath.name} 中没有解析到时间步节点场")
 
-    time_steps = set()
-    # 【核心修复 2】不再写死 p 和 T，改为动态字典，自适应 VTU 里的所有变量
-    fields_dict = {}
+    sorted_times = sorted(time_steps)
+    for field_name, values_by_time in fields_by_time.items():
+        missing_times = [time_value for time_value in sorted_times if time_value not in values_by_time]
+        if missing_times:
+            raise ValueError(
+                f"场 {field_name} 缺少 {len(missing_times)} 个时间步，拒绝用零值填充"
+            )
 
-    for name in array_names:
-        match = pattern.match(name)
-        if match:
-            var_name = match.group(1).strip()
-            t_val = float(match.group(2))
-            time_steps.add(t_val)
+    h5_filepath.parent.mkdir(parents=True, exist_ok=True)
+    partial = h5_filepath.with_name(
+        f".{h5_filepath.stem}.{os.getpid()}.partial.h5"
+    )
+    partial.unlink(missing_ok=True)
+    try:
+        with h5py.File(partial, "w") as handle:
+            mesh_group = handle.create_group("mesh")
+            mesh_group.create_dataset(
+                "coordinates", data=mesh.points, compression="gzip"
+            )
+            mesh_group.create_dataset(
+                "connectivity", data=mesh.cells, compression="gzip"
+            )
+            handle.create_dataset(
+                "time_steps", data=np.asarray(sorted_times), compression="gzip"
+            )
+            fields_group = handle.create_group("fields")
+            for field_name, values_by_time in fields_by_time.items():
+                matrix = np.stack(
+                    [values_by_time[time_value] for time_value in sorted_times]
+                ).astype(np.float32, copy=False)
+                fields_group.create_dataset(
+                    field_name, data=matrix, compression="gzip"
+                )
+            handle.flush()
 
-            # 如果是第一次遇到这个变量，在字典里为它开辟空间
-            if var_name not in fields_dict:
-                fields_dict[var_name] = {}
-            fields_dict[var_name][t_val] = mesh.point_data[name]
+        if not is_valid_hdf5(partial):
+            raise RuntimeError(f"生成后的 HDF5 结构校验失败: {partial}")
+        os.replace(partial, h5_filepath)
+    finally:
+        partial.unlink(missing_ok=True)
 
-    if not time_steps:
-        raise ValueError(
-            f"⚠️ 文件 {vtu_filepath.name} 中没有解析到任何有效的时间步数据 (可能是空文件)。"
-        )
-
-    sorted_times = sorted(list(time_steps))
-    num_steps = len(sorted_times)
-    num_points = mesh.number_of_points
-
-    # ================= 开始写入 HDF5 =================
-    with h5py.File(str(h5_filepath), 'w') as f_h5:
-        # 1. 静态网格域 (初始参考坐标)
-        mesh_group = f_h5.create_group("mesh")
-        mesh_group.create_dataset("coordinates", data=mesh.points, compression="gzip")
-        mesh_group.create_dataset("connectivity", data=mesh.cells, compression="gzip")
-
-        # 2. 时间轴
-        f_h5.create_dataset(
-            "time_steps", data=np.array(sorted_times), compression="gzip"
-        )
-
-        # 3. 动态场域
-        fields_group = f_h5.create_group("fields")
-
-        # 【核心修复 3】动态遍历所有提取到的场（不仅是 p 和 T，连同移动网格变量一起存入！）
-        for var_name in fields_dict.keys():
-            if not fields_dict[var_name]:
-                continue
-
-            var_matrix = np.zeros((num_steps, num_points), dtype=np.float32)
-            for i, t in enumerate(sorted_times):
-                if t in fields_dict[var_name]:
-                    var_matrix[i, :] = fields_dict[var_name][t]
-
-            fields_group.create_dataset(var_name, data=var_matrix, compression="gzip")
-
-    # 打印出提取到了哪些场，方便你在终端直接验证网格变量是否被成功抓取
-    extracted_vars = list(fields_dict.keys())
-    print(f"✅ 成功生成: {h5_filepath.name} ({num_points}节点, {num_steps}步)")
-    print(f"   -> 已提取变量: {extracted_vars}")
+    extracted = sorted(fields_by_time)
+    print(
+        f"完成 {h5_filepath.name}: {mesh.number_of_points} 节点, "
+        f"{len(sorted_times)} 步, fields={extracted}"
+    )
+    return extracted
 
 
-def batch_convert_dir(input_dir, output_dir):
-    """
-    批量扫描并转换文件夹内的所有 VTU 文件。
-    """
-    in_path = Path(input_dir).resolve()
-    out_path = Path(output_dir).resolve()
+def batch_convert_dir(
+    input_dir: Path,
+    output_dir: Path,
+    case_ids: list[str] | None = None,
+    overwrite: bool = False,
+) -> tuple[int, int, int]:
+    input_dir = Path(input_dir).resolve()
+    output_dir = Path(output_dir).resolve()
+    if not input_dir.is_dir():
+        raise FileNotFoundError(f"VTU 输入目录不存在: {input_dir}")
+    output_dir.mkdir(parents=True, exist_ok=True)
 
-    if not in_path.exists() or not in_path.is_dir():
-        print(f"❌ 错误: 输入文件夹不存在 -> {in_path}")
-        return
+    if case_ids:
+        vtu_files = [input_dir / f"{case_id}.vtu" for case_id in case_ids]
+        vtu_files = [path for path in vtu_files if path.is_file()]
+    else:
+        vtu_files = sorted(input_dir.glob("Case_*.vtu"))
 
-    out_path.mkdir(parents=True, exist_ok=True)
-    print(f"📁 输出目录准备就绪: {out_path}")
-
-    vtu_files = list(in_path.glob("*.vtu"))
-    total_files = len(vtu_files)
-
-    if total_files == 0:
-        print(f"⚠️ 在 {in_path} 中没有找到任何 .vtu 文件。")
-        return
-
-    print(f"🔍 共找到 {total_files} 个 VTU 文件，开始批量转换...\n" + "-" * 40)
-
-    success_count = 0
-    for idx, vtu_file in enumerate(vtu_files, 1):
-        h5_file = out_path / f"{vtu_file.stem}.h5"
-
-        print(f"[{idx}/{total_files}] 处理中...")
+    converted = 0
+    skipped = 0
+    failed = 0
+    for index, vtu_file in enumerate(vtu_files, 1):
+        h5_file = output_dir / f"{vtu_file.stem}.h5"
+        if not overwrite and is_valid_hdf5(h5_file):
+            skipped += 1
+            continue
+        print(f"[{index}/{len(vtu_files)}] {vtu_file.name}")
         try:
             vtu_to_hdf5(vtu_file, h5_file)
-            success_count += 1
-        except Exception as e:
-            print(f"❌ 转换 {vtu_file.name} 时失败: {e}")
-            # traceback.print_exc() # 去掉注释可以查看具体的报错堆栈
-        print("-" * 40)
+            converted += 1
+        except Exception:
+            failed += 1
+            print(f"转换失败: {vtu_file.name}\n{traceback.format_exc()}")
 
-    print(f"\n🎉 批量处理完成！成功: {success_count}/{total_files}")
-    print(f"📂 HDF5 文件已保存至: {out_path}")
+    print(f"转换汇总: 新增={converted}, 跳过={skipped}, 失败={failed}")
+    return converted, skipped, failed
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="增量转换 COMSOL VTU 为 HDF5")
+    parser.add_argument("--input-dir", type=Path, default=DEFAULT_INPUT_DIR)
+    parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
+    parser.add_argument("--case-ids", help="只转换逗号分隔的 case_id")
+    parser.add_argument("--overwrite", action="store_true")
+    return parser.parse_args()
+
+
+def main() -> int:
+    args = parse_args()
+    case_ids = None
+    if args.case_ids:
+        case_ids = [item.strip() for item in args.case_ids.split(",") if item.strip()]
+    try:
+        _, _, failed = batch_convert_dir(
+            args.input_dir, args.output_dir, case_ids, args.overwrite
+        )
+    except Exception:
+        traceback.print_exc()
+        return 2
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":
-    # ================= 核心路径修改 =================
-    # 获取当前 Python 脚本所在的绝对目录
-    BASE_DIR = Path(__file__).parent.resolve()
-
-    # 以脚本所在目录为基准，拼接子文件夹
-    INPUT_FOLDER = BASE_DIR / "comsol_output"  # 指向脚本同级目录下的 VTU 数据
-    OUTPUT_FOLDER = BASE_DIR / "comsol_hdf5"  # 指向脚本同级目录下的 HDF5 存放处
-    # ===============================================
-
-    batch_convert_dir(INPUT_FOLDER, OUTPUT_FOLDER)
+    raise SystemExit(main())
