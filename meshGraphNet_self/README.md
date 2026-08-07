@@ -8,7 +8,13 @@ This directory contains the complete training pipeline for the COMSOL HDF5 data:
 4. `model/` contains the reusable encode-process-decode MeshGraphNet.
 5. `train.py` trains, validates, resumes, logs, and saves checkpoints.
 
-Install dependencies:
+Use the conda `pinn` environment for all subsequent commands:
+
+```powershell
+conda activate pinn
+```
+
+Install dependencies if that environment is rebuilt:
 
 ```powershell
 python -m pip install -r meshGraphNet_self/requirements.txt
@@ -32,3 +38,7 @@ Resume training:
 ```powershell
 python meshGraphNet_self/train.py --resume meshGraphNet_self/checkpoints/last.pt
 ```
+
+Detailed Chinese design and operation documentation:
+
+- [技术文档.md](技术文档.md)
