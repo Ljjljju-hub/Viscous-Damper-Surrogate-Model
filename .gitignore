@@ -1,3 +1,5 @@
 **/.vscode/
+**/__pycache__/
+*.pyc
 /计算有限元数据/comsol_output/
 /计算有限元数据/comsol_hdf5/
