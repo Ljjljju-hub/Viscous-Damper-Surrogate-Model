@@ -65,6 +65,18 @@ def file_sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def is_progress_line(line: str) -> bool:
+    text = line.strip()
+    if "%|" not in text:
+        return False
+    return text.startswith(("train ", "valid:", "test:"))
+
+
+def clear_progress_line(width: int) -> None:
+    if width > 0:
+        print("\r" + " " * width + "\r", end="", flush=True)
+
+
 def run_one(
     *,
     model_name: str,
@@ -247,14 +259,28 @@ def run_one(
         )
         status.update({"state": "running", "pid": process.pid})
         atomic_write_json(status_file, status)
+        progress_width = 0
         try:
             assert process.stdout is not None
             for line in process.stdout:
+                if is_progress_line(line):
+                    progress_text = line.rstrip("\r\n")
+                    padding = " " * max(progress_width - len(progress_text), 0)
+                    print(f"\r{progress_text}{padding}", end="", flush=True)
+                    progress_width = len(progress_text)
+                    continue
+                if progress_width > 0:
+                    clear_progress_line(progress_width)
+                    progress_width = 0
+                if not line.strip():
+                    continue
                 print(line, end="")
                 log_stream.write(line)
                 log_stream.flush()
+            clear_progress_line(progress_width)
             return_code = process.wait()
         except KeyboardInterrupt:
+            clear_progress_line(progress_width)
             process.terminate()
             process.wait()
             status.update({"state": "interrupted", "ended_at_utc": utc_now()})

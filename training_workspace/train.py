@@ -95,7 +95,7 @@ if __name__ == "__main__":
 
     # ======================== 执行与保存 ========================
     # True 只检查并显示任务；确认无误后改为 False 开始训练。
-    DRY_RUN = True
+    DRY_RUN = False
     # False 表示某个任务失败后立即停止；True 表示继续后续组合。
     CONTINUE_ON_ERROR = False
     # 自动保存为 runs/<模型>/n<规模>/seed_<种子>/，无需手动创建子目录。
