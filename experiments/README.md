@@ -64,7 +64,7 @@ manifest 包含：
 ## 3. 先检查将执行哪些任务
 
 ```powershell
-python experiments\run_scale_study.py --dry-run
+& '.\experiments\开始训练.bat' --dry-run
 ```
 
 默认实验矩阵：
@@ -79,8 +79,33 @@ seeds = 42,43,44
 
 ## 4. 开始全部训练
 
+训练结果独立保存在：
+
+```text
+experiments/dataset_scale/runs/
+├── meshgraphnet/
+│   ├── n0100/seed_42/
+│   └── ...
+└── transolver/
+    ├── n0100/seed_42/
+    └── ...
+```
+
+模型、数据规模和随机种子共同确定一个独立实验目录，两个模型的 checkpoint、日志和指标不会混合。
+
+推荐先检查单个正式任务：
+
 ```powershell
-python experiments\run_scale_study.py `
+& '.\experiments\开始训练.bat' --dry-run `
+  --models meshgraphnet `
+  --train-sizes 100 `
+  --seeds 42
+```
+
+正式启动全部 48 个任务：
+
+```powershell
+& '.\experiments\开始训练.bat' `
   --epochs 100 `
   --batch-size 4 `
   --early-stopping-patience 15 `
@@ -90,21 +115,24 @@ python experiments\run_scale_study.py `
 只运行部分规模：
 
 ```powershell
-python experiments\run_scale_study.py `
+& '.\experiments\开始训练.bat' `
   --models meshgraphnet transolver `
   --train-sizes 100 200 400 800 `
   --seeds 42 43 44
 ```
 
-单次快速验证：
+单次快速验证必须写入独立的 `_smoke` 目录，不能污染正式 `runs/`：
 
 ```powershell
-python experiments\run_scale_study.py `
+& '.\experiments\开始训练.bat' `
+  --output-root experiments/_smoke/training `
   --models transolver `
   --train-sizes 100 `
   --seeds 42 `
   --epochs 2
 ```
+
+RTX 4060 上建议先用 `--batch-size 2` 验证显存，再提高到 4。用于公平对比的 MeshGraphNet 与 Transolver 正式实验应保持相同 batch size。
 
 ## 5. 断电恢复
 
@@ -133,6 +161,8 @@ experiments/dataset_scale/runs/
 - 什么都没有：从头训练。
 
 checkpoint 保存模型、optimizer、scheduler、Normalizer、early stopping 计数，以及 Python、NumPy、CPU/CUDA、DataLoader generator RNG 状态。恢复发生在 epoch 边界；断电时正在运行的当前 epoch 仍需重算。
+
+调度器会保存模型、规模、seed、epoch、batch size、学习率和 split manifest 指纹。若同一结果目录已经完成，但新命令配置不同，程序会报错而不会静默跳过；需要做新配置实验时使用新的 `--output-root`。
 
 ## 6. 指标和曲线保存
 

@@ -1,4 +1,5 @@
 import argparse
+import hashlib
 import json
 import os
 import subprocess
@@ -29,6 +30,10 @@ def utc_now() -> str:
 
 def default_sizes(train_pool_count: int) -> list:
     return list(range(100, train_pool_count + 1, 100))
+
+
+def file_sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def parse_args():
@@ -90,9 +95,34 @@ def run_one(
     status_file = run_dir / "status.json"
     log_file = run_dir / "train.log"
 
+    request = {
+        "version": 1,
+        "model": model_name,
+        "train_size": train_size,
+        "seed": seed,
+        "epochs": args.epochs,
+        "batch_size": args.batch_size,
+        "num_workers": args.num_workers,
+        "learning_rate": args.learning_rate,
+        "early_stopping_patience": args.early_stopping_patience,
+        "save_every": args.save_every,
+        "device": args.device,
+        "manifest": str(args.manifest.resolve()),
+        "manifest_sha256": file_sha256(args.manifest.resolve()),
+    }
     if summary_file.exists():
         summary = json.loads(summary_file.read_text(encoding="utf-8"))
         if summary.get("completed"):
+            previous_status = (
+                json.loads(status_file.read_text(encoding="utf-8"))
+                if status_file.exists()
+                else {}
+            )
+            if previous_status.get("request") != request:
+                raise RuntimeError(
+                    f"Completed run has a different configuration: {run_dir}. "
+                    "Use a different --output-root for the new experiment."
+                )
             print(f"SKIP complete: {model_name} n={train_size} seed={seed}")
             return True
 
@@ -154,6 +184,7 @@ def run_one(
         "seed": seed,
         "started_at_utc": utc_now(),
         "resumed": resumed,
+        "request": request,
         "command": command,
     }
     atomic_write_json(status_file, status)
