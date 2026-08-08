@@ -74,7 +74,7 @@ if __name__ == "__main__":
 
     # ======================== 共享训练参数 ========================
     EPOCHS = 100  # 最大训练轮数
-    BATCH_SIZE = 2  # 每个 batch 的图数量
+    BATCH_SIZE = 16  # 每个 batch 的图数量
     LEARNING_RATE = 1.0e-4  # Adam 初始学习率
     EARLY_STOPPING_PATIENCE = 15  # 验证集连续多少轮不改善后早停
     SAVE_EVERY = 10  # 每隔多少轮额外保存一个 checkpoint
