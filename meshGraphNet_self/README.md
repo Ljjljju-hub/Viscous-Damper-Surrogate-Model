@@ -8,6 +8,9 @@ This directory contains the complete training pipeline for the COMSOL HDF5 data:
 4. `model/` contains the reusable encode-process-decode MeshGraphNet.
 5. `train.py` trains, validates, resumes, logs, and saves checkpoints.
 
+Dataset-scale comparison, exact RNG resume, fixed case manifests, rollout
+evaluation, and automatic plotting are documented in `experiments/README.md`.
+
 Use the conda `pinn` environment for all subsequent commands:
 
 ```powershell

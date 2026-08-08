@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from typing import Dict, Iterable, Optional, Union
+from typing import Dict, Iterable, Optional, Sequence, Union
 
 import h5py
 import numpy as np
@@ -99,6 +99,7 @@ class FpcDataset(Dataset):
         unit_scale: float = 1.0e-3,
         validate_mesh_domain: bool = True,
         field_names: Iterable[str] = ("p", "T"),
+        case_ids: Optional[Sequence[str]] = None,
     ):
         super().__init__(data_root, transform=None, pre_transform=None)
 
@@ -125,19 +126,36 @@ class FpcDataset(Dataset):
             raise FileNotFoundError(f"No .h5 files found under {self.data_root}.")
         self.file_by_case_id = {case_id_from_path(path): path for path in all_files}
 
-        num_files = len(all_files)
-        train_idx = int(num_files * 0.8)
-        valid_idx = int(num_files * 0.9)
-        if split == "train":
-            self.files = all_files[:train_idx]
-        elif split in ("valid", "val"):
-            self.files = all_files[train_idx:valid_idx]
-        elif split == "test":
-            self.files = all_files[valid_idx:]
-        elif split == "all":
-            self.files = all_files
+        if case_ids is not None:
+            requested = list(case_ids)
+            if len(requested) != len(set(requested)):
+                raise ValueError("case_ids contains duplicate case identifiers.")
+            missing = [
+                case_id for case_id in requested if case_id not in self.file_by_case_id
+            ]
+            if missing:
+                preview = ", ".join(missing[:10])
+                raise FileNotFoundError(
+                    f"{len(missing)} requested cases are missing under "
+                    f"{self.data_root}: {preview}"
+                )
+            self.files = [self.file_by_case_id[case_id] for case_id in requested]
         else:
-            raise ValueError("split must be one of: train, valid, val, test, all.")
+            num_files = len(all_files)
+            train_idx = int(num_files * 0.8)
+            valid_idx = int(num_files * 0.9)
+            if split == "train":
+                self.files = all_files[:train_idx]
+            elif split in ("valid", "val"):
+                self.files = all_files[train_idx:valid_idx]
+            elif split == "test":
+                self.files = all_files[valid_idx:]
+            elif split == "all":
+                self.files = all_files
+            else:
+                raise ValueError(
+                    "split must be one of: train, valid, val, test, all."
+                )
 
         self.index_map = []
         self.mesh_cache = {}

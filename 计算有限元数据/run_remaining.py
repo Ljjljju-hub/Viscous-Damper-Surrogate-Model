@@ -12,6 +12,11 @@ import time
 from pathlib import Path
 from typing import Iterable
 
+from failure_registry import (
+    REGISTRY_PATH,
+    load_failure_registry,
+    synchronize_failure_registry,
+)
 from transfer2hdf5 import is_valid_hdf5
 
 
@@ -94,6 +99,32 @@ def scan_completion(case_ids: list[str]) -> tuple[set[str], set[str]]:
         elif vtu_complete(case_id):
             vtu_only.add(case_id)
     return hdf5_done, vtu_only
+
+
+def sync_failed_cases(case_ids: list[str]) -> set[str]:
+    hdf5_done, vtu_only = scan_completion(case_ids)
+    return synchronize_failure_registry(
+        case_ids,
+        hdf5_done | vtu_only,
+        log_dir=LOG_DIR,
+        registry_path=REGISTRY_PATH,
+    )
+
+
+def compute_pending_cases(
+    case_ids: list[str],
+    hdf5_done: set[str],
+    vtu_only: set[str],
+    failed_cases: set[str],
+    retry_failed: bool = False,
+) -> list[str]:
+    return [
+        case_id
+        for case_id in case_ids
+        if case_id not in hdf5_done
+        and case_id not in vtu_only
+        and (retry_failed or case_id not in failed_cases)
+    ]
 
 
 def chunked(items: list[str], size: int) -> Iterable[list[str]]:
@@ -191,8 +222,18 @@ def write_state(
     pass_number: int = 0,
 ) -> None:
     completed_set, vtu_only_set = scan_completion(all_case_ids)
+    failed_set = set(load_failure_registry(REGISTRY_PATH)["cases"])
+    failed_set.difference_update(completed_set | vtu_only_set)
     completed = [case_id for case_id in all_case_ids if case_id in completed_set]
     vtu_only = [case_id for case_id in all_case_ids if case_id in vtu_only_set]
+    failed = [case_id for case_id in all_case_ids if case_id in failed_set]
+    pending_comsol = [
+        case_id
+        for case_id in all_case_ids
+        if case_id not in completed_set
+        and case_id not in vtu_only_set
+        and case_id not in failed_set
+    ]
     unresolved = [
         case_id
         for case_id in all_case_ids
@@ -207,6 +248,8 @@ def write_state(
         "total": len(all_case_ids),
         "hdf5_completed": len(completed),
         "vtu_waiting_for_conversion": vtu_only,
+        "failed_terminal": failed,
+        "pending_comsol": pending_comsol,
         "unresolved": unresolved,
     }
     temporary = STATE_PATH.with_suffix(".json.tmp")
@@ -263,6 +306,11 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="只生成 VTU，不自动转换 HDF5",
     )
+    parser.add_argument(
+        "--retry-failed",
+        action="store_true",
+        help="显式重新计算 failed_cases.json 中的失败工况；默认永久跳过",
+    )
     return parser.parse_args()
 
 
@@ -311,17 +359,33 @@ def main() -> int:
 
     initial_pending = unresolved_cases(all_case_ids, convert)
     initial_hdf5, initial_vtu_only = scan_completion(all_case_ids)
-    compute_pending = [
-        case_id
-        for case_id in all_case_ids
-        if case_id not in initial_hdf5 and case_id not in initial_vtu_only
-    ]
+    failed_cases = sync_failed_cases(all_case_ids)
+    compute_pending = compute_pending_cases(
+        all_case_ids,
+        initial_hdf5,
+        initial_vtu_only,
+        failed_cases,
+        retry_failed=args.retry_failed,
+    )
+    skipped_failed = (
+        []
+        if args.retry_failed
+        else [case_id for case_id in all_case_ids if case_id in failed_cases]
+    )
     logging.info(
-        "当前 HDF5 完成=%d，需 COMSOL 计算=%d，最终未完成=%d",
-        len(all_case_ids) - len(initial_pending),
+        "当前 HDF5 完成=%d，已失败且默认跳过=%d，需 COMSOL 计算=%d，最终缺少 HDF5=%d",
+        len(initial_hdf5),
+        len(skipped_failed),
         len(compute_pending),
         len(initial_pending),
     )
+    if skipped_failed:
+        logging.info("跳过已记录失败工况: %s", ", ".join(skipped_failed))
+    if args.retry_failed and failed_cases:
+        logging.warning(
+            "已启用 --retry-failed，本次会重新计算 %d 个历史失败工况",
+            len(failed_cases),
+        )
     if args.dry_run:
         for number, batch in enumerate(chunked(compute_pending, args.batch_size), 1):
             logging.info("dry-run 批次 %d: %s", number, ", ".join(batch))
@@ -335,12 +399,33 @@ def main() -> int:
             if not remaining_before_pass:
                 break
             hdf5_done, vtu_only = scan_completion(all_case_ids)
-            compute_pending = [
-                case_id
-                for case_id in all_case_ids
-                if case_id not in hdf5_done and case_id not in vtu_only
-            ]
+            failed_cases = sync_failed_cases(all_case_ids)
+            compute_pending = compute_pending_cases(
+                all_case_ids,
+                hdf5_done,
+                vtu_only,
+                failed_cases,
+                retry_failed=args.retry_failed,
+            )
             if not compute_pending:
+                conversion_waiting = (
+                    [case_id for case_id in all_case_ids if case_id in vtu_only]
+                    if convert
+                    else []
+                )
+                terminal_failed = [
+                    case_id
+                    for case_id in all_case_ids
+                    if case_id in failed_cases
+                    and case_id not in hdf5_done
+                    and case_id not in vtu_only
+                ]
+                if terminal_failed and not conversion_waiting:
+                    logging.info(
+                        "只剩 %d 个已记录失败工况，不再自动重试",
+                        len(terminal_failed),
+                    )
+                    break
                 logging.warning(
                     "第 %d 次尝试只剩 HDF5 转换失败项，将进入下一次重试",
                     pass_number,
@@ -374,11 +459,14 @@ def main() -> int:
                     "worker 已完全退出，独立终端已关闭，返回码=%d", return_code
                 )
                 if return_code:
-                    logging.warning("本批存在失败项，后续重试时会自动重新识别")
+                    logging.warning(
+                        "本批存在失败项；明确计算失败的工况将写入清单并停止自动重试"
+                    )
                 if convert:
                     converter_code = run_converter(batch)
                     if converter_code:
                         logging.warning("本批 HDF5 转换存在失败项")
+                sync_failed_cases(all_case_ids)
                 write_state("between_batches", all_case_ids, None, pass_number)
                 if args.pause_seconds and batch_number < len(batches):
                     logging.info("等待 %.1f 秒后启动下一全新进程", args.pause_seconds)
@@ -397,10 +485,23 @@ def main() -> int:
 
     if convert:
         convert_pending_vtu(all_case_ids, args.batch_size)
+    failed_cases = sync_failed_cases(all_case_ids)
     remaining = unresolved_cases(all_case_ids, convert)
     if remaining:
-        logging.error("仍有 %d 个工况未完成: %s", len(remaining), ", ".join(remaining))
-        write_state("incomplete", all_case_ids)
+        terminal_failed = [case_id for case_id in remaining if case_id in failed_cases]
+        retryable = [case_id for case_id in remaining if case_id not in failed_cases]
+        logging.error(
+            "仍缺少 %d 个 HDF5：已记录失败=%d，其他未完成=%d",
+            len(remaining),
+            len(terminal_failed),
+            len(retryable),
+        )
+        if terminal_failed:
+            logging.error("已记录失败工况: %s", ", ".join(terminal_failed))
+        if retryable:
+            logging.error("其他未完成工况: %s", ", ".join(retryable))
+        status = "complete_with_failures" if not retryable else "incomplete"
+        write_state(status, all_case_ids)
         return 1
 
     logging.info("所选范围全部完成")

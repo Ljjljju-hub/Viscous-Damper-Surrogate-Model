@@ -10,6 +10,7 @@ import h5py
 import numpy as np
 import pyvista as pv
 
+import failure_registry
 import main as worker
 import run_remaining as scheduler
 from transfer2hdf5 import is_valid_hdf5, vtu_to_hdf5
@@ -139,6 +140,58 @@ class BatchAutomationTest(unittest.TestCase):
                     ),
                     ["Case_0001"],
                 )
+
+    def test_failed_cases_are_skipped_unless_explicitly_retried(self):
+        case_ids = ["Case_0001", "Case_0002", "Case_0003"]
+        pending = scheduler.compute_pending_cases(
+            case_ids,
+            hdf5_done={"Case_0001"},
+            vtu_only=set(),
+            failed_cases={"Case_0002"},
+        )
+        self.assertEqual(pending, ["Case_0003"])
+        self.assertEqual(
+            scheduler.compute_pending_cases(
+                case_ids,
+                hdf5_done={"Case_0001"},
+                vtu_only=set(),
+                failed_cases={"Case_0002"},
+                retry_failed=True,
+            ),
+            ["Case_0002", "Case_0003"],
+        )
+
+    def test_failure_registry_recovers_logs_and_prunes_completed_cases(self):
+        with tempfile.TemporaryDirectory(dir=TEST_TEMP_ROOT) as directory:
+            root = Path(directory)
+            log_dir = root / "logs"
+            log_dir.mkdir()
+            registry_path = root / "failed_cases.json"
+            registry_path.write_text(
+                json.dumps(
+                    {
+                        "version": 1,
+                        "cases": {"Case_9999": {"source": "earlier_range"}},
+                    }
+                ),
+                encoding="utf-8",
+            )
+            (log_dir / "worker_test.log").write_text(
+                "2026-08-08 | ERROR | Case_0001 计算失败\n"
+                "2026-08-08 | ERROR | Case_0002 计算失败\n",
+                encoding="utf-8",
+            )
+
+            failed = failure_registry.synchronize_failure_registry(
+                ["Case_0001", "Case_0002", "Case_0003"],
+                completed_case_ids={"Case_0002"},
+                log_dir=log_dir,
+                registry_path=registry_path,
+            )
+
+            self.assertEqual(failed, {"Case_0001"})
+            payload = json.loads(registry_path.read_text(encoding="utf-8"))
+            self.assertEqual(set(payload["cases"]), {"Case_0001", "Case_9999"})
 
     def test_worker_does_not_skip_large_but_corrupt_output(self):
         with tempfile.TemporaryDirectory(dir=TEST_TEMP_ROOT) as directory:

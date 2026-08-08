@@ -33,13 +33,13 @@ python .\计算有限元数据\run_remaining.py --batch-size 10 --cores 16 --max
 控制器执行以下循环：
 
 1. 读取 `4_Combined_Master_Dataset.json` 中全部 `case_id`。
-2. 校验已有 HDF5 和 VTU，只选择真正缺失的工况。
+2. 校验已有 HDF5、VTU 和失败清单，只选择从未成功且未被标记失败的工况。
 3. 为当前批次启动新的 `pinn` Python 进程和独立 Windows 终端。
 4. worker 启动新的 MPh client-server、加载母版、逐个求解并原子导出 VTU。
 5. 一批结束后卸载模型、断开 client、停止 server、退出 worker；独立终端随之关闭。
 6. 控制器等待 worker 完全退出，再用独立转换进程把本批 VTU 原子转换为 HDF5。
 7. 等待 `pause-seconds`，然后启动下一批全新进程。
-8. 完整扫描剩余项，失败工况最多重试 `max-retries` 次。
+8. 完整扫描剩余项；明确求解失败的工况写入清单并停止自动重试。
 
 这保证 Python、JVM 和 COMSOL server 都不会跨批次复用。MPh 本身在同一 Python 进程中只允许一个 client，因此这里有意使用独立进程作为内存释放边界。
 
@@ -47,12 +47,13 @@ python .\计算有限元数据\run_remaining.py --batch-size 10 --cores 16 --max
 
 - 有效 HDF5 视为已完成，不重复计算。
 - 没有 HDF5 但存在完整 VTU 时，只补做 HDF5 转换。
-- VTU 与 HDF5 都不存在或结构无效时，重新运行 COMSOL。
+- VTU 与 HDF5 都不存在或结构无效、且不在失败清单时，重新运行 COMSOL。
+- worker 日志中明确出现“`Case_XXXX 计算失败`”的工况写入 `failed_cases.json`，后续默认跳过。
 - VTU 先写入 `.partial.vtu`，成功后原子替换正式文件。
 - HDF5 同样先写临时文件，通过结构校验后才原子替换。
 - 按 `Ctrl+C` 中断后，当前 worker 进程树会被关闭；再次运行同一命令即可续算。
 
-运行状态写入 `batch_state.json`，详细日志写入 `batch_logs/`。这两个运行产物已加入 `.gitignore`。
+运行状态写入 `batch_state.json`，失败清单写入 `failed_cases.json`，详细日志写入 `batch_logs/`。这些运行产物已加入 `.gitignore`。
 
 ## 4. 常用参数
 
@@ -60,7 +61,7 @@ python .\计算有限元数据\run_remaining.py --batch-size 10 --cores 16 --max
 |---|---:|---|
 | `--batch-size` | 10 | 每次 COMSOL 进程计算的工况数；内存仍高时降为 5 或 2 |
 | `--cores` | 16 | 单个 COMSOL 会话使用的核心数 |
-| `--max-retries` | 2 | 首次失败后额外重试次数 |
+| `--max-retries` | 2 | worker 崩溃、超时或转换失败等未形成明确 case 失败记录时的额外重试次数 |
 | `--pause-seconds` | 10 | 两批之间的等待时间 |
 | `--timeout-minutes` | 0 | 单批超时，0 表示不限时；超时会终止整个 worker 进程树 |
 | `--first-case` | 1 | 只处理指定起始序号，包含该序号 |
@@ -68,6 +69,13 @@ python .\计算有限元数据\run_remaining.py --batch-size 10 --cores 16 --max
 | `--dry-run` | 否 | 只打印分批计划，不计算、不转换 |
 | `--no-worker-window` | 否 | 不显示每批独立终端，后台运行 |
 | `--no-convert` | 否 | 只生成 VTU，不自动生成 HDF5 |
+| `--retry-failed` | 否 | 显式重算失败清单中的工况；正常续算不要添加 |
+
+需要人工验证某些失败工况是否已可收敛时，才使用：
+
+```powershell
+python .\计算有限元数据\run_remaining.py --retry-failed --batch-size 1
+```
 
 例如只续算第 305 到 500 个工况：
 
