@@ -39,6 +39,7 @@ class StudyConfig:
     learning_rate: float = 1.0e-4
     early_stopping_patience: int = 15
     save_every: int = 10
+    batch_log_every: int = 10
     device: str = "auto"
     meshgraphnet_hidden_size: int = 128
     message_passing_steps: int = 15
@@ -109,6 +110,7 @@ def run_one(
         "learning_rate": args.learning_rate,
         "early_stopping_patience": args.early_stopping_patience,
         "save_every": args.save_every,
+        "batch_log_every": args.batch_log_every,
         "device": args.device,
         "manifest": str(args.manifest.resolve()),
         "manifest_sha256": file_sha256(args.manifest.resolve()),
@@ -179,6 +181,8 @@ def run_one(
         str(args.early_stopping_patience),
         "--save-every",
         str(args.save_every),
+        "--batch-log-every",
+        str(args.batch_log_every),
         "--seed",
         str(seed),
         "--device",

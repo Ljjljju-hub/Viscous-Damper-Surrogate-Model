@@ -21,6 +21,7 @@ def main(
     learning_rate,
     early_stopping_patience,
     save_every,
+    batch_log_every,
     num_workers,
     device,
     meshgraphnet_hidden_size,
@@ -44,6 +45,7 @@ def main(
         learning_rate=learning_rate,
         early_stopping_patience=early_stopping_patience,
         save_every=save_every,
+        batch_log_every=batch_log_every,
         num_workers=num_workers,
         device=device,
         meshgraphnet_hidden_size=meshgraphnet_hidden_size,
@@ -78,6 +80,7 @@ if __name__ == "__main__":
     LEARNING_RATE = 1.0e-4  # Adam 初始学习率
     EARLY_STOPPING_PATIENCE = 15  # 验证集连续多少轮不改善后早停
     SAVE_EVERY = 10  # 每隔多少轮额外保存一个 checkpoint
+    BATCH_LOG_EVERY = 10  # 每多少个 batch 写一次实时 TensorBoard loss
     NUM_WORKERS = 0  # DataLoader 子进程数；Windows 建议先用 0
     DEVICE = "auto"  # "auto"、"cuda:0" 或 "cpu"
 
@@ -110,6 +113,7 @@ if __name__ == "__main__":
         learning_rate=LEARNING_RATE,
         early_stopping_patience=EARLY_STOPPING_PATIENCE,
         save_every=SAVE_EVERY,
+        batch_log_every=BATCH_LOG_EVERY,
         num_workers=NUM_WORKERS,
         device=DEVICE,
         meshgraphnet_hidden_size=MESHGRAPHNET_HIDDEN_SIZE,

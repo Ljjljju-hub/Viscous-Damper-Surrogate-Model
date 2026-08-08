@@ -67,6 +67,7 @@ def add_common_training_args(
     parser.add_argument("--weight-decay", type=float, default=0.0)
     parser.add_argument("--gradient-clip", type=float, default=1.0)
     parser.add_argument("--save-every", type=int, default=10)
+    parser.add_argument("--batch-log-every", type=int, default=10)
     parser.add_argument("--early-stopping-patience", type=int, default=0)
     parser.add_argument("--evaluate-test", action="store_true")
     parser.add_argument("--resume", type=Path, default=None)
@@ -117,13 +118,14 @@ def train_one_epoch(
     gradient_clip,
     epoch,
     epochs,
+    batch_loss_callback: Optional[Callable[[int, float], None]] = None,
 ):
     model.train()
     total_squared_error = 0.0
     total_values = 0
     progress = tqdm(loader, desc=f"train {epoch}/{epochs}", leave=False)
 
-    for graph in progress:
+    for batch_index, graph in enumerate(progress, start=1):
         graph = prepare_graph(graph, transform).to(device)
         predicted, target = model(graph)
         loss = F.mse_loss(predicted, target)
@@ -139,6 +141,8 @@ def train_one_epoch(
         ).item()
         total_values += target.numel()
         progress.set_postfix(loss=f"{loss.item():.3e}")
+        if batch_loss_callback is not None:
+            batch_loss_callback(batch_index, float(loss.item()))
 
     return total_squared_error / max(total_values, 1)
 
@@ -366,7 +370,7 @@ def run_training(
 
     writer: Optional[object] = None
     if SummaryWriter is not None:
-        writer = SummaryWriter(log_dir=str(args.log_dir))
+        writer = SummaryWriter(log_dir=str(args.log_dir), flush_secs=10)
     else:
         print("TensorBoard is unavailable; continuing without event logs.")
 
@@ -393,6 +397,17 @@ def run_training(
         )
         for epoch in epoch_range:
             epoch_start = time.perf_counter()
+            epoch_start_step = global_step
+
+            def record_batch_loss(batch_index: int, batch_loss: float) -> None:
+                if writer is None or args.batch_log_every <= 0:
+                    return
+                step = epoch_start_step + batch_index
+                if step % args.batch_log_every == 0 or batch_index == len(train_loader):
+                    writer.add_scalar(
+                        "loss/train_batch_normalized_mse", batch_loss, step
+                    )
+
             train_loss = train_one_epoch(
                 model,
                 train_loader,
@@ -402,6 +417,7 @@ def run_training(
                 args.gradient_clip,
                 epoch,
                 args.epochs,
+                batch_loss_callback=record_batch_loss,
             )
             global_step += len(train_loader)
             valid_metrics = evaluate(model, valid_loader, transform, device)

@@ -92,10 +92,11 @@ TRAIN_SIZES = [100]
 SEEDS = [42]
 
 EPOCHS = 100
-BATCH_SIZE = 2
+BATCH_SIZE = 16
 LEARNING_RATE = 1.0e-4
 EARLY_STOPPING_PATIENCE = 15
 SAVE_EVERY = 10
+BATCH_LOG_EVERY = 10
 NUM_WORKERS = 0
 DEVICE = "auto"
 
@@ -182,7 +183,9 @@ EPOCHS = 2
 OUTPUT_ROOT = WORKSPACE_ROOT / "_smoke"
 ```
 
-RTX 4060 上建议先用 `BATCH_SIZE = 2` 验证显存，再提高到 4。公平对比时两个模型必须保持相同 batch size。
+RTX 4060 8 GB 的真实前向、反向和 Adam 更新测试表明，`BATCH_SIZE = 16`
+时 MeshGraphNet 峰值约 4.48 GiB、Transolver 约 1.27 GiB。正式公平对比时
+两个模型统一使用 16；若同时运行其他占用显存的程序，可降为 8。
 
 ## 5. 断电恢复
 
@@ -245,6 +248,9 @@ test T RMSE
 ```
 
 TensorBoard 曲线保存在每个任务自己的 `tensorboard` 目录，不会与其他规模混合。
+训练过程中每 `BATCH_LOG_EVERY` 个 batch 实时写入
+`loss/train_batch_normalized_mse`；每个完整 epoch 结束后写入训练集、验证集、
+物理量 RMSE、学习率和 epoch 耗时。TensorBoard 默认每 10 秒刷新事件文件。
 
 ## 7. rollout 评价
 
