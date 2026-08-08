@@ -67,7 +67,7 @@ if __name__ == "__main__":
     # ======================== 实验组合 ========================
     # 可选 "meshgraphnet"、"transolver"，也可同时训练两个模型。
     # MODELS = ["meshgraphnet", "transolver"]
-    MODELS = ["meshgraphnet", "transolver"]
+    MODELS = ["transolver", "meshgraphnet"]
     # 使用的训练工况数量；设为 None 时自动运行 100、200、...、800。
     # [100, 200, 300, 400, 500, 600, 700, 800]
     TRAIN_SIZES = [100]

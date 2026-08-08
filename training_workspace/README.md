@@ -199,6 +199,7 @@ training_workspace/runs/
             ├── checkpoints/
             │   ├── last.pt
             │   ├── best.pt
+            │   ├── normalization_stats.pt
             │   └── training_config.json
             ├── tensorboard/
             ├── metrics.csv
@@ -214,6 +215,12 @@ training_workspace/runs/
 - 什么都没有：从头训练。
 
 checkpoint 保存模型、optimizer、scheduler、Normalizer、early stopping 计数，以及 Python、NumPy、CPU/CUDA、DataLoader generator RNG 状态。恢复发生在 epoch 边界；断电时正在运行的当前 epoch 仍需重算。
+
+新实验在第一个训练 epoch 前额外执行一次 `fit normalization`：只扫描训练工况，按
+`工况×150 个相邻时间步×节点` 统计当前场、动态坐标、网格速度、上下文和目标增量。
+统计使用 `float64` batch-Welford 算法，完成后冻结并保存到
+`checkpoints/normalization_stats.pt`。后续所有 epoch、验证集和测试集只读取该统计，
+不会继续累计，也不会使用验证/测试信息。
 
 调度器会保存模型、规模、seed、epoch、batch size、学习率和 split manifest 指纹。若同一结果目录已经完成，但变量配置不同，程序会报错而不会静默跳过；新配置实验应修改 `OUTPUT_ROOT`。
 

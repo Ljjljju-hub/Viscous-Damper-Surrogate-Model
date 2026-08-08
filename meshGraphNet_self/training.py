@@ -181,6 +181,99 @@ def evaluate(model, loader, transform, device, description="valid") -> Dict[str,
     return metrics
 
 
+@torch.no_grad()
+def fit_training_normalizers(model, loader, transform, device) -> dict:
+    """Fit all feature/target statistics once from the training split."""
+    model.reset_normalizers()
+    for graph in tqdm(loader, desc="fit normalization", leave=False):
+        graph = prepare_graph(graph, transform).to(device)
+        model.accumulate_normalizers(graph)
+
+    normalizers = model.normalizers()
+    for name, normalizer in normalizers.items():
+        if normalizer.acc_count.item() <= 0:
+            raise RuntimeError(f"Normalizer {name!r} received no training values.")
+        if not torch.isfinite(normalizer.mean).all():
+            raise RuntimeError(f"Normalizer {name!r} has a non-finite mean.")
+        if not torch.isfinite(normalizer.raw_std).all():
+            raise RuntimeError(f"Normalizer {name!r} has a non-finite std.")
+
+    # Physical fields and prediction targets must vary. Constant geometric
+    # channels such as mesh_velocity_x are allowed and normalize to zero.
+    for name in ("field", "output"):
+        raw_std = normalizers[name].raw_std
+        if torch.any(raw_std <= normalizers[name].std_epsilon):
+            raise RuntimeError(
+                f"Normalizer {name!r} contains an unexpectedly constant field: "
+                f"std={raw_std.flatten().cpu().tolist()}"
+            )
+
+    model.freeze_normalizers()
+    statistics = {
+        name: {
+            "count": int(normalizer.acc_count.item()),
+            "mean": normalizer.mean.detach().cpu().flatten().tolist(),
+            "std": normalizer.raw_std.detach().cpu().flatten().tolist(),
+        }
+        for name, normalizer in normalizers.items()
+    }
+    print(
+        "normalization fitted and frozen: "
+        f"field_mean={statistics['field']['mean']} "
+        f"field_std={statistics['field']['std']} "
+        f"output_mean={statistics['output']['mean']} "
+        f"output_std={statistics['output']['std']}"
+    )
+    return statistics
+
+
+def freeze_restored_normalizers(model) -> dict:
+    """Freeze statistics restored from a legacy or current checkpoint."""
+    normalizers = model.normalizers()
+    for name, normalizer in normalizers.items():
+        if normalizer.acc_count.item() <= 0:
+            raise RuntimeError(
+                f"Checkpoint normalizer {name!r} has no fitted statistics."
+            )
+        if not torch.isfinite(normalizer.mean).all() or not torch.isfinite(
+            normalizer.raw_std
+        ).all():
+            raise RuntimeError(
+                f"Checkpoint normalizer {name!r} contains non-finite statistics."
+            )
+        normalizer.freeze()
+    for name in ("field", "output"):
+        raw_std = normalizers[name].raw_std
+        if torch.any(raw_std <= normalizers[name].std_epsilon):
+            raise RuntimeError(
+                f"Checkpoint normalizer {name!r} is numerically collapsed: "
+                f"std={raw_std.flatten().cpu().tolist()}. Restart this run with "
+                "precomputed normalization statistics."
+            )
+    return {
+        name: {
+            "count": int(normalizer.acc_count.item()),
+            "mean": normalizer.mean.detach().cpu().flatten().tolist(),
+            "std": normalizer.raw_std.detach().cpu().flatten().tolist(),
+        }
+        for name, normalizer in normalizers.items()
+    }
+
+
+def save_normalization_statistics(path: Path, model_name: str, statistics: dict) -> None:
+    payload = {
+        "version": 2,
+        "algorithm": "float64_batch_welford",
+        "source": "training_split_only",
+        "frozen_during_optimization": True,
+        "model_name": model_name,
+        "normalizers": statistics,
+    }
+    temporary_path = path.with_suffix(path.suffix + ".tmp")
+    torch.save(payload, temporary_path)
+    temporary_path.replace(path)
+
+
 def checkpoint_state(
     epoch,
     global_step,
@@ -305,6 +398,13 @@ def run_training(
         device,
         generator=train_generator,
     )
+    normalization_loader = create_dataloader(
+        train_dataset,
+        args.batch_size,
+        False,
+        args.num_workers,
+        device,
+    )
     valid_loader = create_dataloader(
         valid_dataset, args.batch_size, False, args.num_workers, device
     )
@@ -349,6 +449,18 @@ def run_training(
         )
         if restored_metrics is not None:
             upsert_metrics_row(metrics_path, restored_metrics)
+
+        normalization_statistics = freeze_restored_normalizers(model)
+        print("restored normalization statistics and froze them for resumed training")
+    else:
+        normalization_statistics = fit_training_normalizers(
+            model, normalization_loader, transform, device
+        )
+    save_normalization_statistics(
+        args.checkpoint_dir / "normalization_stats.pt",
+        model_name,
+        normalization_statistics,
+    )
 
     config = {
         key: str(value) if isinstance(value, Path) else value

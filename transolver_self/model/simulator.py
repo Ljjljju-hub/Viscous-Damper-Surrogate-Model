@@ -120,6 +120,32 @@ class TransolverSimulator(nn.Module):
         normalized_target = self.output_normalizer(target_delta, accumulate)
         return predicted_delta, normalized_target
 
+    def normalizers(self):
+        return {
+            "field": self.field_normalizer,
+            "position": self.position_normalizer,
+            "mesh_velocity": self.mesh_velocity_normalizer,
+            "context": self.context_normalizer,
+            "output": self.output_normalizer,
+        }
+
+    @torch.no_grad()
+    def reset_normalizers(self) -> None:
+        for normalizer in self.normalizers().values():
+            normalizer.reset()
+
+    @torch.no_grad()
+    def accumulate_normalizers(self, graph: Data) -> None:
+        self._build_dense_inputs(graph, accumulate=True)
+        self.output_normalizer(
+            target_field_delta(graph, self.field_count), accumulate=True
+        )
+
+    @torch.no_grad()
+    def freeze_normalizers(self) -> None:
+        for normalizer in self.normalizers().values():
+            normalizer.freeze()
+
     def predict_next(self, graph: Data) -> torch.Tensor:
         position, function, mask = self._build_dense_inputs(
             graph, accumulate=False
@@ -131,5 +157,5 @@ class TransolverSimulator(nn.Module):
 
     def forward(self, graph: Data):
         if self.training:
-            return self.normalized_prediction_and_target(graph, accumulate=True)
+            return self.normalized_prediction_and_target(graph, accumulate=False)
         return self.predict_next(graph)

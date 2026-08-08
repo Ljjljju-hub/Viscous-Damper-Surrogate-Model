@@ -70,7 +70,7 @@ def is_progress_line(line: str) -> bool:
     text = line.strip()
     if "%|" not in text:
         return False
-    return text.startswith(("train ", "valid:", "test:"))
+    return text.startswith(("fit normalization:", "train ", "valid:", "test:"))
 
 
 def clear_progress_line(width: int) -> None:
