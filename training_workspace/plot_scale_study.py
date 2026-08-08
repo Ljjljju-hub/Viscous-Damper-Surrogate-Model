@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+WORKSPACE_ROOT = Path(__file__).resolve().parent
 SUMMARY_METRICS = (
     "best_valid_normalized_mse",
     "test_normalized_mse",
@@ -172,12 +173,12 @@ def parse_args():
     parser.add_argument(
         "--runs-root",
         type=Path,
-        default=PROJECT_ROOT / "experiments" / "dataset_scale" / "runs",
+        default=WORKSPACE_ROOT / "runs",
     )
     parser.add_argument(
         "--output-dir",
         type=Path,
-        default=PROJECT_ROOT / "experiments" / "dataset_scale" / "plots",
+        default=WORKSPACE_ROOT / "plots",
     )
     return parser.parse_args()
 

@@ -5,7 +5,8 @@ from pathlib import Path
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-EVALUATE_SCRIPT = PROJECT_ROOT / "experiments" / "evaluate_experiment.py"
+WORKSPACE_ROOT = Path(__file__).resolve().parent
+EVALUATE_SCRIPT = WORKSPACE_ROOT / "evaluate_experiment.py"
 
 
 def parse_args():
@@ -15,7 +16,7 @@ def parse_args():
     parser.add_argument(
         "--runs-root",
         type=Path,
-        default=PROJECT_ROOT / "experiments" / "dataset_scale" / "runs",
+        default=WORKSPACE_ROOT / "runs",
     )
     parser.add_argument("--rollout-count", type=int, default=10)
     parser.add_argument("--device", type=str, default="auto")

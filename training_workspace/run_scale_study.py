@@ -1,13 +1,15 @@
-import argparse
 import hashlib
 import json
 import os
 import subprocess
 import sys
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Optional, Sequence
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+WORKSPACE_ROOT = Path(__file__).resolve().parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
@@ -19,9 +21,36 @@ from meshGraphNet_self.experiment_utils import (
 
 
 MODEL_SCRIPTS = {
-    "meshgraphnet": PROJECT_ROOT / "meshGraphNet_self" / "train.py",
-    "transolver": PROJECT_ROOT / "transolver_self" / "train.py",
+    "meshgraphnet": PROJECT_ROOT / "meshGraphNet_self" / "train_worker.py",
+    "transolver": PROJECT_ROOT / "transolver_self" / "train_worker.py",
 }
+
+
+@dataclass(frozen=True)
+class StudyConfig:
+    manifest: Path = WORKSPACE_ROOT / "dataset_split" / "split_manifest.json"
+    output_root: Path = WORKSPACE_ROOT / "runs"
+    models: Sequence[str] = ("meshgraphnet", "transolver")
+    train_sizes: Optional[Sequence[int]] = None
+    seeds: Sequence[int] = (42, 43, 44)
+    epochs: int = 100
+    batch_size: int = 4
+    num_workers: int = 0
+    learning_rate: float = 1.0e-4
+    early_stopping_patience: int = 15
+    save_every: int = 10
+    device: str = "auto"
+    meshgraphnet_hidden_size: int = 128
+    message_passing_steps: int = 15
+    transolver_hidden_size: int = 256
+    transolver_layers: int = 8
+    transolver_heads: int = 8
+    transolver_slice_num: int = 32
+    transolver_dropout: float = 0.0
+    transolver_mlp_ratio: int = 1
+    dry_run: bool = False
+    continue_on_error: bool = False
+    allow_temporary_manifest: bool = False
 
 
 def utc_now() -> str:
@@ -34,44 +63,6 @@ def default_sizes(train_pool_count: int) -> list:
 
 def file_sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
-
-
-def parse_args():
-    parser = argparse.ArgumentParser(
-        description="Run resumable MeshGraphNet/Transolver dataset-scale experiments."
-    )
-    parser.add_argument(
-        "--manifest",
-        type=Path,
-        default=PROJECT_ROOT
-        / "experiments"
-        / "dataset_scale"
-        / "split_manifest.json",
-    )
-    parser.add_argument(
-        "--output-root",
-        type=Path,
-        default=PROJECT_ROOT / "experiments" / "dataset_scale" / "runs",
-    )
-    parser.add_argument(
-        "--models",
-        nargs="+",
-        choices=tuple(MODEL_SCRIPTS),
-        default=list(MODEL_SCRIPTS),
-    )
-    parser.add_argument("--train-sizes", nargs="+", type=int, default=None)
-    parser.add_argument("--seeds", nargs="+", type=int, default=[42, 43, 44])
-    parser.add_argument("--epochs", type=int, default=100)
-    parser.add_argument("--batch-size", type=int, default=4)
-    parser.add_argument("--num-workers", type=int, default=0)
-    parser.add_argument("--learning-rate", type=float, default=1.0e-4)
-    parser.add_argument("--early-stopping-patience", type=int, default=15)
-    parser.add_argument("--save-every", type=int, default=10)
-    parser.add_argument("--device", type=str, default="auto")
-    parser.add_argument("--dry-run", action="store_true")
-    parser.add_argument("--continue-on-error", action="store_true")
-    parser.add_argument("--allow-temporary-manifest", action="store_true")
-    return parser.parse_args()
 
 
 def run_one(
@@ -110,6 +101,24 @@ def run_one(
         "manifest": str(args.manifest.resolve()),
         "manifest_sha256": file_sha256(args.manifest.resolve()),
     }
+    if model_name == "meshgraphnet":
+        request.update(
+            {
+                "hidden_size": args.meshgraphnet_hidden_size,
+                "message_passing_steps": args.message_passing_steps,
+            }
+        )
+    else:
+        request.update(
+            {
+                "hidden_size": args.transolver_hidden_size,
+                "layers": args.transolver_layers,
+                "heads": args.transolver_heads,
+                "slice_num": args.transolver_slice_num,
+                "dropout": args.transolver_dropout,
+                "mlp_ratio": args.transolver_mlp_ratio,
+            }
+        )
     if summary_file.exists():
         summary = json.loads(summary_file.read_text(encoding="utf-8"))
         if summary.get("completed"):
@@ -121,7 +130,8 @@ def run_one(
             if previous_status.get("request") != request:
                 raise RuntimeError(
                     f"Completed run has a different configuration: {run_dir}. "
-                    "Use a different --output-root for the new experiment."
+                    "Set a different OUTPUT_ROOT in training_workspace/train.py "
+                    "for the new experiment."
                 )
             print(f"SKIP complete: {model_name} n={train_size} seed={seed}")
             return True
@@ -163,6 +173,32 @@ def run_one(
         args.device,
         "--evaluate-test",
     ]
+    if model_name == "meshgraphnet":
+        command.extend(
+            [
+                "--hidden-size",
+                str(args.meshgraphnet_hidden_size),
+                "--message-passing-steps",
+                str(args.message_passing_steps),
+            ]
+        )
+    else:
+        command.extend(
+            [
+                "--hidden-size",
+                str(args.transolver_hidden_size),
+                "--layers",
+                str(args.transolver_layers),
+                "--heads",
+                str(args.transolver_heads),
+                "--slice-num",
+                str(args.transolver_slice_num),
+                "--dropout",
+                str(args.transolver_dropout),
+                "--mlp-ratio",
+                str(args.transolver_mlp_ratio),
+            ]
+        )
     last_checkpoint = checkpoint_dir / "last.pt"
     resumed = last_checkpoint.exists()
     if resumed:
@@ -173,7 +209,8 @@ def run_one(
         f"n={train_size} seed={seed} resume={resumed}"
     )
     if args.dry_run:
-        print(subprocess.list2cmdline(command))
+        print(f"  output={run_dir}")
+        print(f"  worker={MODEL_SCRIPTS[model_name].name}")
         return True
 
     run_dir.mkdir(parents=True, exist_ok=True)
@@ -236,13 +273,15 @@ def run_one(
     return success
 
 
-def main():
-    args = parse_args()
+def run_study(args: StudyConfig) -> None:
+    unknown_models = [model for model in args.models if model not in MODEL_SCRIPTS]
+    if unknown_models:
+        raise ValueError(f"Unknown models: {unknown_models}")
     manifest = load_split_manifest(args.manifest)
     if manifest.get("temporary_incomplete") and not args.allow_temporary_manifest:
         raise RuntimeError(
             "The split manifest was created from incomplete COMSOL data. "
-            "Create the final manifest or pass --allow-temporary-manifest for testing."
+            "Create the final manifest before starting formal training."
         )
     snapshot_errors = verify_manifest_snapshot(manifest)
     if snapshot_errors:
@@ -280,8 +319,7 @@ def main():
 
     if failures:
         raise RuntimeError(f"{len(failures)} experiments failed: {failures}")
-    print("All requested experiments are complete.")
-
-
-if __name__ == "__main__":
-    main()
+    if args.dry_run:
+        print("Dry-run plan is valid; no training was started.")
+    else:
+        print("All requested experiments are complete.")

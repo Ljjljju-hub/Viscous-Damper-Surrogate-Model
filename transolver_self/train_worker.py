@@ -1,3 +1,5 @@
+"""Internal Transolver worker launched by the root training entry point."""
+
 import argparse
 import sys
 from pathlib import Path
@@ -10,15 +12,7 @@ from meshGraphNet_self.dataset import CASE_FEATURE_NAMES
 from meshGraphNet_self.training import (
     FIELD_NAMES,
     add_common_training_args,
-    checkpoint_state,
-    choose_device,
-    create_dataloader,
-    evaluate,
-    restore_checkpoint,
     run_training,
-    save_checkpoint,
-    seed_everything,
-    train_one_epoch,
 )
 from transolver_self.model.simulator import TransolverSimulator
 
@@ -29,7 +23,7 @@ OFFICIAL_TRANSOLVER_REVISION = "75e0f67643806a81cd1d3f6adc88dd8c02416fe7"
 def parse_args():
     self_root = Path(__file__).resolve().parent
     parser = argparse.ArgumentParser(
-        description="Train Transolver on the viscous-damper moving mesh."
+        description="Internal Transolver worker. Use training_workspace/train.py."
     )
     add_common_training_args(parser, PROJECT_ROOT, self_root)
     parser.add_argument("--hidden-size", type=int, default=256)

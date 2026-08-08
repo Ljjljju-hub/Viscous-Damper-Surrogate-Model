@@ -1,47 +1,50 @@
 # Viscous Damper MeshGraphNet
 
-This directory contains the complete training pipeline for the COMSOL HDF5 data:
+本目录只保留 MeshGraphNet 运行所需代码和技术说明。
 
-1. `dataset.py` reads static topology and physical fields.
-2. `mesh_motion.py` restores positions and ALE mesh velocities at time `t`.
-3. `graph.py` converts triangular faces into dynamic edge features.
-4. `model/` contains the reusable encode-process-decode MeshGraphNet.
-5. `train.py` trains, validates, resumes, logs, and saves checkpoints.
+```text
+meshGraphNet_self/
+├── dataset.py          # HDF5、JSON 和单步图样本读取
+├── mesh_motion.py      # 三段动网格位置与速度恢复
+├── features.py         # 两模型共享特征
+├── graph.py            # face -> edge_index / edge_attr
+├── training.py         # 两模型共享训练、评价和 checkpoint
+├── experiment_utils.py # 固定划分、RNG 恢复和指标文件工具
+├── train_worker.py     # 调度器使用的 MeshGraphNet 内部 worker
+├── model/              # Encoder-Processor-Decoder 网络
+├── utils/              # NodeType 和 Normalizer
+└── 技术文档.md
+```
 
-Dataset-scale comparison, exact RNG resume, fixed case manifests, rollout
-evaluation, and automatic plotting are documented in `experiments/README.md`.
+## 训练入口
 
-Use the conda `pinn` environment for all subsequent commands:
+不要直接运行本目录的 `train_worker.py`。统一修改 [training_workspace/train.py](../training_workspace/train.py) 末尾的变量区，然后运行：
 
 ```powershell
 conda activate pinn
+python training_workspace\train.py
 ```
 
-Install dependencies if that environment is rebuilt:
+只训练 MeshGraphNet 时设置：
 
-```powershell
-python -m pip install -r meshGraphNet_self/requirements.txt
+```python
+MODELS = ["meshgraphnet"]
+TRAIN_SIZES = [100, 200, 400, 800]
+SEEDS = [42]
+DRY_RUN = False
 ```
 
-Run training from the repository root:
+训练结果保存在：
 
-```powershell
-python meshGraphNet_self/train.py --epochs 100 --batch-size 4
+```text
+training_workspace/runs/meshgraphnet/
+└── n0100/seed_42/
+    ├── checkpoints/best.pt
+    ├── checkpoints/last.pt
+    ├── tensorboard/
+    ├── metrics.csv
+    ├── summary.json
+    └── train.log
 ```
 
-Checkpoint files are written under `meshGraphNet_self/checkpoints`:
-
-- `last.pt`: latest complete training state
-- `best.pt`: best validation model
-- `epoch_XXXX.pt`: periodic snapshots
-- `training_config.json`: command and model configuration
-
-Resume training:
-
-```powershell
-python meshGraphNet_self/train.py --resume meshGraphNet_self/checkpoints/last.pt
-```
-
-Detailed Chinese design and operation documentation:
-
-- [技术文档.md](技术文档.md)
+重新运行相同的 `training_workspace/train.py` 会自动跳过已完成任务，或从 `last.pt` 恢复中断任务。详细设计见 [技术文档.md](技术文档.md)，完整实验流程见 [training_workspace/README.md](../training_workspace/README.md)。

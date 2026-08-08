@@ -11,6 +11,7 @@ from pathlib import Path
 import h5py
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+WORKSPACE_ROOT = Path(__file__).resolve().parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
@@ -79,20 +80,17 @@ def parse_args():
     parser.add_argument(
         "--output",
         type=Path,
-        default=PROJECT_ROOT
-        / "experiments"
-        / "dataset_scale"
-        / "split_manifest.json",
+        default=WORKSPACE_ROOT / "dataset_split" / "split_manifest.json",
     )
     parser.add_argument(
         "--portable-output",
         type=Path,
-        default=PROJECT_ROOT / "experiments" / "dataset_scale" / "case_split.json",
+        default=WORKSPACE_ROOT / "dataset_split" / "case_split.json",
     )
     parser.add_argument(
         "--case-index-output",
         type=Path,
-        default=PROJECT_ROOT / "experiments" / "dataset_scale" / "case_index.csv",
+        default=WORKSPACE_ROOT / "dataset_split" / "case_index.csv",
     )
     parser.add_argument(
         "--failed-registry",
@@ -275,7 +273,7 @@ def main():
         "计算有限元数据/4_Combined_Master_Dataset.json"
     )
     portable_manifest["runtime_manifest"] = (
-        "experiments/dataset_scale/split_manifest.json"
+        "training_workspace/dataset_split/split_manifest.json"
     )
     atomic_write_json(portable_output, portable_manifest)
     write_case_index(

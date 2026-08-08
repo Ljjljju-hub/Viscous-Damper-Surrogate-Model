@@ -1030,5 +1030,5 @@
   "invalid_cases": [],
   "data_root": "计算有限元数据/comsol_hdf5",
   "parameters_json": "计算有限元数据/4_Combined_Master_Dataset.json",
-  "runtime_manifest": "experiments/dataset_scale/split_manifest.json"
+  "runtime_manifest": "training_workspace/dataset_split/split_manifest.json"
 }

@@ -73,18 +73,14 @@ train_case_ids = train_pool[:N]
 
 ```powershell
 conda activate pinn
-python experiments\create_split_manifest.py --force
-& '.\experiments\开始训练.bat' --dry-run
+python training_workspace\create_split_manifest.py --force
+python training_workspace\train.py
 ```
 
 生成器要求 1000 个参数工况全部属于“有效 HDF5”或“终态失败”。只要存在未归类 case，正式清单生成就会失败。
 
-开始完整规模实验：
+开始训练前，修改 `training_workspace/train.py` 末尾的 `MODELS`、`TRAIN_SIZES`、`SEEDS` 等变量，将 `DRY_RUN` 从 `True` 改为 `False`，然后运行：
 
 ```powershell
-& '.\experiments\开始训练.bat' `
-  --epochs 100 `
-  --batch-size 4 `
-  --early-stopping-patience 15 `
-  --device auto
+python training_workspace\train.py
 ```

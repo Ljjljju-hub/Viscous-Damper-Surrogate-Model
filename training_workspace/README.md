@@ -1,4 +1,4 @@
-# 数据规模对比实验
+# 统一训练工作目录
 
 本目录自动完成以下流程：
 
@@ -12,6 +12,27 @@
 -> 固定测试工况自回归 rollout
 -> 汇总均值、标准差并输出 PNG/PDF 曲线
 ```
+
+## 目录结构
+
+```text
+training_workspace/
+├── train.py                    # 唯一人工训练入口，参数定义在文件末尾
+├── dataset_split/              # 固定的数据集划分和本机数据快照
+│   ├── case_split.json
+│   ├── case_index.csv
+│   └── split_manifest.json
+├── runs/
+│   ├── meshgraphnet/           # MeshGraphNet 按规模和 seed 保存
+│   └── transolver/             # Transolver 按规模和 seed 保存
+├── plots/                      # 汇总 CSV 及 PNG/PDF 曲线
+├── run_scale_study.py          # 可恢复训练调度器
+├── create_split_manifest.py    # 固定数据划分生成器
+├── evaluate_scale_study.py     # 批量 rollout 评价
+└── plot_scale_study.py         # 指标汇总和绘图
+```
+
+训练结果自动形成 `runs/<模型>/n<规模>/seed_<种子>/`，无需人工新建实验目录。
 
 ## 1. 最终数据和划分
 
@@ -31,7 +52,7 @@ valid      = 80
 test       = 81
 ```
 
-训练规模使用 `100,200,...,800`。验证和测试工况永远不变，因此曲线只反映训练数据规模变化。详细统计见 [dataset_scale/README.md](dataset_scale/README.md)。
+训练规模使用 `100,200,...,800`。验证和测试工况永远不变，因此曲线只反映训练数据规模变化。详细统计见 [dataset_split/README.md](dataset_split/README.md)。
 
 ## 2. 生成固定 split
 
@@ -40,15 +61,15 @@ COMSOL 全部工况进入成功或失败终态后执行：
 ```powershell
 conda activate pinn
 
-python experiments\create_split_manifest.py --force
+python training_workspace\create_split_manifest.py --force
 ```
 
 输出：
 
 ```text
-experiments/dataset_scale/split_manifest.json
-experiments/dataset_scale/case_split.json
-experiments/dataset_scale/case_index.csv
+training_workspace/dataset_split/split_manifest.json
+training_workspace/dataset_split/case_split.json
+training_workspace/dataset_split/case_index.csv
 ```
 
 manifest 包含：
@@ -61,28 +82,62 @@ manifest 包含：
 
 脚本默认要求参数 JSON 中的 1000 个工况全部属于有效 HDF5 或终态失败。存在未归类工况时会拒绝生成正式 manifest。临时测试可以增加 `--allow-incomplete`，但不能用于最终论文实验。
 
-## 3. 先检查将执行哪些任务
+## 3. Python 训练入口
+
+唯一人工训练入口是本目录的 `train.py`。不输入命令行参数，只修改文件末尾变量区：
+
+```python
+MODELS = ["meshgraphnet", "transolver"]
+TRAIN_SIZES = [100]
+SEEDS = [42]
+
+EPOCHS = 100
+BATCH_SIZE = 2
+LEARNING_RATE = 1.0e-4
+EARLY_STOPPING_PATIENCE = 15
+SAVE_EVERY = 10
+NUM_WORKERS = 0
+DEVICE = "auto"
+
+MESHGRAPHNET_HIDDEN_SIZE = 128
+MESSAGE_PASSING_STEPS = 15
+
+TRANSOLVER_HIDDEN_SIZE = 256
+TRANSOLVER_LAYERS = 8
+TRANSOLVER_HEADS = 8
+TRANSOLVER_SLICE_NUM = 32
+TRANSOLVER_DROPOUT = 0.0
+TRANSOLVER_MLP_RATIO = 1
+
+DRY_RUN = True
+CONTINUE_ON_ERROR = False
+OUTPUT_ROOT = WORKSPACE_ROOT / "runs"
+```
+
+变量含义：
+
+- `MODELS`：可选 `meshgraphnet`、`transolver` 或两者；
+- `TRAIN_SIZES`：从 `100,200,...,800` 中任意选择；设为 `None` 时读取 manifest 中全部规模；
+- `SEEDS`：一个或多个随机种子；
+- `MESHGRAPHNET_*`：MeshGraphNet 隐藏维度和消息传递层数；
+- `TRANSOLVER_*`：Transolver 隐藏维度、层数、head、slice 和 dropout；
+- `DRY_RUN=True`：只显示计划，不训练；确认后改为 `False`；
+- `CONTINUE_ON_ERROR`：单个任务失败后是否继续后续组合；正式首次运行建议保持 `False`；
+- `OUTPUT_ROOT`：模型、checkpoint、日志和指标的总输出目录。
+
+运行方式固定为：
 
 ```powershell
-& '.\experiments\开始训练.bat' --dry-run
+conda activate pinn
+python training_workspace\train.py
 ```
 
-默认实验矩阵：
-
-```text
-models = meshgraphnet, transolver
-train sizes = 100,200,...,800
-seeds = 42,43,44
-```
-
-共 `2 × 8 × 3 = 48` 次训练。
-
-## 4. 开始全部训练
+## 4. 模型和规模选择
 
 训练结果独立保存在：
 
 ```text
-experiments/dataset_scale/runs/
+training_workspace/runs/
 ├── meshgraphnet/
 │   ├── n0100/seed_42/
 │   └── ...
@@ -93,53 +148,48 @@ experiments/dataset_scale/runs/
 
 模型、数据规模和随机种子共同确定一个独立实验目录，两个模型的 checkpoint、日志和指标不会混合。
 
-推荐先检查单个正式任务：
+只训练 MeshGraphNet 的 100 工况：
 
-```powershell
-& '.\experiments\开始训练.bat' --dry-run `
-  --models meshgraphnet `
-  --train-sizes 100 `
-  --seeds 42
+```python
+MODELS = ["meshgraphnet"]
+TRAIN_SIZES = [100]
+SEEDS = [42]
 ```
 
-正式启动全部 48 个任务：
+比较两个模型的部分规模：
 
-```powershell
-& '.\experiments\开始训练.bat' `
-  --epochs 100 `
-  --batch-size 4 `
-  --early-stopping-patience 15 `
-  --device auto
+```python
+MODELS = ["meshgraphnet", "transolver"]
+TRAIN_SIZES = [100, 200, 400, 800]
+SEEDS = [42]
 ```
 
-只运行部分规模：
+完整 48 个任务：
 
-```powershell
-& '.\experiments\开始训练.bat' `
-  --models meshgraphnet transolver `
-  --train-sizes 100 200 400 800 `
-  --seeds 42 43 44
+```python
+MODELS = ["meshgraphnet", "transolver"]
+TRAIN_SIZES = [100, 200, 300, 400, 500, 600, 700, 800]
+SEEDS = [42, 43, 44]
 ```
 
-单次快速验证必须写入独立的 `_smoke` 目录，不能污染正式 `runs/`：
+短训练验证必须写入独立的 `_smoke` 目录，不能污染正式结果：
 
-```powershell
-& '.\experiments\开始训练.bat' `
-  --output-root experiments/_smoke/training `
-  --models transolver `
-  --train-sizes 100 `
-  --seeds 42 `
-  --epochs 2
+```python
+MODELS = ["transolver"]
+TRAIN_SIZES = [100]
+SEEDS = [42]
+EPOCHS = 2
+OUTPUT_ROOT = WORKSPACE_ROOT / "_smoke"
 ```
 
-RTX 4060 上建议先用 `--batch-size 2` 验证显存，再提高到 4。用于公平对比的 MeshGraphNet 与 Transolver 正式实验应保持相同 batch size。
+RTX 4060 上建议先用 `BATCH_SIZE = 2` 验证显存，再提高到 4。公平对比时两个模型必须保持相同 batch size。
 
 ## 5. 断电恢复
 
 每个实验保存在独立目录：
 
 ```text
-experiments/dataset_scale/runs/
+training_workspace/runs/
 └── transolver/
     └── n0100/
         └── seed_42/
@@ -154,7 +204,7 @@ experiments/dataset_scale/runs/
             └── train.log
 ```
 
-断电后重新运行完全相同的 `run_scale_study.py` 命令：
+断电后保持 `training_workspace/train.py` 末尾变量不变，再次运行 `python training_workspace\train.py`：
 
 - 有 `summary.json`：任务已经完成，自动跳过；
 - 有 `last.pt` 但没有 summary：从最近完整 epoch 自动恢复；
@@ -162,7 +212,7 @@ experiments/dataset_scale/runs/
 
 checkpoint 保存模型、optimizer、scheduler、Normalizer、early stopping 计数，以及 Python、NumPy、CPU/CUDA、DataLoader generator RNG 状态。恢复发生在 epoch 边界；断电时正在运行的当前 epoch 仍需重算。
 
-调度器会保存模型、规模、seed、epoch、batch size、学习率和 split manifest 指纹。若同一结果目录已经完成，但新命令配置不同，程序会报错而不会静默跳过；需要做新配置实验时使用新的 `--output-root`。
+调度器会保存模型、规模、seed、epoch、batch size、学习率和 split manifest 指纹。若同一结果目录已经完成，但变量配置不同，程序会报错而不会静默跳过；新配置实验应修改 `OUTPUT_ROOT`。
 
 ## 6. 指标和曲线保存
 
@@ -201,7 +251,7 @@ TensorBoard 曲线保存在每个任务自己的 `tensorboard` 目录，不会�
 所有训练完成后，对固定 test 集前 10 个工况运行完整自回归序列：
 
 ```powershell
-python experiments\evaluate_scale_study.py `
+python training_workspace\evaluate_scale_study.py `
   --rollout-count 10 `
   --device auto
 ```
@@ -211,7 +261,7 @@ python experiments\evaluate_scale_study.py `
 默认只保存指标，避免 48 个实验产生大量网格序列文件。如果确实需要每一帧 PyG 网格：
 
 ```powershell
-python experiments\evaluate_scale_study.py `
+python training_workspace\evaluate_scale_study.py `
   --rollout-count 10 `
   --save-predictions
 ```
@@ -221,13 +271,13 @@ MeshGraphNet rollout 每步会根据新 `pos` 重新生成动态边特征；Tran
 ## 8. 汇总和绘图
 
 ```powershell
-python experiments\plot_scale_study.py
+python training_workspace\plot_scale_study.py
 ```
 
 输出：
 
 ```text
-experiments/dataset_scale/plots/
+training_workspace/plots/
 ├── individual_results.csv
 ├── aggregate.csv
 ├── best_valid_normalized_mse.png/.pdf
