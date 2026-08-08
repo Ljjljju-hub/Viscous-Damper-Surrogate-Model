@@ -13,48 +13,53 @@
 -> 汇总均值、标准差并输出 PNG/PDF 曲线
 ```
 
-## 1. 为什么最多使用 800 个训练工况
+## 1. 最终数据和划分
 
-如果总数据只有 1000 个工况，推荐固定：
+1000 个参数工况的最终计算结果为：
+
+```text
+有效 HDF5       = 961
+COMSOL 终态失败 = 39
+未归类           = 0
+```
+
+有效数据使用种子 42 固定划分：
 
 ```text
 train pool = 800
-valid      = 100
-test       = 100
+valid      = 80
+test       = 81
 ```
 
-训练规模使用 `100,200,...,800`。验证和测试工况永远不变，因此曲线只反映训练数据规模变化。
-
-如果要把 1000 个工况全部用于训练，需要额外准备独立的验证和测试工况。例如总共 1200 个工况时，可以使用 `1000/100/100`。不能一边用某个工况训练，一边再把它作为无偏测试数据。
+训练规模使用 `100,200,...,800`。验证和测试工况永远不变，因此曲线只反映训练数据规模变化。详细统计见 [dataset_scale/README.md](dataset_scale/README.md)。
 
 ## 2. 生成固定 split
 
-等待 COMSOL 1000 个工况全部完成后执行：
+COMSOL 全部工况进入成功或失败终态后执行：
 
 ```powershell
 conda activate pinn
 
-python experiments\create_split_manifest.py `
-  --expected-cases 1000 `
-  --valid-count 100 `
-  --test-count 100 `
-  --seed 42
+python experiments\create_split_manifest.py --force
 ```
 
 输出：
 
 ```text
 experiments/dataset_scale/split_manifest.json
+experiments/dataset_scale/case_split.json
+experiments/dataset_scale/case_index.csv
 ```
 
 manifest 包含：
 
 - 固定打乱后的 `train_pool`、`valid` 和 `test` case ID；
+- 39 个终态失败 case ID 和未归类 case 检查结果；
 - 每个 HDF5 的文件大小、修改时间、节点数和时间步数；
 - JSON 参数文件 SHA256；
 - 无效或尚未写完的 HDF5 列表。
 
-脚本默认要求正好找到 1000 个有效工况。计算未完成时会拒绝生成正式 manifest。临时测试可以增加 `--allow-incomplete`，但不能用于最终论文实验。
+脚本默认要求参数 JSON 中的 1000 个工况全部属于有效 HDF5 或终态失败。存在未归类工况时会拒绝生成正式 manifest。临时测试可以增加 `--allow-incomplete`，但不能用于最终论文实验。
 
 ## 3. 先检查将执行哪些任务
 

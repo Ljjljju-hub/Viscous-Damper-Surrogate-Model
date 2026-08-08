@@ -218,7 +218,8 @@ def main():
         preview = "\n".join(snapshot_errors[:20])
         raise RuntimeError(f"Frozen dataset snapshot changed:\n{preview}")
     train_pool_count = len(manifest["train_pool"])
-    sizes = args.train_sizes or default_sizes(train_pool_count)
+    manifest_sizes = [int(size) for size in manifest.get("train_sizes", [])]
+    sizes = args.train_sizes or manifest_sizes or default_sizes(train_pool_count)
     invalid_sizes = [size for size in sizes if size < 1 or size > train_pool_count]
     if invalid_sizes:
         raise ValueError(
