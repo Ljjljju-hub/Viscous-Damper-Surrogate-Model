@@ -30,6 +30,24 @@
 - 压力相对误差只在真值绝对值高于每工况阈值的位置统计，避免近零分母放大。
 - 域外泛化数据只写“流程和参数已准备，COMSOL/模型结果待计算”，不得给出虚构精度。
 
+### 相对误差定义
+
+总结报告以预测值和 GT 直接计算相对指标，不使用训练集归一化均值或标准差：
+
+```text
+relative_RMSE = sqrt(sum((prediction - GT)^2) / sum(GT^2)) * 100%
+point_relative_error = abs(prediction - GT) / abs(GT) * 100%
+```
+
+其中 `relative_RMSE` 是全局相对 L2 误差。单点相对误差对每个工况、每个物理场使用 `1% * (GT_max - GT_min)` 作为近零阈值，只统计 `abs(GT) >= threshold` 的点，并报告 P50、P95、P99、最大值和排除数量。
+
+报告必须分别给出：
+
+1. 81 个 test 工况的完整单步 relative RMSE 和单点相对误差；
+2. 相同 10 个 test 工况的单步与 150 步 rollout relative RMSE；
+3. 相同 10 个工况的 rollout 单点相对误差分位数；
+4. 绝对 RMSE 作为物理单位补充，但不再单独作为主要准确性结论。
+
 ## 表述规则
 
 - “数值稳定”仅表示 150 步 rollout 完成且无 NaN/Inf。
