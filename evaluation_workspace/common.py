@@ -112,10 +112,6 @@ def load_evaluation_context(
     device: str,
     manifest_path: Path | None = None,
 ) -> EvaluationContext:
-    model_names = tuple(models)
-    unknown = [name for name in model_names if name not in {"meshgraphnet", "transolver"}]
-    if unknown:
-        raise ValueError(f"Unknown models: {unknown}")
     manifest_path = manifest_path or (
         PROJECT_ROOT / "training_workspace" / "dataset_split" / "split_manifest.json"
     )
@@ -123,11 +119,85 @@ def load_evaluation_context(
     snapshot_errors = verify_manifest_snapshot(manifest)
     if snapshot_errors:
         raise RuntimeError("Frozen dataset snapshot changed:\n" + "\n".join(snapshot_errors[:20]))
+    return _build_evaluation_context(
+        models=models,
+        train_size=train_size,
+        seed=seed,
+        device=device,
+        data_root=Path(manifest["data_root"]),
+        parameters_json=Path(manifest["parameters_json"]),
+        case_ids=list(manifest["test"]),
+        manifest=manifest,
+    )
+
+
+def load_evaluation_context_from_cases(
+    *,
+    models: list[str] | tuple[str, ...],
+    train_size: int,
+    seed: int,
+    device: str,
+    data_root: Path,
+    parameters_json: Path,
+    case_ids: list[str] | tuple[str, ...],
+    source_name: str,
+) -> EvaluationContext:
+    data_root = Path(data_root).resolve()
+    parameters_json = Path(parameters_json).resolve()
+    selected_cases = list(case_ids)
+    manifest = {
+        "source_name": str(source_name),
+        "data_root": str(data_root),
+        "parameters_json": str(parameters_json),
+        "test": selected_cases,
+    }
+    return _build_evaluation_context(
+        models=models,
+        train_size=train_size,
+        seed=seed,
+        device=device,
+        data_root=data_root,
+        parameters_json=parameters_json,
+        case_ids=selected_cases,
+        manifest=manifest,
+    )
+
+
+def _build_evaluation_context(
+    *,
+    models: list[str] | tuple[str, ...],
+    train_size: int,
+    seed: int,
+    device: str,
+    data_root: Path,
+    parameters_json: Path,
+    case_ids: list[str] | tuple[str, ...],
+    manifest: dict,
+) -> EvaluationContext:
+    model_names = tuple(models)
+    unknown = [name for name in model_names if name not in {"meshgraphnet", "transolver"}]
+    if not model_names:
+        raise ValueError("At least one evaluation model is required.")
+    if unknown:
+        raise ValueError(f"Unknown models: {unknown}")
+    selected_cases = list(case_ids)
+    if not selected_cases:
+        raise ValueError("At least one evaluation case is required.")
+    if len(selected_cases) != len(set(selected_cases)):
+        raise ValueError("Evaluation case_ids contains duplicates.")
+    data_root = Path(data_root).resolve()
+    parameters_json = Path(parameters_json).resolve()
+    if not data_root.is_dir():
+        raise FileNotFoundError(f"Evaluation data root does not exist: {data_root}")
+    if not parameters_json.is_file():
+        raise FileNotFoundError(
+            f"Evaluation parameters JSON does not exist: {parameters_json}"
+        )
     dataset = FpcDataset(
-        data_root=manifest["data_root"],
+        data_root=str(data_root),
         split="test",
-        parameters_json=manifest["parameters_json"],
-        case_ids=manifest["test"],
+        parameters_json=str(parameters_json),
+        case_ids=selected_cases,
     )
     checkpoints = {
         name: checkpoint_path(name, train_size, seed) for name in model_names

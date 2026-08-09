@@ -1,9 +1,10 @@
 # 模型测试与时序可视化
 
-本目录有两个独立人工入口：
+本目录有三个独立人工入口：
 
 ```text
 test.py                  完整 test split 单步预测与分层指标
+test_ood.py              域外工况单步预测与独立指标
 visualize_timeseries.py  指定工况时序推理与 ParaView 导出
 ```
 
@@ -34,7 +35,46 @@ results/test/n0100_seed42/predictions/<模型>/Case_XXXX.h5
 
 每个文件包含目标时刻、动态位置、网格速度、静态拓扑、区域、真实场、绝对预测场、checkpoint 哈希及输出归一化统计量。文件完整且 checkpoint 哈希未变化时，下一次运行会跳过推理并直接复用。
 
-## 2. 分层指标
+## 2. 域外测试
+
+当前域外参数共150个，其中133个已有有效HDF5，17个为终态失败。运行：
+
+```powershell
+conda activate pinn
+python evaluation_workspace\test_ood.py
+```
+
+默认使用`n=100, seed=42`的MeshGraphNet和Transolver，并读取：
+
+```text
+ood_generalization_workspace/comsol_hdf5
+ood_generalization_workspace/4_Combined_Master_Dataset.json
+ood_generalization_workspace/parameter_audit.csv
+ood_generalization_workspace/failed_cases.json
+```
+
+域外数据不会重新统计归一化，仍使用checkpoint中冻结的训练集统计量。结果与域内测试完全隔离：
+
+```text
+results/ood/n0100_seed42/
+├── predictions/<模型>/Case_XXXX.h5
+├── run_config.json
+├── ood_cases.csv
+├── summary.json
+├── summary.csv
+├── case_metrics.csv
+├── time_metrics.csv
+├── case_time_metrics.csv
+├── extrema.csv
+├── percentiles.csv
+└── model_comparison.png
+```
+
+`run_config.json`记录150个参数工况、133个实际测试工况和17个失败编号。`ood_cases.csv`保留每个有效工况的`geometry_ood/loading_ood/material_ood`分组、越界参数和上下侧，供后续分组统计。
+
+预测仍按每个模型、每个工况保存为独立HDF5。`REUSE_PREDICTIONS=True`时，模型名、case ID、checkpoint哈希和时间步数均匹配的文件会直接跳过；断电或中断后重新运行同一入口即可继续。
+
+## 3. 分层指标
 
 结果目录包含：
 
@@ -58,7 +98,7 @@ abs(truth) >= 1% * 该工况该字段的 max(abs(truth))
 
 的节点时刻计算。CSV 同时记录有效点、排除点和实际阈值。RMSE、MAE、P95、P99 和最大绝对误差仍使用所有节点。
 
-## 3. 时序可视化
+## 4. 时序可视化
 
 先在 `visualize_timeseries.py` 末尾设置：
 
@@ -111,7 +151,7 @@ results/visualization/<Case>/start_<索引>/<模式>/
 
 用 ParaView 打开 `comparison.pvd`。每个节点可选择真实 `p/T`、两个模型预测、绝对误差、有效相对误差、区域和网格速度。PVD 依赖 `frames` 文件夹，移动结果时需要一起保留。
 
-## 4. 建议分析顺序
+## 5. 建议分析顺序
 
 1. 用 `summary.csv` 判断两个模型总体泛化能力。
 2. 用 `case_metrics.csv` 找出困难几何和加载工况。
