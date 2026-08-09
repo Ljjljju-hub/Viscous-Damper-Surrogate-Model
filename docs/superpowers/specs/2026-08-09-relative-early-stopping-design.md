@@ -25,7 +25,7 @@ Training tracks two values:
 For reference loss `r` and current loss `v`, an improvement is meaningful when:
 
 ```text
-v < r * (1 - min_relative_improvement)
+v <= r * (1 - min_relative_improvement)
 ```
 
 The first completed validation epoch always initializes both values.

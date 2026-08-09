@@ -15,6 +15,7 @@ from tqdm import tqdm
 
 try:
     from .dataset import CASE_FEATURE_NAMES, FpcDataset
+    from .early_stopping import reference_from_checkpoint, update_early_stopping
     from .experiment_utils import (
         atomic_write_json,
         capture_rng_state,
@@ -26,6 +27,7 @@ try:
     from .graph import build_graph_transform, prepare_graph
 except ImportError:
     from dataset import CASE_FEATURE_NAMES, FpcDataset
+    from early_stopping import reference_from_checkpoint, update_early_stopping
     from experiment_utils import (
         atomic_write_json,
         capture_rng_state,
@@ -69,6 +71,9 @@ def add_common_training_args(
     parser.add_argument("--save-every", type=int, default=10)
     parser.add_argument("--batch-log-every", type=int, default=10)
     parser.add_argument("--early-stopping-patience", type=int, default=0)
+    parser.add_argument(
+        "--early-stopping-min-relative-improvement", type=float, default=0.002
+    )
     parser.add_argument("--evaluate-test", action="store_true")
     parser.add_argument("--resume", type=Path, default=None)
     parser.add_argument("--device", type=str, default="auto")
@@ -283,6 +288,7 @@ def checkpoint_state(
     best_valid_loss,
     model_config,
     epochs_without_improvement=0,
+    early_stopping_reference_loss=float("inf"),
     data_loader_generator=None,
     metrics_row=None,
 ):
@@ -294,6 +300,7 @@ def checkpoint_state(
         "scheduler_state_dict": scheduler.state_dict(),
         "best_valid_loss": best_valid_loss,
         "epochs_without_improvement": epochs_without_improvement,
+        "early_stopping_reference_loss": early_stopping_reference_loss,
         "model_config": model_config,
         "field_names": FIELD_NAMES,
         "case_feature_names": CASE_FEATURE_NAMES,
@@ -327,6 +334,10 @@ def restore_checkpoint(
         int(checkpoint.get("global_step", 0)),
         float(checkpoint.get("best_valid_loss", float("inf"))),
         int(checkpoint.get("epochs_without_improvement", 0)),
+        reference_from_checkpoint(
+            checkpoint,
+            float(checkpoint.get("best_valid_loss", float("inf"))),
+        ),
         checkpoint.get("metrics_row"),
     )
 
@@ -430,6 +441,7 @@ def run_training(
     start_epoch = 1
     global_step = 0
     best_valid_loss = float("inf")
+    early_stopping_reference_loss = float("inf")
     epochs_without_improvement = 0
     restored_metrics = None
     if args.resume is not None:
@@ -438,6 +450,7 @@ def run_training(
             global_step,
             best_valid_loss,
             epochs_without_improvement,
+            early_stopping_reference_loss,
             restored_metrics,
         ) = restore_checkpoint(
             args.resume,
@@ -536,12 +549,19 @@ def run_training(
             valid_loss = valid_metrics["normalized_mse"]
             scheduler.step(valid_loss)
 
-            improved = valid_loss < best_valid_loss
-            if improved:
-                best_valid_loss = valid_loss
-                epochs_without_improvement = 0
-            else:
-                epochs_without_improvement += 1
+            early_stopping_update = update_early_stopping(
+                valid_loss,
+                best_valid_loss,
+                early_stopping_reference_loss,
+                epochs_without_improvement,
+                args.early_stopping_min_relative_improvement,
+            )
+            best_valid_loss = early_stopping_update.best_valid_loss
+            early_stopping_reference_loss = early_stopping_update.reference_loss
+            epochs_without_improvement = (
+                early_stopping_update.epochs_without_improvement
+            )
+            improved = early_stopping_update.exact_improvement
 
             epoch_seconds = time.perf_counter() - epoch_start
             metrics_row = {
@@ -552,6 +572,11 @@ def run_training(
                 "valid_rmse_p": valid_metrics["rmse_p"],
                 "valid_rmse_T": valid_metrics["rmse_T"],
                 "learning_rate": optimizer.param_groups[0]["lr"],
+                "early_stop_wait": epochs_without_improvement,
+                "relative_improvement": early_stopping_update.relative_improvement,
+                "meaningful_improvement": (
+                    early_stopping_update.meaningful_improvement
+                ),
                 "epoch_seconds": epoch_seconds,
             }
             print(
@@ -560,6 +585,12 @@ def run_training(
                 f"p_rmse={valid_metrics['rmse_p']:.4e} "
                 f"T_rmse={valid_metrics['rmse_T']:.4e} "
                 f"lr={optimizer.param_groups[0]['lr']:.3e} "
+                f"early_stop_wait={epochs_without_improvement}/"
+                f"{args.early_stopping_patience} "
+                f"relative_improvement="
+                f"{early_stopping_update.relative_improvement:.3%} "
+                f"meaningful_improvement="
+                f"{early_stopping_update.meaningful_improvement} "
                 f"seconds={epoch_seconds:.1f}"
             )
 
@@ -572,6 +603,14 @@ def run_training(
                     "learning_rate", optimizer.param_groups[0]["lr"], epoch
                 )
                 writer.add_scalar("time/epoch_seconds", epoch_seconds, epoch)
+                writer.add_scalar(
+                    "early_stopping/wait", epochs_without_improvement, epoch
+                )
+                writer.add_scalar(
+                    "early_stopping/relative_improvement",
+                    early_stopping_update.relative_improvement,
+                    epoch,
+                )
                 writer.flush()
 
             state = checkpoint_state(
@@ -583,6 +622,7 @@ def run_training(
                 best_valid_loss,
                 model_config,
                 epochs_without_improvement=epochs_without_improvement,
+                early_stopping_reference_loss=early_stopping_reference_loss,
                 data_loader_generator=train_generator,
                 metrics_row=metrics_row,
             )
@@ -605,7 +645,9 @@ def run_training(
                 stopped_early = True
                 print(
                     f"early stopping at epoch={epoch}; "
-                    f"patience={args.early_stopping_patience}"
+                    f"patience={args.early_stopping_patience}; "
+                    f"min_relative_improvement="
+                    f"{args.early_stopping_min_relative_improvement:.3%}"
                 )
                 break
     finally:
@@ -651,6 +693,12 @@ def run_training(
             best_checkpoint["best_valid_loss"]
         ),
         "stopped_early": stopped_early,
+        "early_stopping_patience": args.early_stopping_patience,
+        "early_stopping_min_relative_improvement": (
+            args.early_stopping_min_relative_improvement
+        ),
+        "early_stopping_reference_loss": early_stopping_reference_loss,
+        "early_stopping_final_wait": epochs_without_improvement,
         "total_epoch_seconds": total_epoch_seconds,
         "metrics_file": str(Path(metrics_path).resolve()),
         "best_checkpoint": str(best_path.resolve()),

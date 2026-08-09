@@ -20,6 +20,7 @@ def main(
     batch_size,
     learning_rate,
     early_stopping_patience,
+    early_stopping_min_relative_improvement,
     save_every,
     batch_log_every,
     num_workers,
@@ -44,6 +45,9 @@ def main(
         batch_size=batch_size,
         learning_rate=learning_rate,
         early_stopping_patience=early_stopping_patience,
+        early_stopping_min_relative_improvement=(
+            early_stopping_min_relative_improvement
+        ),
         save_every=save_every,
         batch_log_every=batch_log_every,
         num_workers=num_workers,
@@ -78,7 +82,9 @@ if __name__ == "__main__":
     EPOCHS = 100  # 最大训练轮数
     BATCH_SIZE = 16  # 每个 batch 的图数量
     LEARNING_RATE = 1.0e-4  # Adam 初始学习率
-    EARLY_STOPPING_PATIENCE = 15  # 验证集连续多少轮不改善后早停
+    EARLY_STOPPING_PATIENCE = 10  # 连续多少轮没有显著改善后早停
+    # 相对显著改善阈值；0.002 表示验证损失至少下降 0.2% 才重置耐心。
+    EARLY_STOPPING_MIN_RELATIVE_IMPROVEMENT = 0.002
     SAVE_EVERY = 10  # 每隔多少轮额外保存一个 checkpoint
     BATCH_LOG_EVERY = 10  # 每多少个 batch 写一次实时 TensorBoard loss
     NUM_WORKERS = 0  # DataLoader 子进程数；Windows 建议先用 0
@@ -112,6 +118,9 @@ if __name__ == "__main__":
         batch_size=BATCH_SIZE,
         learning_rate=LEARNING_RATE,
         early_stopping_patience=EARLY_STOPPING_PATIENCE,
+        early_stopping_min_relative_improvement=(
+            EARLY_STOPPING_MIN_RELATIVE_IMPROVEMENT
+        ),
         save_every=SAVE_EVERY,
         batch_log_every=BATCH_LOG_EVERY,
         num_workers=NUM_WORKERS,

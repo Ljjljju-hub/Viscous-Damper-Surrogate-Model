@@ -37,7 +37,8 @@ class StudyConfig:
     batch_size: int = 4
     num_workers: int = 0
     learning_rate: float = 1.0e-4
-    early_stopping_patience: int = 15
+    early_stopping_patience: int = 10
+    early_stopping_min_relative_improvement: float = 0.002
     save_every: int = 10
     batch_log_every: int = 10
     device: str = "auto"
@@ -78,6 +79,24 @@ def clear_progress_line(width: int) -> None:
         print("\r" + " " * width + "\r", end="", flush=True)
 
 
+def early_stopping_request(args) -> dict:
+    return {
+        "early_stopping_patience": args.early_stopping_patience,
+        "early_stopping_min_relative_improvement": (
+            args.early_stopping_min_relative_improvement
+        ),
+    }
+
+
+def early_stopping_command_args(args) -> list[str]:
+    return [
+        "--early-stopping-patience",
+        str(args.early_stopping_patience),
+        "--early-stopping-min-relative-improvement",
+        str(args.early_stopping_min_relative_improvement),
+    ]
+
+
 def run_one(
     *,
     model_name: str,
@@ -108,13 +127,13 @@ def run_one(
         "batch_size": args.batch_size,
         "num_workers": args.num_workers,
         "learning_rate": args.learning_rate,
-        "early_stopping_patience": args.early_stopping_patience,
         "save_every": args.save_every,
         "batch_log_every": args.batch_log_every,
         "device": args.device,
         "manifest": str(args.manifest.resolve()),
         "manifest_sha256": file_sha256(args.manifest.resolve()),
     }
+    request.update(early_stopping_request(args))
     if model_name == "meshgraphnet":
         request.update(
             {
@@ -177,8 +196,6 @@ def run_one(
         str(args.num_workers),
         "--learning-rate",
         str(args.learning_rate),
-        "--early-stopping-patience",
-        str(args.early_stopping_patience),
         "--save-every",
         str(args.save_every),
         "--batch-log-every",
@@ -189,6 +206,7 @@ def run_one(
         args.device,
         "--evaluate-test",
     ]
+    command.extend(early_stopping_command_args(args))
     if model_name == "meshgraphnet":
         command.extend(
             [

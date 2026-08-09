@@ -94,7 +94,8 @@ SEEDS = [42]
 EPOCHS = 100
 BATCH_SIZE = 16
 LEARNING_RATE = 1.0e-4
-EARLY_STOPPING_PATIENCE = 15
+EARLY_STOPPING_PATIENCE = 10
+EARLY_STOPPING_MIN_RELATIVE_IMPROVEMENT = 0.002
 SAVE_EVERY = 10
 BATCH_LOG_EVERY = 10
 NUM_WORKERS = 0
@@ -119,6 +120,8 @@ OUTPUT_ROOT = WORKSPACE_ROOT / "runs"
 
 - `MODELS`：可选 `meshgraphnet`、`transolver` 或两者；
 - `TRAIN_SIZES`：从 `100,200,...,800` 中任意选择；设为 `None` 时读取 manifest 中全部规模；
+- `EARLY_STOPPING_PATIENCE`：连续多少轮没有达到显著改善后停止训练；
+- `EARLY_STOPPING_MIN_RELATIVE_IMPROVEMENT`：显著改善的相对阈值，`0.002` 表示验证损失至少下降 0.2% 才重置计数；
 - `SEEDS`：一个或多个随机种子；
 - `MESHGRAPHNET_*`：MeshGraphNet 隐藏维度和消息传递层数；
 - `TRANSOLVER_*`：Transolver 隐藏维度、层数、head、slice 和 dropout；
