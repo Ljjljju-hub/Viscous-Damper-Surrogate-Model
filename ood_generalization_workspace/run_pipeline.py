@@ -187,7 +187,7 @@ GENERATE_PARAMETERS = True   # generate missing artifacts before calculation
 OVERWRITE_PARAMETERS = False  # True intentionally replaces existing parameters
 
 # ======================== COMSOL execution ========================
-DRY_RUN = True               # True validates and prints batches without COMSOL
+DRY_RUN = False               # True validates and prints batches without COMSOL
 BATCH_SIZE = 10              # cases per isolated COMSOL process
 CORES = 16                   # processor cores used by one COMSOL session
 MAX_RETRIES = 2              # extra passes for non-terminal process failures
