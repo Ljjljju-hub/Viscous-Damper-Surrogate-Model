@@ -236,3 +236,17 @@ mesh_velocity
 ## 9. 非目标
 
 本阶段不生成论文排版图，不评价训练集或验证集，不重新训练模型，也不将不同工况的相同 node index 解释为同一物理空间点。跨工况比较通过聚合指标完成；单节点时序只在同一工况内跟踪，因为该工况网格拓扑在时间上不变。
+
+## 10. 代表工况自动导出
+
+`visualize_timeseries.py` 提供 `CASE_SELECTION_MODE="test_extremes"`。它读取完整测试生成的 `case_metrics.csv`，对每个模型和 `p/T` 字段分别选择：
+
+```text
+case RMSE 最大/最小
+case 最大单点绝对误差 最大/最小
+case 最大有效单点相对误差 最大/最小
+```
+
+“单点误差最小”定义为：先求每个工况在全部时间步和节点中的最大单点误差，再选择该最大值最小的工况。它表示最坏节点误差控制得最好的工况，不使用通常接近 0、没有代表性的全数据最小点误差。
+
+程序保存完整 `representative_cases.csv`，再按 Case ID 去重。每个唯一工况使用已缓存的 `saved_one_step` 绝对预测生成完整 PVD/VTU 时间序列，并将原始 COMSOL GT HDF5 复制到该工况的 `ground_truth` 子目录。代表工况来自单步测试指标，因此本流程不以 rollout 结果替代单步预测。

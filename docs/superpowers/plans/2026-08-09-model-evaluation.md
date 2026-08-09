@@ -384,3 +384,23 @@ git diff --check
 git add .gitignore evaluation_workspace/README.md evaluation_workspace/results/.gitkeep
 git commit -m "docs: explain evaluation and visualization workflow"
 ```
+
+### Task 6: Representative Extreme-Case Export
+
+**Files:**
+- Create: `evaluation_workspace/representative_cases.py`
+- Create: `evaluation_workspace/tests/test_representative_cases.py`
+- Modify: `evaluation_workspace/visualize_timeseries.py`
+- Modify: `evaluation_workspace/README.md`
+
+**Interfaces:**
+- Produces: `select_representative_cases(case_metrics_path, models) -> list[dict]`.
+- Produces: `export_representative_cases(context, selections, prediction_root, output_root, threshold_ratio) -> list[Path]`.
+
+- [ ] Select min/max case rows for RMSE, per-case maximum absolute point error, and per-case maximum valid relative point error, independently for every model and field.
+- [ ] Interpret minimum point error as the minimum across per-case worst-point values, never the raw minimum over all node-time samples.
+- [ ] Write `representative_cases.csv`, deduplicate Case IDs only for expensive PVD export, and retain every selection reason in the CSV.
+- [ ] Export full `saved_one_step` PVD/VTU, frame metrics, and error curves for each unique Case.
+- [ ] Copy the source COMSOL HDF5 to `<case>/ground_truth/<case>.h5` with `shutil.copy2`.
+- [ ] Add `CASE_SELECTION_MODE = "manual" | "test_extremes"` to `visualize_timeseries.py` and document both modes.
+- [ ] Run unit tests, then execute test-extreme export against the completed `n0100_seed42` results.

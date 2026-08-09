@@ -13,6 +13,10 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from evaluation_workspace.common import load_evaluation_context
 from evaluation_workspace.plotting import plot_error_vs_time
+from evaluation_workspace.representative_cases import (
+    export_representative_cases,
+    select_representative_cases,
+)
 from evaluation_workspace.visualization_pipeline import (
     build_step_metric_rows,
     load_saved_one_step_sequence,
@@ -31,6 +35,7 @@ def main(
     start_index,
     steps,
     source_mode,
+    case_selection_mode,
     device,
     threshold_ratio,
     test_result_root,
@@ -38,18 +43,41 @@ def main(
 ) -> None:
     if source_mode not in {"saved_one_step", "rollout"}:
         raise ValueError("SOURCE_MODE must be 'saved_one_step' or 'rollout'.")
+    if case_selection_mode not in {"manual", "test_extremes"}:
+        raise ValueError(
+            "CASE_SELECTION_MODE must be 'manual' or 'test_extremes'."
+        )
     context = load_evaluation_context(
         models=models,
         train_size=train_size,
         seed=seed,
         device=device,
     )
-    if source_mode == "saved_one_step":
-        prediction_root = (
-            Path(test_result_root)
-            / f"n{train_size:04d}_seed{seed}"
-            / "predictions"
+    test_run_dir = Path(test_result_root) / f"n{train_size:04d}_seed{seed}"
+    prediction_root = test_run_dir / "predictions"
+    if case_selection_mode == "test_extremes":
+        selections = select_representative_cases(
+            test_run_dir / "case_metrics.csv", list(models)
         )
+        output_dir = (
+            Path(visualization_root)
+            / "test_extremes"
+            / f"n{train_size:04d}_seed{seed}"
+        )
+        exported = export_representative_cases(
+            context,
+            selections,
+            prediction_root,
+            output_dir,
+            threshold_ratio,
+        )
+        print(
+            f"Representative export complete: {len(exported)} unique cases, "
+            f"{(output_dir / 'representative_cases.csv').resolve()}"
+        )
+        return
+
+    if source_mode == "saved_one_step":
         sequence = load_saved_one_step_sequence(
             context, prediction_root, case_id, start_index, steps
         )
@@ -70,6 +98,7 @@ def main(
         "start_index": start_index,
         "steps": steps,
         "source_mode": source_mode,
+        "case_selection_mode": case_selection_mode,
         "device": str(context.device),
         "relative_error_threshold_ratio": threshold_ratio,
     }
@@ -94,6 +123,8 @@ if __name__ == "__main__":
     START_INDEX = 0  # 已知初始场的时间索引
     STEPS = None  # None 表示一直预测到该工况末尾
     SOURCE_MODE = "saved_one_step"  # "saved_one_step" 或 "rollout"
+    # "manual" 导出上面的 CASE_ID；"test_extremes" 自动导出指标极值工况。
+    CASE_SELECTION_MODE = "test_extremes"
     DEVICE = "auto"
     RELATIVE_ERROR_THRESHOLD_RATIO = 0.01
 
@@ -108,6 +139,7 @@ if __name__ == "__main__":
         start_index=START_INDEX,
         steps=STEPS,
         source_mode=SOURCE_MODE,
+        case_selection_mode=CASE_SELECTION_MODE,
         device=DEVICE,
         threshold_ratio=RELATIVE_ERROR_THRESHOLD_RATIO,
         test_result_root=TEST_RESULT_ROOT,

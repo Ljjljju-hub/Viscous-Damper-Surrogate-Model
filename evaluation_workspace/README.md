@@ -67,6 +67,7 @@ CASE_ID = "Case_0866"
 START_INDEX = 0
 STEPS = None
 SOURCE_MODE = "saved_one_step"
+CASE_SELECTION_MODE = "manual"
 ```
 
 然后运行：
@@ -79,6 +80,24 @@ python evaluation_workspace\visualize_timeseries.py
 
 - `saved_one_step`：读取 `test.py` 保存的预测，不加载模型。
 - `rollout`：第 0 帧使用真实初始场，后续持续使用前一步模型预测。
+
+`CASE_SELECTION_MODE`：
+
+- `manual`：只导出手工设置的 `CASE_ID`。
+- `test_extremes`：读取完整测试的 `case_metrics.csv`，自动选择每个模型、每个字段的 RMSE 最大/最小、工况最坏单点绝对误差最大/最小、工况最坏有效相对误差最大/最小。
+
+自动模式会生成 `representative_cases.csv`。相同 Case 只导出一次 PVD，但 CSV 保留它被选中的所有原因。每个代表工况目录还会保存：
+
+```text
+ground_truth/Case_XXXX.h5   原始 COMSOL GT
+selection_reasons.csv       当前 Case 的所有选择原因
+comparison.pvd              组合时序入口
+frames/*.vtu                全部时间帧
+step_metrics.csv
+error_vs_time.png
+```
+
+这里“单点误差最小”不是在所有节点里寻找接近零的误差，而是比较各工况的最坏单点误差，选择其中最小者。
 
 输出目录：
 
