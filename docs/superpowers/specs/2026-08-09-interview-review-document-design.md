@@ -14,7 +14,7 @@
 
 1. **30 秒项目介绍**：问题、方法、结果各一句。
 2. **实验口径**：100 个训练工况、80 个验证工况、81 个测试工况、seed 42、batch 16、RTX 4060。
-3. **核心结果表**：参数量、训练时间、单步 normalized MSE、压力/温度 RMSE、P95 和最大绝对误差、150 步 rollout RMSE、推理耗时和相对 COMSOL 60 秒的加速倍数。
+3. **核心结果表**：参数量、训练时间、单步相对 RMSE、单点相对误差分位数、150 步 rollout 相对 RMSE、推理耗时和相对 COMSOL 60 秒的加速倍数。
 4. **结果判断**：Transolver 与 MeshGraphNet 的量化对比；单步准确性与自回归稳定性分开表述。
 5. **关键技术点**：动网格实时恢复、训练集归一化冻结、COMSOL 独立进程分批计算、公平模型对比。
 6. **高频问答**：最大相对误差、rollout 漂移、模型选择、局限和下一步。
@@ -39,7 +39,7 @@ relative_RMSE = sqrt(sum((prediction - GT)^2) / sum(GT^2)) * 100%
 point_relative_error = abs(prediction - GT) / abs(GT) * 100%
 ```
 
-其中 `relative_RMSE` 是全局相对 L2 误差。单点相对误差对每个工况、每个物理场使用 `1% * (GT_max - GT_min)` 作为近零阈值，只统计 `abs(GT) >= threshold` 的点，并报告 P50、P95、P99、最大值和排除数量。
+其中 `relative_RMSE` 是全局相对 L2 误差。单点相对误差对每个工况、每个物理场使用 `1% * max(abs(GT))` 作为近零阈值，只统计 `abs(GT) >= threshold` 的点，并报告 P50、P95、P99、最大值和排除数量。
 
 报告必须分别给出：
 
@@ -47,6 +47,8 @@ point_relative_error = abs(prediction - GT) / abs(GT) * 100%
 2. 相同 10 个 test 工况的单步与 150 步 rollout relative RMSE；
 3. 相同 10 个工况的 rollout 单点相对误差分位数；
 4. 绝对 RMSE 作为物理单位补充，但不再单独作为主要准确性结论。
+
+温度评价同时报告绝对 RMSE（K）与温升相对指标。温升定义为 `ΔT_rise(t,x)=T(t,x)-T_GT(0,x)`，不得用约 297 K 的绝对温度作为温升相对误差分母。训练标签中的相邻步温度增量记为 `δT_step`，避免和评价温升混淆。
 
 ## 表述规则
 
