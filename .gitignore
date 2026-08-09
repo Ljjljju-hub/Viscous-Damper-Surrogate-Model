@@ -19,6 +19,8 @@ training_workspace/runs/transolver/*
 training_workspace/plots/*
 !training_workspace/plots/.gitkeep
 training_workspace/_smoke/
+evaluation_workspace/results/*
+!evaluation_workspace/results/.gitkeep
 /计算有限元数据/comsol_output/
 /计算有限元数据/comsol_hdf5/
 /计算有限元数据/batch_logs/

@@ -85,6 +85,8 @@ truth/p                      [K, N]
 truth/T                      [K, N]
 prediction/p                 [K, N]
 prediction/T                 [K, N]
+normalization/output_mean    [2]
+normalization/output_std     [2]
 ```
 
 其中 `K` 是预测目标时刻数量，通常为 150；位置和速度对应目标时刻的实时动网格。数组使用 float32，拓扑和区域使用整数。
@@ -217,7 +219,7 @@ mesh_velocity
 2. 两个模型必须使用同一个 split manifest、训练规模和测试 case 列表。
 3. 预测 HDF5 记录 checkpoint SHA256，checkpoint 改变后不得静默复用旧预测。
 4. 指标文件通过临时文件原子替换；预测中断不会产生伪完整 HDF5。
-5. test 统计只读取预测 HDF5 和 checkpoint 中的输出标准差，不重新拟合归一化器。
+5. 预测 HDF5 保存 checkpoint 中冻结的输出均值和标准差；test 统计只读取预测 HDF5，不重新加载模型或拟合归一化器。
 
 ## 8. 验证
 
