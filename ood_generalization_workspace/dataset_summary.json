@@ -1,0 +1,199 @@
+{
+  "dataset_metadata": {
+    "description": "Grouped out-of-domain dataset for surrogate-model generalization evaluation.",
+    "total_samples": 150,
+    "sampling_method": "Grouped Latin Hypercube Sampling with one strict OOD parameter per case",
+    "seed": 20260809,
+    "sample_count_per_group": 50,
+    "outside_fraction": 0.1,
+    "first_case_number": 1001,
+    "safety_constraint": "sy >= b2 + 2*A + 10 mm",
+    "parameter_ranges": {
+      "geometry": {
+        "c": {
+          "training": [
+            1.0,
+            3.0
+          ],
+          "lower_ood": [
+            0.8,
+            1.0
+          ],
+          "upper_ood": [
+            3.0,
+            3.2
+          ]
+        },
+        "sx": {
+          "training": [
+            40.0,
+            120.0
+          ],
+          "lower_ood": [
+            32.0,
+            40.0
+          ],
+          "upper_ood": [
+            120.0,
+            128.0
+          ]
+        },
+        "sy": {
+          "training": [
+            120.0,
+            320.0
+          ],
+          "lower_ood": [
+            100.0,
+            120.0
+          ],
+          "upper_ood": [
+            320.0,
+            340.0
+          ]
+        },
+        "r1": {
+          "training": [
+            50.0,
+            70.0
+          ],
+          "lower_ood": [
+            48.0,
+            50.0
+          ],
+          "upper_ood": [
+            70.0,
+            72.0
+          ]
+        },
+        "a2": {
+          "training": [
+            40.0,
+            80.0
+          ],
+          "lower_ood": [
+            36.0,
+            40.0
+          ],
+          "upper_ood": [
+            80.0,
+            84.0
+          ]
+        },
+        "b1": {
+          "training": [
+            80.0,
+            120.0
+          ],
+          "lower_ood": [
+            76.0,
+            80.0
+          ],
+          "upper_ood": [
+            120.0,
+            124.0
+          ]
+        },
+        "b2": {
+          "training": [
+            80.0,
+            160.0
+          ],
+          "lower_ood": [
+            72.0,
+            80.0
+          ],
+          "upper_ood": [
+            160.0,
+            168.0
+          ]
+        }
+      },
+      "loading": {
+        "A": {
+          "training": [
+            10.0,
+            90.0
+          ],
+          "lower_ood": [
+            2.0,
+            10.0
+          ],
+          "upper_ood": [
+            90.0,
+            98.0
+          ]
+        },
+        "Ts": {
+          "training": [
+            0.1,
+            0.5
+          ],
+          "lower_ood": [
+            0.06,
+            0.1
+          ],
+          "upper_ood": [
+            0.5,
+            0.54
+          ]
+        }
+      },
+      "material": {
+        "mu": {
+          "training": [
+            1000.0,
+            3000.0
+          ],
+          "lower_ood": [
+            800.0,
+            1000.0
+          ],
+          "upper_ood": [
+            3000.0,
+            3200.0
+          ]
+        }
+      }
+    }
+  },
+  "validation": {
+    "valid_cases": 150,
+    "group_counts": {
+      "geometry_ood": 50,
+      "loading_ood": 50,
+      "material_ood": 50
+    },
+    "side_counts": {
+      "geometry_ood:lower": 25,
+      "geometry_ood:upper": 25,
+      "loading_ood:lower": 25,
+      "loading_ood:upper": 25,
+      "material_ood:lower": 25,
+      "material_ood:upper": 25
+    },
+    "target_counts": {
+      "geometry_ood:a2:lower": 3,
+      "geometry_ood:a2:upper": 3,
+      "geometry_ood:b1:lower": 4,
+      "geometry_ood:b1:upper": 4,
+      "geometry_ood:b2:lower": 3,
+      "geometry_ood:b2:upper": 4,
+      "geometry_ood:c:lower": 4,
+      "geometry_ood:c:upper": 4,
+      "geometry_ood:r1:lower": 4,
+      "geometry_ood:r1:upper": 3,
+      "geometry_ood:sx:lower": 3,
+      "geometry_ood:sx:upper": 3,
+      "geometry_ood:sy:lower": 4,
+      "geometry_ood:sy:upper": 4,
+      "loading_ood:A:lower": 12,
+      "loading_ood:A:upper": 13,
+      "loading_ood:Ts:lower": 13,
+      "loading_ood:Ts:upper": 12,
+      "material_ood:mu:lower": 25,
+      "material_ood:mu:upper": 25
+    },
+    "minimum_safety_margin_mm": 10.189999999999998
+  }
+}

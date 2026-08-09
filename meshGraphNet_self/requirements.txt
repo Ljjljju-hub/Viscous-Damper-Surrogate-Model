@@ -1,0 +1,7 @@
+h5py
+matplotlib
+numpy
+tensorboard
+torch
+torch-geometric
+tqdm
