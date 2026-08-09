@@ -23,12 +23,30 @@ import mph
 import mph.session as mph_session
 
 
-BASE_DIR = Path(__file__).parent.resolve()
-PARAMETERS_PATH = BASE_DIR / "4_Combined_Master_Dataset.json"
-MODEL_PATH = BASE_DIR / "standard_model.mph"
-VTU_DIR = BASE_DIR / "comsol_output"
-HDF5_DIR = BASE_DIR / "comsol_hdf5"
-LOG_DIR = BASE_DIR / "batch_logs"
+SCRIPT_DIR = Path(__file__).parent.resolve()
+
+
+def configure_workspace(
+    workspace_root: Path | None = None,
+    model_path: Path | None = None,
+) -> None:
+    """Point worker data paths at one isolated calculation workspace."""
+    global WORKSPACE_ROOT, PARAMETERS_PATH, MODEL_PATH, VTU_DIR, HDF5_DIR, LOG_DIR
+    WORKSPACE_ROOT = (
+        SCRIPT_DIR if workspace_root is None else Path(workspace_root).resolve()
+    )
+    PARAMETERS_PATH = WORKSPACE_ROOT / "4_Combined_Master_Dataset.json"
+    MODEL_PATH = (
+        SCRIPT_DIR / "standard_model.mph"
+        if model_path is None
+        else Path(model_path).resolve()
+    )
+    VTU_DIR = WORKSPACE_ROOT / "comsol_output"
+    HDF5_DIR = WORKSPACE_ROOT / "comsol_hdf5"
+    LOG_DIR = WORKSPACE_ROOT / "batch_logs"
+
+
+configure_workspace()
 
 
 def configure_logging(case_ids: list[str]) -> Path:
@@ -49,7 +67,8 @@ def configure_logging(case_ids: list[str]) -> Path:
     return log_path
 
 
-def load_samples(path: Path = PARAMETERS_PATH) -> list[dict]:
+def load_samples(path: Path | None = None) -> list[dict]:
+    path = PARAMETERS_PATH if path is None else Path(path)
     with path.open("r", encoding="utf-8") as stream:
         payload = json.load(stream)
     samples = payload.get("parameters_list")
@@ -264,12 +283,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--end-case", type=int)
     parser.add_argument("--max-samples", type=int)
     parser.add_argument("--cores", type=int, default=16)
+    parser.add_argument("--workspace-root", type=Path)
+    parser.add_argument("--model-path", type=Path)
     parser.add_argument("--force", action="store_true", help="覆盖已有 VTU")
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
+    configure_workspace(args.workspace_root, args.model_path)
     case_ids = None
     if args.case_ids:
         case_ids = [item.strip() for item in args.case_ids.split(",") if item.strip()]

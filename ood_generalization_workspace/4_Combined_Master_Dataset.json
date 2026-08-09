@@ -1,0 +1,4812 @@
+{
+  "dataset_metadata": {
+    "description": "Grouped out-of-domain dataset for surrogate-model generalization evaluation.",
+    "total_samples": 150,
+    "sampling_method": "Grouped Latin Hypercube Sampling with one strict OOD parameter per case",
+    "seed": 20260809,
+    "sample_count_per_group": 50,
+    "outside_fraction": 0.1,
+    "first_case_number": 1001,
+    "safety_constraint": "sy >= b2 + 2*A + 10 mm",
+    "parameter_ranges": {
+      "geometry": {
+        "c": {
+          "training": [
+            1.0,
+            3.0
+          ],
+          "lower_ood": [
+            0.8,
+            1.0
+          ],
+          "upper_ood": [
+            3.0,
+            3.2
+          ]
+        },
+        "sx": {
+          "training": [
+            40.0,
+            120.0
+          ],
+          "lower_ood": [
+            32.0,
+            40.0
+          ],
+          "upper_ood": [
+            120.0,
+            128.0
+          ]
+        },
+        "sy": {
+          "training": [
+            120.0,
+            320.0
+          ],
+          "lower_ood": [
+            100.0,
+            120.0
+          ],
+          "upper_ood": [
+            320.0,
+            340.0
+          ]
+        },
+        "r1": {
+          "training": [
+            50.0,
+            70.0
+          ],
+          "lower_ood": [
+            48.0,
+            50.0
+          ],
+          "upper_ood": [
+            70.0,
+            72.0
+          ]
+        },
+        "a2": {
+          "training": [
+            40.0,
+            80.0
+          ],
+          "lower_ood": [
+            36.0,
+            40.0
+          ],
+          "upper_ood": [
+            80.0,
+            84.0
+          ]
+        },
+        "b1": {
+          "training": [
+            80.0,
+            120.0
+          ],
+          "lower_ood": [
+            76.0,
+            80.0
+          ],
+          "upper_ood": [
+            120.0,
+            124.0
+          ]
+        },
+        "b2": {
+          "training": [
+            80.0,
+            160.0
+          ],
+          "lower_ood": [
+            72.0,
+            80.0
+          ],
+          "upper_ood": [
+            160.0,
+            168.0
+          ]
+        }
+      },
+      "loading": {
+        "A": {
+          "training": [
+            10.0,
+            90.0
+          ],
+          "lower_ood": [
+            2.0,
+            10.0
+          ],
+          "upper_ood": [
+            90.0,
+            98.0
+          ]
+        },
+        "Ts": {
+          "training": [
+            0.1,
+            0.5
+          ],
+          "lower_ood": [
+            0.06,
+            0.1
+          ],
+          "upper_ood": [
+            0.5,
+            0.54
+          ]
+        }
+      },
+      "material": {
+        "mu": {
+          "training": [
+            1000.0,
+            3000.0
+          ],
+          "lower_ood": [
+            800.0,
+            1000.0
+          ],
+          "upper_ood": [
+            3000.0,
+            3200.0
+          ]
+        }
+      }
+    }
+  },
+  "parameters_list": [
+    {
+      "case_id": "Case_1001",
+      "geometry": {
+        "c": 1.83,
+        "sx": 117.75,
+        "sy": 259.38,
+        "r1": 49.93,
+        "a2": 76.49,
+        "b1": 86.6,
+        "b2": 146.27,
+        "part_id": "Geo_Sample_1001"
+      },
+      "loading": {
+        "A": 41.116,
+        "Ts": 0.394,
+        "part_id": "Load_Sample_1001"
+      },
+      "material": {
+        "mu": 2820.66,
+        "part_id": "Mat_Sample_1001"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "r1",
+        "side": "lower",
+        "training_lower": 50.0,
+        "training_upper": 70.0,
+        "value": 49.93,
+        "normalized_ood_distance": 0.0035
+      }
+    },
+    {
+      "case_id": "Case_1002",
+      "geometry": {
+        "c": 2.39,
+        "sx": 64.55,
+        "sy": 318.54,
+        "r1": 48.59,
+        "a2": 77.15,
+        "b1": 112.12,
+        "b2": 151.48,
+        "part_id": "Geo_Sample_1002"
+      },
+      "loading": {
+        "A": 12.253,
+        "Ts": 0.178,
+        "part_id": "Load_Sample_1002"
+      },
+      "material": {
+        "mu": 2746.33,
+        "part_id": "Mat_Sample_1002"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "r1",
+        "side": "lower",
+        "training_lower": 50.0,
+        "training_upper": 70.0,
+        "value": 48.59,
+        "normalized_ood_distance": 0.0705
+      }
+    },
+    {
+      "case_id": "Case_1003",
+      "geometry": {
+        "c": 2.48,
+        "sx": 104.79,
+        "sy": 166.72,
+        "r1": 54.62,
+        "a2": 71.63,
+        "b1": 79.69,
+        "b2": 82.92,
+        "part_id": "Geo_Sample_1003"
+      },
+      "loading": {
+        "A": 27.728,
+        "Ts": 0.202,
+        "part_id": "Load_Sample_1003"
+      },
+      "material": {
+        "mu": 1018.57,
+        "part_id": "Mat_Sample_1003"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "b1",
+        "side": "lower",
+        "training_lower": 80.0,
+        "training_upper": 120.0,
+        "value": 79.69,
+        "normalized_ood_distance": 0.00775
+      }
+    },
+    {
+      "case_id": "Case_1004",
+      "geometry": {
+        "c": 1.99,
+        "sx": 92.36,
+        "sy": 281.99,
+        "r1": 55.42,
+        "a2": 41.79,
+        "b1": 97.31,
+        "b2": 165.09,
+        "part_id": "Geo_Sample_1004"
+      },
+      "loading": {
+        "A": 34.85,
+        "Ts": 0.329,
+        "part_id": "Load_Sample_1004"
+      },
+      "material": {
+        "mu": 2762.85,
+        "part_id": "Mat_Sample_1004"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "b2",
+        "side": "upper",
+        "training_lower": 80.0,
+        "training_upper": 160.0,
+        "value": 165.09,
+        "normalized_ood_distance": 0.063625
+      }
+    },
+    {
+      "case_id": "Case_1005",
+      "geometry": {
+        "c": 2.26,
+        "sx": 46.15,
+        "sy": 301.8,
+        "r1": 65.55,
+        "a2": 37.94,
+        "b1": 89.18,
+        "b2": 80.98,
+        "part_id": "Geo_Sample_1005"
+      },
+      "loading": {
+        "A": 16.24,
+        "Ts": 0.173,
+        "part_id": "Load_Sample_1005"
+      },
+      "material": {
+        "mu": 1364.09,
+        "part_id": "Mat_Sample_1005"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "a2",
+        "side": "lower",
+        "training_lower": 40.0,
+        "training_upper": 80.0,
+        "value": 37.94,
+        "normalized_ood_distance": 0.0515
+      }
+    },
+    {
+      "case_id": "Case_1006",
+      "geometry": {
+        "c": 3.04,
+        "sx": 110.37,
+        "sy": 295.88,
+        "r1": 63.87,
+        "a2": 63.2,
+        "b1": 98.52,
+        "b2": 82.98,
+        "part_id": "Geo_Sample_1006"
+      },
+      "loading": {
+        "A": 84.965,
+        "Ts": 0.191,
+        "part_id": "Load_Sample_1006"
+      },
+      "material": {
+        "mu": 2091.32,
+        "part_id": "Mat_Sample_1006"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "c",
+        "side": "upper",
+        "training_lower": 1.0,
+        "training_upper": 3.0,
+        "value": 3.04,
+        "normalized_ood_distance": 0.02
+      }
+    },
+    {
+      "case_id": "Case_1007",
+      "geometry": {
+        "c": 1.0,
+        "sx": 116.03,
+        "sy": 189.12,
+        "r1": 48.24,
+        "a2": 40.3,
+        "b1": 92.33,
+        "b2": 94.51,
+        "part_id": "Geo_Sample_1007"
+      },
+      "loading": {
+        "A": 19.769,
+        "Ts": 0.426,
+        "part_id": "Load_Sample_1007"
+      },
+      "material": {
+        "mu": 1653.52,
+        "part_id": "Mat_Sample_1007"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "r1",
+        "side": "lower",
+        "training_lower": 50.0,
+        "training_upper": 70.0,
+        "value": 48.24,
+        "normalized_ood_distance": 0.088
+      }
+    },
+    {
+      "case_id": "Case_1008",
+      "geometry": {
+        "c": 2.72,
+        "sx": 116.29,
+        "sy": 324.52,
+        "r1": 59.34,
+        "a2": 41.93,
+        "b1": 82.62,
+        "b2": 156.37,
+        "part_id": "Geo_Sample_1008"
+      },
+      "loading": {
+        "A": 70.241,
+        "Ts": 0.34,
+        "part_id": "Load_Sample_1008"
+      },
+      "material": {
+        "mu": 1768.96,
+        "part_id": "Mat_Sample_1008"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "sy",
+        "side": "upper",
+        "training_lower": 120.0,
+        "training_upper": 320.0,
+        "value": 324.52,
+        "normalized_ood_distance": 0.0226
+      }
+    },
+    {
+      "case_id": "Case_1009",
+      "geometry": {
+        "c": 2.04,
+        "sx": 112.2,
+        "sy": 312.12,
+        "r1": 71.63,
+        "a2": 56.11,
+        "b1": 92.42,
+        "b2": 110.16,
+        "part_id": "Geo_Sample_1009"
+      },
+      "loading": {
+        "A": 48.89,
+        "Ts": 0.256,
+        "part_id": "Load_Sample_1009"
+      },
+      "material": {
+        "mu": 2340.51,
+        "part_id": "Mat_Sample_1009"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "r1",
+        "side": "upper",
+        "training_lower": 50.0,
+        "training_upper": 70.0,
+        "value": 71.63,
+        "normalized_ood_distance": 0.0815
+      }
+    },
+    {
+      "case_id": "Case_1010",
+      "geometry": {
+        "c": 2.24,
+        "sx": 60.25,
+        "sy": 228.26,
+        "r1": 57.51,
+        "a2": 66.62,
+        "b1": 123.6,
+        "b2": 145.1,
+        "part_id": "Geo_Sample_1010"
+      },
+      "loading": {
+        "A": 30.736,
+        "Ts": 0.413,
+        "part_id": "Load_Sample_1010"
+      },
+      "material": {
+        "mu": 1696.26,
+        "part_id": "Mat_Sample_1010"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "b1",
+        "side": "upper",
+        "training_lower": 80.0,
+        "training_upper": 120.0,
+        "value": 123.6,
+        "normalized_ood_distance": 0.09
+      }
+    },
+    {
+      "case_id": "Case_1011",
+      "geometry": {
+        "c": 2.98,
+        "sx": 85.1,
+        "sy": 251.7,
+        "r1": 54.01,
+        "a2": 72.81,
+        "b1": 122.87,
+        "b2": 97.53,
+        "part_id": "Geo_Sample_1011"
+      },
+      "loading": {
+        "A": 67.314,
+        "Ts": 0.165,
+        "part_id": "Load_Sample_1011"
+      },
+      "material": {
+        "mu": 1597.42,
+        "part_id": "Mat_Sample_1011"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "b1",
+        "side": "upper",
+        "training_lower": 80.0,
+        "training_upper": 120.0,
+        "value": 122.87,
+        "normalized_ood_distance": 0.07175
+      }
+    },
+    {
+      "case_id": "Case_1012",
+      "geometry": {
+        "c": 3.07,
+        "sx": 73.0,
+        "sy": 276.48,
+        "r1": 65.83,
+        "a2": 66.4,
+        "b1": 90.89,
+        "b2": 91.84,
+        "part_id": "Geo_Sample_1012"
+      },
+      "loading": {
+        "A": 42.338,
+        "Ts": 0.277,
+        "part_id": "Load_Sample_1012"
+      },
+      "material": {
+        "mu": 1026.75,
+        "part_id": "Mat_Sample_1012"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "c",
+        "side": "upper",
+        "training_lower": 1.0,
+        "training_upper": 3.0,
+        "value": 3.07,
+        "normalized_ood_distance": 0.035
+      }
+    },
+    {
+      "case_id": "Case_1013",
+      "geometry": {
+        "c": 2.44,
+        "sx": 91.33,
+        "sy": 274.43,
+        "r1": 60.21,
+        "a2": 47.38,
+        "b1": 100.5,
+        "b2": 167.84,
+        "part_id": "Geo_Sample_1013"
+      },
+      "loading": {
+        "A": 34.102,
+        "Ts": 0.415,
+        "part_id": "Load_Sample_1013"
+      },
+      "material": {
+        "mu": 1340.89,
+        "part_id": "Mat_Sample_1013"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "b2",
+        "side": "upper",
+        "training_lower": 80.0,
+        "training_upper": 160.0,
+        "value": 167.84,
+        "normalized_ood_distance": 0.098
+      }
+    },
+    {
+      "case_id": "Case_1014",
+      "geometry": {
+        "c": 2.3,
+        "sx": 104.48,
+        "sy": 302.1,
+        "r1": 59.24,
+        "a2": 81.78,
+        "b1": 110.66,
+        "b2": 112.06,
+        "part_id": "Geo_Sample_1014"
+      },
+      "loading": {
+        "A": 69.246,
+        "Ts": 0.396,
+        "part_id": "Load_Sample_1014"
+      },
+      "material": {
+        "mu": 1940.35,
+        "part_id": "Mat_Sample_1014"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "a2",
+        "side": "upper",
+        "training_lower": 40.0,
+        "training_upper": 80.0,
+        "value": 81.78,
+        "normalized_ood_distance": 0.0445
+      }
+    },
+    {
+      "case_id": "Case_1015",
+      "geometry": {
+        "c": 2.86,
+        "sx": 114.6,
+        "sy": 305.52,
+        "r1": 56.36,
+        "a2": 45.37,
+        "b1": 79.48,
+        "b2": 107.79,
+        "part_id": "Geo_Sample_1015"
+      },
+      "loading": {
+        "A": 47.347,
+        "Ts": 0.415,
+        "part_id": "Load_Sample_1015"
+      },
+      "material": {
+        "mu": 1384.55,
+        "part_id": "Mat_Sample_1015"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "b1",
+        "side": "lower",
+        "training_lower": 80.0,
+        "training_upper": 120.0,
+        "value": 79.48,
+        "normalized_ood_distance": 0.013
+      }
+    },
+    {
+      "case_id": "Case_1016",
+      "geometry": {
+        "c": 1.49,
+        "sx": 39.88,
+        "sy": 202.88,
+        "r1": 55.75,
+        "a2": 47.19,
+        "b1": 102.74,
+        "b2": 111.44,
+        "part_id": "Geo_Sample_1016"
+      },
+      "loading": {
+        "A": 37.02,
+        "Ts": 0.158,
+        "part_id": "Load_Sample_1016"
+      },
+      "material": {
+        "mu": 1038.24,
+        "part_id": "Mat_Sample_1016"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "sx",
+        "side": "lower",
+        "training_lower": 40.0,
+        "training_upper": 120.0,
+        "value": 39.88,
+        "normalized_ood_distance": 0.0015
+      }
+    },
+    {
+      "case_id": "Case_1017",
+      "geometry": {
+        "c": 2.85,
+        "sx": 97.28,
+        "sy": 292.85,
+        "r1": 70.04,
+        "a2": 55.67,
+        "b1": 84.51,
+        "b2": 158.68,
+        "part_id": "Geo_Sample_1017"
+      },
+      "loading": {
+        "A": 60.522,
+        "Ts": 0.445,
+        "part_id": "Load_Sample_1017"
+      },
+      "material": {
+        "mu": 2563.56,
+        "part_id": "Mat_Sample_1017"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "r1",
+        "side": "upper",
+        "training_lower": 50.0,
+        "training_upper": 70.0,
+        "value": 70.04,
+        "normalized_ood_distance": 0.002
+      }
+    },
+    {
+      "case_id": "Case_1018",
+      "geometry": {
+        "c": 2.48,
+        "sx": 53.22,
+        "sy": 113.48,
+        "r1": 60.63,
+        "a2": 56.39,
+        "b1": 87.76,
+        "b2": 81.71,
+        "part_id": "Geo_Sample_1018"
+      },
+      "loading": {
+        "A": 10.166,
+        "Ts": 0.101,
+        "part_id": "Load_Sample_1018"
+      },
+      "material": {
+        "mu": 2083.94,
+        "part_id": "Mat_Sample_1018"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "sy",
+        "side": "lower",
+        "training_lower": 120.0,
+        "training_upper": 320.0,
+        "value": 113.48,
+        "normalized_ood_distance": 0.0326
+      }
+    },
+    {
+      "case_id": "Case_1019",
+      "geometry": {
+        "c": 1.84,
+        "sx": 76.76,
+        "sy": 174.27,
+        "r1": 51.01,
+        "a2": 46.65,
+        "b1": 78.26,
+        "b2": 102.34,
+        "part_id": "Geo_Sample_1019"
+      },
+      "loading": {
+        "A": 26.295,
+        "Ts": 0.278,
+        "part_id": "Load_Sample_1019"
+      },
+      "material": {
+        "mu": 2955.67,
+        "part_id": "Mat_Sample_1019"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "b1",
+        "side": "lower",
+        "training_lower": 80.0,
+        "training_upper": 120.0,
+        "value": 78.26,
+        "normalized_ood_distance": 0.0435
+      }
+    },
+    {
+      "case_id": "Case_1020",
+      "geometry": {
+        "c": 2.78,
+        "sx": 121.68,
+        "sy": 308.05,
+        "r1": 55.49,
+        "a2": 71.56,
+        "b1": 91.26,
+        "b2": 121.19,
+        "part_id": "Geo_Sample_1020"
+      },
+      "loading": {
+        "A": 72.853,
+        "Ts": 0.378,
+        "part_id": "Load_Sample_1020"
+      },
+      "material": {
+        "mu": 1289.1,
+        "part_id": "Mat_Sample_1020"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "sx",
+        "side": "upper",
+        "training_lower": 40.0,
+        "training_upper": 120.0,
+        "value": 121.68,
+        "normalized_ood_distance": 0.021
+      }
+    },
+    {
+      "case_id": "Case_1021",
+      "geometry": {
+        "c": 2.2,
+        "sx": 124.4,
+        "sy": 251.14,
+        "r1": 52.8,
+        "a2": 69.71,
+        "b1": 94.79,
+        "b2": 150.3,
+        "part_id": "Geo_Sample_1021"
+      },
+      "loading": {
+        "A": 12.324,
+        "Ts": 0.126,
+        "part_id": "Load_Sample_1021"
+      },
+      "material": {
+        "mu": 1884.66,
+        "part_id": "Mat_Sample_1021"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "sx",
+        "side": "upper",
+        "training_lower": 40.0,
+        "training_upper": 120.0,
+        "value": 124.4,
+        "normalized_ood_distance": 0.055
+      }
+    },
+    {
+      "case_id": "Case_1022",
+      "geometry": {
+        "c": 1.95,
+        "sx": 66.19,
+        "sy": 242.3,
+        "r1": 64.64,
+        "a2": 57.99,
+        "b1": 99.99,
+        "b2": 78.73,
+        "part_id": "Geo_Sample_1022"
+      },
+      "loading": {
+        "A": 51.304,
+        "Ts": 0.197,
+        "part_id": "Load_Sample_1022"
+      },
+      "material": {
+        "mu": 1159.94,
+        "part_id": "Mat_Sample_1022"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "b2",
+        "side": "lower",
+        "training_lower": 80.0,
+        "training_upper": 160.0,
+        "value": 78.73,
+        "normalized_ood_distance": 0.015875
+      }
+    },
+    {
+      "case_id": "Case_1023",
+      "geometry": {
+        "c": 2.37,
+        "sx": 81.67,
+        "sy": 316.46,
+        "r1": 52.55,
+        "a2": 58.05,
+        "b1": 77.39,
+        "b2": 122.97,
+        "part_id": "Geo_Sample_1023"
+      },
+      "loading": {
+        "A": 35.512,
+        "Ts": 0.2,
+        "part_id": "Load_Sample_1023"
+      },
+      "material": {
+        "mu": 2811.13,
+        "part_id": "Mat_Sample_1023"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "b1",
+        "side": "lower",
+        "training_lower": 80.0,
+        "training_upper": 120.0,
+        "value": 77.39,
+        "normalized_ood_distance": 0.06525
+      }
+    },
+    {
+      "case_id": "Case_1024",
+      "geometry": {
+        "c": 3.17,
+        "sx": 89.74,
+        "sy": 206.76,
+        "r1": 51.93,
+        "a2": 47.86,
+        "b1": 88.78,
+        "b2": 112.25,
+        "part_id": "Geo_Sample_1024"
+      },
+      "loading": {
+        "A": 39.043,
+        "Ts": 0.38,
+        "part_id": "Load_Sample_1024"
+      },
+      "material": {
+        "mu": 1905.79,
+        "part_id": "Mat_Sample_1024"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "c",
+        "side": "upper",
+        "training_lower": 1.0,
+        "training_upper": 3.0,
+        "value": 3.17,
+        "normalized_ood_distance": 0.085
+      }
+    },
+    {
+      "case_id": "Case_1025",
+      "geometry": {
+        "c": 2.01,
+        "sx": 50.86,
+        "sy": 291.04,
+        "r1": 48.18,
+        "a2": 67.22,
+        "b1": 114.71,
+        "b2": 131.23,
+        "part_id": "Geo_Sample_1025"
+      },
+      "loading": {
+        "A": 14.076,
+        "Ts": 0.343,
+        "part_id": "Load_Sample_1025"
+      },
+      "material": {
+        "mu": 1940.9,
+        "part_id": "Mat_Sample_1025"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "r1",
+        "side": "lower",
+        "training_lower": 50.0,
+        "training_upper": 70.0,
+        "value": 48.18,
+        "normalized_ood_distance": 0.091
+      }
+    },
+    {
+      "case_id": "Case_1026",
+      "geometry": {
+        "c": 1.59,
+        "sx": 46.05,
+        "sy": 230.67,
+        "r1": 56.64,
+        "a2": 77.04,
+        "b1": 121.44,
+        "b2": 100.6,
+        "part_id": "Geo_Sample_1026"
+      },
+      "loading": {
+        "A": 56.595,
+        "Ts": 0.185,
+        "part_id": "Load_Sample_1026"
+      },
+      "material": {
+        "mu": 2124.35,
+        "part_id": "Mat_Sample_1026"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "b1",
+        "side": "upper",
+        "training_lower": 80.0,
+        "training_upper": 120.0,
+        "value": 121.44,
+        "normalized_ood_distance": 0.036
+      }
+    },
+    {
+      "case_id": "Case_1027",
+      "geometry": {
+        "c": 1.8,
+        "sx": 54.48,
+        "sy": 119.03,
+        "r1": 60.45,
+        "a2": 42.83,
+        "b1": 85.94,
+        "b2": 81.81,
+        "part_id": "Geo_Sample_1027"
+      },
+      "loading": {
+        "A": 12.575,
+        "Ts": 0.343,
+        "part_id": "Load_Sample_1027"
+      },
+      "material": {
+        "mu": 2973.46,
+        "part_id": "Mat_Sample_1027"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "sy",
+        "side": "lower",
+        "training_lower": 120.0,
+        "training_upper": 320.0,
+        "value": 119.03,
+        "normalized_ood_distance": 0.00485
+      }
+    },
+    {
+      "case_id": "Case_1028",
+      "geometry": {
+        "c": 2.81,
+        "sx": 99.64,
+        "sy": 116.93,
+        "r1": 56.61,
+        "a2": 79.57,
+        "b1": 92.31,
+        "b2": 83.08,
+        "part_id": "Geo_Sample_1028"
+      },
+      "loading": {
+        "A": 10.878,
+        "Ts": 0.361,
+        "part_id": "Load_Sample_1028"
+      },
+      "material": {
+        "mu": 1447.03,
+        "part_id": "Mat_Sample_1028"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "sy",
+        "side": "lower",
+        "training_lower": 120.0,
+        "training_upper": 320.0,
+        "value": 116.93,
+        "normalized_ood_distance": 0.01535
+      }
+    },
+    {
+      "case_id": "Case_1029",
+      "geometry": {
+        "c": 0.96,
+        "sx": 93.63,
+        "sy": 159.23,
+        "r1": 65.81,
+        "a2": 42.06,
+        "b1": 118.95,
+        "b2": 89.8,
+        "part_id": "Geo_Sample_1029"
+      },
+      "loading": {
+        "A": 17.913,
+        "Ts": 0.28,
+        "part_id": "Load_Sample_1029"
+      },
+      "material": {
+        "mu": 2913.27,
+        "part_id": "Mat_Sample_1029"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "c",
+        "side": "lower",
+        "training_lower": 1.0,
+        "training_upper": 3.0,
+        "value": 0.96,
+        "normalized_ood_distance": 0.02
+      }
+    },
+    {
+      "case_id": "Case_1030",
+      "geometry": {
+        "c": 2.71,
+        "sx": 91.21,
+        "sy": 299.69,
+        "r1": 60.81,
+        "a2": 72.96,
+        "b1": 120.34,
+        "b2": 121.87,
+        "part_id": "Geo_Sample_1030"
+      },
+      "loading": {
+        "A": 25.827,
+        "Ts": 0.274,
+        "part_id": "Load_Sample_1030"
+      },
+      "material": {
+        "mu": 2434.15,
+        "part_id": "Mat_Sample_1030"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "b1",
+        "side": "upper",
+        "training_lower": 80.0,
+        "training_upper": 120.0,
+        "value": 120.34,
+        "normalized_ood_distance": 0.0085
+      }
+    },
+    {
+      "case_id": "Case_1031",
+      "geometry": {
+        "c": 2.56,
+        "sx": 52.34,
+        "sy": 323.77,
+        "r1": 57.24,
+        "a2": 68.8,
+        "b1": 108.78,
+        "b2": 101.63,
+        "part_id": "Geo_Sample_1031"
+      },
+      "loading": {
+        "A": 13.0,
+        "Ts": 0.345,
+        "part_id": "Load_Sample_1031"
+      },
+      "material": {
+        "mu": 2120.3,
+        "part_id": "Mat_Sample_1031"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "sy",
+        "side": "upper",
+        "training_lower": 120.0,
+        "training_upper": 320.0,
+        "value": 323.77,
+        "normalized_ood_distance": 0.01885
+      }
+    },
+    {
+      "case_id": "Case_1032",
+      "geometry": {
+        "c": 3.04,
+        "sx": 89.86,
+        "sy": 249.28,
+        "r1": 66.45,
+        "a2": 78.11,
+        "b1": 94.71,
+        "b2": 112.15,
+        "part_id": "Geo_Sample_1032"
+      },
+      "loading": {
+        "A": 11.533,
+        "Ts": 0.468,
+        "part_id": "Load_Sample_1032"
+      },
+      "material": {
+        "mu": 2988.82,
+        "part_id": "Mat_Sample_1032"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "c",
+        "side": "upper",
+        "training_lower": 1.0,
+        "training_upper": 3.0,
+        "value": 3.04,
+        "normalized_ood_distance": 0.02
+      }
+    },
+    {
+      "case_id": "Case_1033",
+      "geometry": {
+        "c": 1.75,
+        "sx": 50.7,
+        "sy": 244.86,
+        "r1": 65.96,
+        "a2": 82.13,
+        "b1": 87.32,
+        "b2": 150.59,
+        "part_id": "Geo_Sample_1033"
+      },
+      "loading": {
+        "A": 31.067,
+        "Ts": 0.497,
+        "part_id": "Load_Sample_1033"
+      },
+      "material": {
+        "mu": 2408.89,
+        "part_id": "Mat_Sample_1033"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "a2",
+        "side": "upper",
+        "training_lower": 40.0,
+        "training_upper": 80.0,
+        "value": 82.13,
+        "normalized_ood_distance": 0.05325
+      }
+    },
+    {
+      "case_id": "Case_1034",
+      "geometry": {
+        "c": 1.41,
+        "sx": 65.95,
+        "sy": 221.86,
+        "r1": 59.31,
+        "a2": 49.51,
+        "b1": 97.92,
+        "b2": 164.64,
+        "part_id": "Geo_Sample_1034"
+      },
+      "loading": {
+        "A": 22.208,
+        "Ts": 0.284,
+        "part_id": "Load_Sample_1034"
+      },
+      "material": {
+        "mu": 1353.68,
+        "part_id": "Mat_Sample_1034"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "b2",
+        "side": "upper",
+        "training_lower": 80.0,
+        "training_upper": 160.0,
+        "value": 164.64,
+        "normalized_ood_distance": 0.058
+      }
+    },
+    {
+      "case_id": "Case_1035",
+      "geometry": {
+        "c": 0.8,
+        "sx": 62.75,
+        "sy": 230.05,
+        "r1": 53.67,
+        "a2": 58.74,
+        "b1": 86.94,
+        "b2": 115.8,
+        "part_id": "Geo_Sample_1035"
+      },
+      "loading": {
+        "A": 34.665,
+        "Ts": 0.233,
+        "part_id": "Load_Sample_1035"
+      },
+      "material": {
+        "mu": 2284.14,
+        "part_id": "Mat_Sample_1035"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "c",
+        "side": "lower",
+        "training_lower": 1.0,
+        "training_upper": 3.0,
+        "value": 0.8,
+        "normalized_ood_distance": 0.1
+      }
+    },
+    {
+      "case_id": "Case_1036",
+      "geometry": {
+        "c": 1.4,
+        "sx": 102.46,
+        "sy": 311.31,
+        "r1": 66.96,
+        "a2": 71.11,
+        "b1": 111.31,
+        "b2": 162.83,
+        "part_id": "Geo_Sample_1036"
+      },
+      "loading": {
+        "A": 12.513,
+        "Ts": 0.444,
+        "part_id": "Load_Sample_1036"
+      },
+      "material": {
+        "mu": 2355.04,
+        "part_id": "Mat_Sample_1036"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "b2",
+        "side": "upper",
+        "training_lower": 80.0,
+        "training_upper": 160.0,
+        "value": 162.83,
+        "normalized_ood_distance": 0.035375
+      }
+    },
+    {
+      "case_id": "Case_1037",
+      "geometry": {
+        "c": 2.24,
+        "sx": 33.73,
+        "sy": 309.42,
+        "r1": 65.86,
+        "a2": 69.8,
+        "b1": 116.07,
+        "b2": 96.43,
+        "part_id": "Geo_Sample_1037"
+      },
+      "loading": {
+        "A": 55.948,
+        "Ts": 0.337,
+        "part_id": "Load_Sample_1037"
+      },
+      "material": {
+        "mu": 1303.85,
+        "part_id": "Mat_Sample_1037"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "sx",
+        "side": "lower",
+        "training_lower": 40.0,
+        "training_upper": 120.0,
+        "value": 33.73,
+        "normalized_ood_distance": 0.078375
+      }
+    },
+    {
+      "case_id": "Case_1038",
+      "geometry": {
+        "c": 1.39,
+        "sx": 124.0,
+        "sy": 299.6,
+        "r1": 67.54,
+        "a2": 66.82,
+        "b1": 101.32,
+        "b2": 154.94,
+        "part_id": "Geo_Sample_1038"
+      },
+      "loading": {
+        "A": 62.869,
+        "Ts": 0.117,
+        "part_id": "Load_Sample_1038"
+      },
+      "material": {
+        "mu": 2014.82,
+        "part_id": "Mat_Sample_1038"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "sx",
+        "side": "upper",
+        "training_lower": 40.0,
+        "training_upper": 120.0,
+        "value": 124.0,
+        "normalized_ood_distance": 0.05
+      }
+    },
+    {
+      "case_id": "Case_1039",
+      "geometry": {
+        "c": 2.1,
+        "sx": 117.43,
+        "sy": 260.04,
+        "r1": 59.23,
+        "a2": 71.41,
+        "b1": 95.74,
+        "b2": 77.83,
+        "part_id": "Geo_Sample_1039"
+      },
+      "loading": {
+        "A": 73.999,
+        "Ts": 0.205,
+        "part_id": "Load_Sample_1039"
+      },
+      "material": {
+        "mu": 1210.76,
+        "part_id": "Mat_Sample_1039"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "b2",
+        "side": "lower",
+        "training_lower": 80.0,
+        "training_upper": 160.0,
+        "value": 77.83,
+        "normalized_ood_distance": 0.027125
+      }
+    },
+    {
+      "case_id": "Case_1040",
+      "geometry": {
+        "c": 2.26,
+        "sx": 74.81,
+        "sy": 320.18,
+        "r1": 60.84,
+        "a2": 61.17,
+        "b1": 88.83,
+        "b2": 126.93,
+        "part_id": "Geo_Sample_1040"
+      },
+      "loading": {
+        "A": 66.728,
+        "Ts": 0.115,
+        "part_id": "Load_Sample_1040"
+      },
+      "material": {
+        "mu": 1795.7,
+        "part_id": "Mat_Sample_1040"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "sy",
+        "side": "upper",
+        "training_lower": 120.0,
+        "training_upper": 320.0,
+        "value": 320.18,
+        "normalized_ood_distance": 0.0009
+      }
+    },
+    {
+      "case_id": "Case_1041",
+      "geometry": {
+        "c": 1.05,
+        "sx": 50.79,
+        "sy": 158.65,
+        "r1": 56.42,
+        "a2": 81.21,
+        "b1": 87.02,
+        "b2": 95.99,
+        "part_id": "Geo_Sample_1041"
+      },
+      "loading": {
+        "A": 23.433,
+        "Ts": 0.111,
+        "part_id": "Load_Sample_1041"
+      },
+      "material": {
+        "mu": 1552.87,
+        "part_id": "Mat_Sample_1041"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "a2",
+        "side": "upper",
+        "training_lower": 40.0,
+        "training_upper": 80.0,
+        "value": 81.21,
+        "normalized_ood_distance": 0.03025
+      }
+    },
+    {
+      "case_id": "Case_1042",
+      "geometry": {
+        "c": 1.55,
+        "sx": 81.01,
+        "sy": 282.4,
+        "r1": 52.8,
+        "a2": 40.12,
+        "b1": 98.4,
+        "b2": 74.3,
+        "part_id": "Geo_Sample_1042"
+      },
+      "loading": {
+        "A": 69.682,
+        "Ts": 0.125,
+        "part_id": "Load_Sample_1042"
+      },
+      "material": {
+        "mu": 2495.92,
+        "part_id": "Mat_Sample_1042"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "b2",
+        "side": "lower",
+        "training_lower": 80.0,
+        "training_upper": 160.0,
+        "value": 74.3,
+        "normalized_ood_distance": 0.07125
+      }
+    },
+    {
+      "case_id": "Case_1043",
+      "geometry": {
+        "c": 0.9,
+        "sx": 44.4,
+        "sy": 238.8,
+        "r1": 53.79,
+        "a2": 59.9,
+        "b1": 101.64,
+        "b2": 150.37,
+        "part_id": "Geo_Sample_1043"
+      },
+      "loading": {
+        "A": 32.634,
+        "Ts": 0.454,
+        "part_id": "Load_Sample_1043"
+      },
+      "material": {
+        "mu": 2042.96,
+        "part_id": "Mat_Sample_1043"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "c",
+        "side": "lower",
+        "training_lower": 1.0,
+        "training_upper": 3.0,
+        "value": 0.9,
+        "normalized_ood_distance": 0.05
+      }
+    },
+    {
+      "case_id": "Case_1044",
+      "geometry": {
+        "c": 1.91,
+        "sx": 46.83,
+        "sy": 334.71,
+        "r1": 56.6,
+        "a2": 42.49,
+        "b1": 105.92,
+        "b2": 155.16,
+        "part_id": "Geo_Sample_1044"
+      },
+      "loading": {
+        "A": 63.275,
+        "Ts": 0.103,
+        "part_id": "Load_Sample_1044"
+      },
+      "material": {
+        "mu": 2501.2,
+        "part_id": "Mat_Sample_1044"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "sy",
+        "side": "upper",
+        "training_lower": 120.0,
+        "training_upper": 320.0,
+        "value": 334.71,
+        "normalized_ood_distance": 0.07355
+      }
+    },
+    {
+      "case_id": "Case_1045",
+      "geometry": {
+        "c": 0.85,
+        "sx": 88.31,
+        "sy": 289.16,
+        "r1": 68.58,
+        "a2": 79.67,
+        "b1": 113.4,
+        "b2": 109.21,
+        "part_id": "Geo_Sample_1045"
+      },
+      "loading": {
+        "A": 27.13,
+        "Ts": 0.243,
+        "part_id": "Load_Sample_1045"
+      },
+      "material": {
+        "mu": 2290.94,
+        "part_id": "Mat_Sample_1045"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "c",
+        "side": "lower",
+        "training_lower": 1.0,
+        "training_upper": 3.0,
+        "value": 0.85,
+        "normalized_ood_distance": 0.075
+      }
+    },
+    {
+      "case_id": "Case_1046",
+      "geometry": {
+        "c": 2.43,
+        "sx": 114.67,
+        "sy": 280.05,
+        "r1": 53.85,
+        "a2": 36.12,
+        "b1": 90.24,
+        "b2": 107.98,
+        "part_id": "Geo_Sample_1046"
+      },
+      "loading": {
+        "A": 78.935,
+        "Ts": 0.387,
+        "part_id": "Load_Sample_1046"
+      },
+      "material": {
+        "mu": 1777.37,
+        "part_id": "Mat_Sample_1046"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "a2",
+        "side": "lower",
+        "training_lower": 40.0,
+        "training_upper": 80.0,
+        "value": 36.12,
+        "normalized_ood_distance": 0.097
+      }
+    },
+    {
+      "case_id": "Case_1047",
+      "geometry": {
+        "c": 1.85,
+        "sx": 49.88,
+        "sy": 273.44,
+        "r1": 70.57,
+        "a2": 62.94,
+        "b1": 91.48,
+        "b2": 127.96,
+        "part_id": "Geo_Sample_1047"
+      },
+      "loading": {
+        "A": 41.28,
+        "Ts": 0.397,
+        "part_id": "Load_Sample_1047"
+      },
+      "material": {
+        "mu": 1763.79,
+        "part_id": "Mat_Sample_1047"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "r1",
+        "side": "upper",
+        "training_lower": 50.0,
+        "training_upper": 70.0,
+        "value": 70.57,
+        "normalized_ood_distance": 0.0285
+      }
+    },
+    {
+      "case_id": "Case_1048",
+      "geometry": {
+        "c": 2.13,
+        "sx": 34.8,
+        "sy": 248.3,
+        "r1": 53.87,
+        "a2": 66.62,
+        "b1": 95.49,
+        "b2": 137.72,
+        "part_id": "Geo_Sample_1048"
+      },
+      "loading": {
+        "A": 29.318,
+        "Ts": 0.268,
+        "part_id": "Load_Sample_1048"
+      },
+      "material": {
+        "mu": 1590.65,
+        "part_id": "Mat_Sample_1048"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "sx",
+        "side": "lower",
+        "training_lower": 40.0,
+        "training_upper": 120.0,
+        "value": 34.8,
+        "normalized_ood_distance": 0.065
+      }
+    },
+    {
+      "case_id": "Case_1049",
+      "geometry": {
+        "c": 1.72,
+        "sx": 43.19,
+        "sy": 119.47,
+        "r1": 60.44,
+        "a2": 62.08,
+        "b1": 88.16,
+        "b2": 82.1,
+        "part_id": "Geo_Sample_1049"
+      },
+      "loading": {
+        "A": 12.747,
+        "Ts": 0.124,
+        "part_id": "Load_Sample_1049"
+      },
+      "material": {
+        "mu": 2091.39,
+        "part_id": "Mat_Sample_1049"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "sy",
+        "side": "lower",
+        "training_lower": 120.0,
+        "training_upper": 320.0,
+        "value": 119.47,
+        "normalized_ood_distance": 0.00265
+      }
+    },
+    {
+      "case_id": "Case_1050",
+      "geometry": {
+        "c": 2.35,
+        "sx": 97.08,
+        "sy": 284.22,
+        "r1": 67.73,
+        "a2": 38.54,
+        "b1": 95.41,
+        "b2": 82.44,
+        "part_id": "Geo_Sample_1050"
+      },
+      "loading": {
+        "A": 46.456,
+        "Ts": 0.222,
+        "part_id": "Load_Sample_1050"
+      },
+      "material": {
+        "mu": 1208.54,
+        "part_id": "Mat_Sample_1050"
+      },
+      "ood": {
+        "group": "geometry_ood",
+        "parameter": "a2",
+        "side": "lower",
+        "training_lower": 40.0,
+        "training_upper": 80.0,
+        "value": 38.54,
+        "normalized_ood_distance": 0.0365
+      }
+    },
+    {
+      "case_id": "Case_1051",
+      "geometry": {
+        "c": 1.75,
+        "sx": 41.21,
+        "sy": 169.37,
+        "r1": 62.2,
+        "a2": 63.94,
+        "b1": 97.6,
+        "b2": 93.78,
+        "part_id": "Geo_Sample_1051"
+      },
+      "loading": {
+        "A": 13.226,
+        "Ts": 0.061,
+        "part_id": "Load_Sample_1051"
+      },
+      "material": {
+        "mu": 1537.36,
+        "part_id": "Mat_Sample_1051"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "Ts",
+        "side": "lower",
+        "training_lower": 0.1,
+        "training_upper": 0.5,
+        "value": 0.061,
+        "normalized_ood_distance": 0.0975
+      }
+    },
+    {
+      "case_id": "Case_1052",
+      "geometry": {
+        "c": 1.61,
+        "sx": 77.36,
+        "sy": 316.41,
+        "r1": 54.97,
+        "a2": 61.65,
+        "b1": 83.5,
+        "b2": 96.85,
+        "part_id": "Geo_Sample_1052"
+      },
+      "loading": {
+        "A": 95.836,
+        "Ts": 0.458,
+        "part_id": "Load_Sample_1052"
+      },
+      "material": {
+        "mu": 2598.84,
+        "part_id": "Mat_Sample_1052"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "A",
+        "side": "upper",
+        "training_lower": 10.0,
+        "training_upper": 90.0,
+        "value": 95.836,
+        "normalized_ood_distance": 0.07295
+      }
+    },
+    {
+      "case_id": "Case_1053",
+      "geometry": {
+        "c": 1.58,
+        "sx": 89.08,
+        "sy": 303.98,
+        "r1": 68.5,
+        "a2": 44.92,
+        "b1": 108.05,
+        "b2": 123.03,
+        "part_id": "Geo_Sample_1053"
+      },
+      "loading": {
+        "A": 7.422,
+        "Ts": 0.407,
+        "part_id": "Load_Sample_1053"
+      },
+      "material": {
+        "mu": 2458.79,
+        "part_id": "Mat_Sample_1053"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "A",
+        "side": "lower",
+        "training_lower": 10.0,
+        "training_upper": 90.0,
+        "value": 7.422,
+        "normalized_ood_distance": 0.032225
+      }
+    },
+    {
+      "case_id": "Case_1054",
+      "geometry": {
+        "c": 2.82,
+        "sx": 113.91,
+        "sy": 120.52,
+        "r1": 61.41,
+        "a2": 75.73,
+        "b1": 95.92,
+        "b2": 86.89,
+        "part_id": "Geo_Sample_1054"
+      },
+      "loading": {
+        "A": 6.709,
+        "Ts": 0.4,
+        "part_id": "Load_Sample_1054"
+      },
+      "material": {
+        "mu": 1269.23,
+        "part_id": "Mat_Sample_1054"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "A",
+        "side": "lower",
+        "training_lower": 10.0,
+        "training_upper": 90.0,
+        "value": 6.709,
+        "normalized_ood_distance": 0.0411375
+      }
+    },
+    {
+      "case_id": "Case_1055",
+      "geometry": {
+        "c": 2.27,
+        "sx": 43.72,
+        "sy": 309.71,
+        "r1": 62.43,
+        "a2": 49.93,
+        "b1": 104.28,
+        "b2": 80.5,
+        "part_id": "Geo_Sample_1055"
+      },
+      "loading": {
+        "A": 90.659,
+        "Ts": 0.306,
+        "part_id": "Load_Sample_1055"
+      },
+      "material": {
+        "mu": 2153.17,
+        "part_id": "Mat_Sample_1055"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "A",
+        "side": "upper",
+        "training_lower": 10.0,
+        "training_upper": 90.0,
+        "value": 90.659,
+        "normalized_ood_distance": 0.0082375
+      }
+    },
+    {
+      "case_id": "Case_1056",
+      "geometry": {
+        "c": 2.17,
+        "sx": 86.61,
+        "sy": 288.65,
+        "r1": 62.18,
+        "a2": 79.27,
+        "b1": 114.34,
+        "b2": 116.4,
+        "part_id": "Geo_Sample_1056"
+      },
+      "loading": {
+        "A": 3.121,
+        "Ts": 0.41,
+        "part_id": "Load_Sample_1056"
+      },
+      "material": {
+        "mu": 1792.08,
+        "part_id": "Mat_Sample_1056"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "A",
+        "side": "lower",
+        "training_lower": 10.0,
+        "training_upper": 90.0,
+        "value": 3.121,
+        "normalized_ood_distance": 0.0859875
+      }
+    },
+    {
+      "case_id": "Case_1057",
+      "geometry": {
+        "c": 1.55,
+        "sx": 117.11,
+        "sy": 315.78,
+        "r1": 56.66,
+        "a2": 70.64,
+        "b1": 93.91,
+        "b2": 96.52,
+        "part_id": "Geo_Sample_1057"
+      },
+      "loading": {
+        "A": 32.579,
+        "Ts": 0.527,
+        "part_id": "Load_Sample_1057"
+      },
+      "material": {
+        "mu": 2528.08,
+        "part_id": "Mat_Sample_1057"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "Ts",
+        "side": "upper",
+        "training_lower": 0.1,
+        "training_upper": 0.5,
+        "value": 0.527,
+        "normalized_ood_distance": 0.0675
+      }
+    },
+    {
+      "case_id": "Case_1058",
+      "geometry": {
+        "c": 2.87,
+        "sx": 78.47,
+        "sy": 298.78,
+        "r1": 68.26,
+        "a2": 42.38,
+        "b1": 102.99,
+        "b2": 135.1,
+        "part_id": "Geo_Sample_1058"
+      },
+      "loading": {
+        "A": 8.115,
+        "Ts": 0.257,
+        "part_id": "Load_Sample_1058"
+      },
+      "material": {
+        "mu": 2676.82,
+        "part_id": "Mat_Sample_1058"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "A",
+        "side": "lower",
+        "training_lower": 10.0,
+        "training_upper": 90.0,
+        "value": 8.115,
+        "normalized_ood_distance": 0.0235625
+      }
+    },
+    {
+      "case_id": "Case_1059",
+      "geometry": {
+        "c": 1.65,
+        "sx": 71.52,
+        "sy": 318.85,
+        "r1": 54.47,
+        "a2": 41.12,
+        "b1": 96.84,
+        "b2": 83.26,
+        "part_id": "Geo_Sample_1059"
+      },
+      "loading": {
+        "A": 91.839,
+        "Ts": 0.232,
+        "part_id": "Load_Sample_1059"
+      },
+      "material": {
+        "mu": 2036.5,
+        "part_id": "Mat_Sample_1059"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "A",
+        "side": "upper",
+        "training_lower": 10.0,
+        "training_upper": 90.0,
+        "value": 91.839,
+        "normalized_ood_distance": 0.0229875
+      }
+    },
+    {
+      "case_id": "Case_1060",
+      "geometry": {
+        "c": 2.05,
+        "sx": 71.75,
+        "sy": 293.26,
+        "r1": 61.08,
+        "a2": 64.81,
+        "b1": 80.14,
+        "b2": 98.27,
+        "part_id": "Geo_Sample_1060"
+      },
+      "loading": {
+        "A": 79.276,
+        "Ts": 0.503,
+        "part_id": "Load_Sample_1060"
+      },
+      "material": {
+        "mu": 2360.63,
+        "part_id": "Mat_Sample_1060"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "Ts",
+        "side": "upper",
+        "training_lower": 0.1,
+        "training_upper": 0.5,
+        "value": 0.503,
+        "normalized_ood_distance": 0.0075
+      }
+    },
+    {
+      "case_id": "Case_1061",
+      "geometry": {
+        "c": 2.3,
+        "sx": 84.42,
+        "sy": 315.5,
+        "r1": 55.9,
+        "a2": 69.99,
+        "b1": 115.81,
+        "b2": 112.58,
+        "part_id": "Geo_Sample_1061"
+      },
+      "loading": {
+        "A": 4.382,
+        "Ts": 0.148,
+        "part_id": "Load_Sample_1061"
+      },
+      "material": {
+        "mu": 2475.67,
+        "part_id": "Mat_Sample_1061"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "A",
+        "side": "lower",
+        "training_lower": 10.0,
+        "training_upper": 90.0,
+        "value": 4.382,
+        "normalized_ood_distance": 0.070225
+      }
+    },
+    {
+      "case_id": "Case_1062",
+      "geometry": {
+        "c": 2.41,
+        "sx": 119.5,
+        "sy": 269.58,
+        "r1": 58.7,
+        "a2": 53.68,
+        "b1": 118.41,
+        "b2": 95.61,
+        "part_id": "Geo_Sample_1062"
+      },
+      "loading": {
+        "A": 33.664,
+        "Ts": 0.538,
+        "part_id": "Load_Sample_1062"
+      },
+      "material": {
+        "mu": 1960.79,
+        "part_id": "Mat_Sample_1062"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "Ts",
+        "side": "upper",
+        "training_lower": 0.1,
+        "training_upper": 0.5,
+        "value": 0.538,
+        "normalized_ood_distance": 0.095
+      }
+    },
+    {
+      "case_id": "Case_1063",
+      "geometry": {
+        "c": 1.91,
+        "sx": 89.54,
+        "sy": 243.86,
+        "r1": 65.35,
+        "a2": 76.56,
+        "b1": 87.7,
+        "b2": 106.06,
+        "part_id": "Geo_Sample_1063"
+      },
+      "loading": {
+        "A": 54.398,
+        "Ts": 0.527,
+        "part_id": "Load_Sample_1063"
+      },
+      "material": {
+        "mu": 1430.45,
+        "part_id": "Mat_Sample_1063"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "Ts",
+        "side": "upper",
+        "training_lower": 0.1,
+        "training_upper": 0.5,
+        "value": 0.527,
+        "normalized_ood_distance": 0.0675
+      }
+    },
+    {
+      "case_id": "Case_1064",
+      "geometry": {
+        "c": 2.7,
+        "sx": 69.9,
+        "sy": 251.37,
+        "r1": 64.34,
+        "a2": 52.2,
+        "b1": 102.6,
+        "b2": 132.15,
+        "part_id": "Geo_Sample_1064"
+      },
+      "loading": {
+        "A": 45.076,
+        "Ts": 0.099,
+        "part_id": "Load_Sample_1064"
+      },
+      "material": {
+        "mu": 2570.6,
+        "part_id": "Mat_Sample_1064"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "Ts",
+        "side": "lower",
+        "training_lower": 0.1,
+        "training_upper": 0.5,
+        "value": 0.099,
+        "normalized_ood_distance": 0.0025
+      }
+    },
+    {
+      "case_id": "Case_1065",
+      "geometry": {
+        "c": 2.86,
+        "sx": 77.65,
+        "sy": 300.51,
+        "r1": 63.52,
+        "a2": 46.28,
+        "b1": 111.52,
+        "b2": 95.94,
+        "part_id": "Geo_Sample_1065"
+      },
+      "loading": {
+        "A": 97.047,
+        "Ts": 0.466,
+        "part_id": "Load_Sample_1065"
+      },
+      "material": {
+        "mu": 2407.3,
+        "part_id": "Mat_Sample_1065"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "A",
+        "side": "upper",
+        "training_lower": 10.0,
+        "training_upper": 90.0,
+        "value": 97.047,
+        "normalized_ood_distance": 0.0880875
+      }
+    },
+    {
+      "case_id": "Case_1066",
+      "geometry": {
+        "c": 2.67,
+        "sx": 49.84,
+        "sy": 298.49,
+        "r1": 52.96,
+        "a2": 68.15,
+        "b1": 100.17,
+        "b2": 118.48,
+        "part_id": "Geo_Sample_1066"
+      },
+      "loading": {
+        "A": 69.842,
+        "Ts": 0.076,
+        "part_id": "Load_Sample_1066"
+      },
+      "material": {
+        "mu": 2370.28,
+        "part_id": "Mat_Sample_1066"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "Ts",
+        "side": "lower",
+        "training_lower": 0.1,
+        "training_upper": 0.5,
+        "value": 0.076,
+        "normalized_ood_distance": 0.06
+      }
+    },
+    {
+      "case_id": "Case_1067",
+      "geometry": {
+        "c": 2.14,
+        "sx": 92.33,
+        "sy": 297.77,
+        "r1": 69.36,
+        "a2": 43.34,
+        "b1": 119.95,
+        "b2": 151.73,
+        "part_id": "Geo_Sample_1067"
+      },
+      "loading": {
+        "A": 29.419,
+        "Ts": 0.073,
+        "part_id": "Load_Sample_1067"
+      },
+      "material": {
+        "mu": 2393.73,
+        "part_id": "Mat_Sample_1067"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "Ts",
+        "side": "lower",
+        "training_lower": 0.1,
+        "training_upper": 0.5,
+        "value": 0.073,
+        "normalized_ood_distance": 0.0675
+      }
+    },
+    {
+      "case_id": "Case_1068",
+      "geometry": {
+        "c": 2.54,
+        "sx": 87.17,
+        "sy": 293.98,
+        "r1": 53.15,
+        "a2": 58.02,
+        "b1": 102.56,
+        "b2": 80.71,
+        "part_id": "Geo_Sample_1068"
+      },
+      "loading": {
+        "A": 96.346,
+        "Ts": 0.377,
+        "part_id": "Load_Sample_1068"
+      },
+      "material": {
+        "mu": 2901.53,
+        "part_id": "Mat_Sample_1068"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "A",
+        "side": "upper",
+        "training_lower": 10.0,
+        "training_upper": 90.0,
+        "value": 96.346,
+        "normalized_ood_distance": 0.079325
+      }
+    },
+    {
+      "case_id": "Case_1069",
+      "geometry": {
+        "c": 1.18,
+        "sx": 55.01,
+        "sy": 310.51,
+        "r1": 58.88,
+        "a2": 62.62,
+        "b1": 106.09,
+        "b2": 111.88,
+        "part_id": "Geo_Sample_1069"
+      },
+      "loading": {
+        "A": 93.326,
+        "Ts": 0.125,
+        "part_id": "Load_Sample_1069"
+      },
+      "material": {
+        "mu": 1759.55,
+        "part_id": "Mat_Sample_1069"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "A",
+        "side": "upper",
+        "training_lower": 10.0,
+        "training_upper": 90.0,
+        "value": 93.326,
+        "normalized_ood_distance": 0.041575
+      }
+    },
+    {
+      "case_id": "Case_1070",
+      "geometry": {
+        "c": 1.33,
+        "sx": 97.78,
+        "sy": 255.43,
+        "r1": 55.99,
+        "a2": 50.27,
+        "b1": 87.46,
+        "b2": 142.19,
+        "part_id": "Geo_Sample_1070"
+      },
+      "loading": {
+        "A": 26.633,
+        "Ts": 0.085,
+        "part_id": "Load_Sample_1070"
+      },
+      "material": {
+        "mu": 1354.72,
+        "part_id": "Mat_Sample_1070"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "Ts",
+        "side": "lower",
+        "training_lower": 0.1,
+        "training_upper": 0.5,
+        "value": 0.085,
+        "normalized_ood_distance": 0.0375
+      }
+    },
+    {
+      "case_id": "Case_1071",
+      "geometry": {
+        "c": 2.39,
+        "sx": 65.91,
+        "sy": 256.87,
+        "r1": 62.95,
+        "a2": 44.1,
+        "b1": 108.9,
+        "b2": 91.7,
+        "part_id": "Geo_Sample_1071"
+      },
+      "loading": {
+        "A": 5.612,
+        "Ts": 0.238,
+        "part_id": "Load_Sample_1071"
+      },
+      "material": {
+        "mu": 2118.63,
+        "part_id": "Mat_Sample_1071"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "A",
+        "side": "lower",
+        "training_lower": 10.0,
+        "training_upper": 90.0,
+        "value": 5.612,
+        "normalized_ood_distance": 0.05485
+      }
+    },
+    {
+      "case_id": "Case_1072",
+      "geometry": {
+        "c": 1.45,
+        "sx": 92.17,
+        "sy": 307.13,
+        "r1": 69.55,
+        "a2": 51.82,
+        "b1": 109.44,
+        "b2": 81.11,
+        "part_id": "Geo_Sample_1072"
+      },
+      "loading": {
+        "A": 92.903,
+        "Ts": 0.346,
+        "part_id": "Load_Sample_1072"
+      },
+      "material": {
+        "mu": 2992.54,
+        "part_id": "Mat_Sample_1072"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "A",
+        "side": "upper",
+        "training_lower": 10.0,
+        "training_upper": 90.0,
+        "value": 92.903,
+        "normalized_ood_distance": 0.0362875
+      }
+    },
+    {
+      "case_id": "Case_1073",
+      "geometry": {
+        "c": 2.53,
+        "sx": 68.95,
+        "sy": 255.0,
+        "r1": 63.28,
+        "a2": 60.03,
+        "b1": 116.0,
+        "b2": 109.31,
+        "part_id": "Geo_Sample_1073"
+      },
+      "loading": {
+        "A": 54.631,
+        "Ts": 0.087,
+        "part_id": "Load_Sample_1073"
+      },
+      "material": {
+        "mu": 2740.38,
+        "part_id": "Mat_Sample_1073"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "Ts",
+        "side": "lower",
+        "training_lower": 0.1,
+        "training_upper": 0.5,
+        "value": 0.087,
+        "normalized_ood_distance": 0.0325
+      }
+    },
+    {
+      "case_id": "Case_1074",
+      "geometry": {
+        "c": 1.03,
+        "sx": 78.71,
+        "sy": 292.38,
+        "r1": 64.08,
+        "a2": 44.9,
+        "b1": 99.8,
+        "b2": 82.66,
+        "part_id": "Geo_Sample_1074"
+      },
+      "loading": {
+        "A": 91.27,
+        "Ts": 0.31,
+        "part_id": "Load_Sample_1074"
+      },
+      "material": {
+        "mu": 1083.17,
+        "part_id": "Mat_Sample_1074"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "A",
+        "side": "upper",
+        "training_lower": 10.0,
+        "training_upper": 90.0,
+        "value": 91.27,
+        "normalized_ood_distance": 0.015875
+      }
+    },
+    {
+      "case_id": "Case_1075",
+      "geometry": {
+        "c": 2.55,
+        "sx": 108.27,
+        "sy": 231.71,
+        "r1": 50.33,
+        "a2": 77.21,
+        "b1": 104.15,
+        "b2": 85.78,
+        "part_id": "Geo_Sample_1075"
+      },
+      "loading": {
+        "A": 34.39,
+        "Ts": 0.087,
+        "part_id": "Load_Sample_1075"
+      },
+      "material": {
+        "mu": 1940.56,
+        "part_id": "Mat_Sample_1075"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "Ts",
+        "side": "lower",
+        "training_lower": 0.1,
+        "training_upper": 0.5,
+        "value": 0.087,
+        "normalized_ood_distance": 0.0325
+      }
+    },
+    {
+      "case_id": "Case_1076",
+      "geometry": {
+        "c": 1.78,
+        "sx": 105.47,
+        "sy": 265.72,
+        "r1": 50.79,
+        "a2": 70.34,
+        "b1": 117.65,
+        "b2": 126.06,
+        "part_id": "Geo_Sample_1076"
+      },
+      "loading": {
+        "A": 53.342,
+        "Ts": 0.523,
+        "part_id": "Load_Sample_1076"
+      },
+      "material": {
+        "mu": 2425.57,
+        "part_id": "Mat_Sample_1076"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "Ts",
+        "side": "upper",
+        "training_lower": 0.1,
+        "training_upper": 0.5,
+        "value": 0.523,
+        "normalized_ood_distance": 0.0575
+      }
+    },
+    {
+      "case_id": "Case_1077",
+      "geometry": {
+        "c": 1.12,
+        "sx": 102.92,
+        "sy": 273.41,
+        "r1": 52.98,
+        "a2": 54.25,
+        "b1": 99.68,
+        "b2": 106.19,
+        "part_id": "Geo_Sample_1077"
+      },
+      "loading": {
+        "A": 6.788,
+        "Ts": 0.101,
+        "part_id": "Load_Sample_1077"
+      },
+      "material": {
+        "mu": 2923.5,
+        "part_id": "Mat_Sample_1077"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "A",
+        "side": "lower",
+        "training_lower": 10.0,
+        "training_upper": 90.0,
+        "value": 6.788,
+        "normalized_ood_distance": 0.04015
+      }
+    },
+    {
+      "case_id": "Case_1078",
+      "geometry": {
+        "c": 1.62,
+        "sx": 88.26,
+        "sy": 284.04,
+        "r1": 64.74,
+        "a2": 74.74,
+        "b1": 101.36,
+        "b2": 83.0,
+        "part_id": "Geo_Sample_1078"
+      },
+      "loading": {
+        "A": 93.741,
+        "Ts": 0.15,
+        "part_id": "Load_Sample_1078"
+      },
+      "material": {
+        "mu": 1479.64,
+        "part_id": "Mat_Sample_1078"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "A",
+        "side": "upper",
+        "training_lower": 10.0,
+        "training_upper": 90.0,
+        "value": 93.741,
+        "normalized_ood_distance": 0.0467625
+      }
+    },
+    {
+      "case_id": "Case_1079",
+      "geometry": {
+        "c": 1.97,
+        "sx": 73.83,
+        "sy": 219.92,
+        "r1": 67.37,
+        "a2": 56.21,
+        "b1": 101.96,
+        "b2": 115.35,
+        "part_id": "Geo_Sample_1079"
+      },
+      "loading": {
+        "A": 9.283,
+        "Ts": 0.261,
+        "part_id": "Load_Sample_1079"
+      },
+      "material": {
+        "mu": 1216.37,
+        "part_id": "Mat_Sample_1079"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "A",
+        "side": "lower",
+        "training_lower": 10.0,
+        "training_upper": 90.0,
+        "value": 9.283,
+        "normalized_ood_distance": 0.0089625
+      }
+    },
+    {
+      "case_id": "Case_1080",
+      "geometry": {
+        "c": 1.17,
+        "sx": 59.74,
+        "sy": 175.23,
+        "r1": 67.57,
+        "a2": 69.69,
+        "b1": 108.99,
+        "b2": 87.18,
+        "part_id": "Geo_Sample_1080"
+      },
+      "loading": {
+        "A": 21.87,
+        "Ts": 0.073,
+        "part_id": "Load_Sample_1080"
+      },
+      "material": {
+        "mu": 1405.31,
+        "part_id": "Mat_Sample_1080"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "Ts",
+        "side": "lower",
+        "training_lower": 0.1,
+        "training_upper": 0.5,
+        "value": 0.073,
+        "normalized_ood_distance": 0.0675
+      }
+    },
+    {
+      "case_id": "Case_1081",
+      "geometry": {
+        "c": 2.09,
+        "sx": 98.98,
+        "sy": 297.12,
+        "r1": 56.92,
+        "a2": 59.36,
+        "b1": 89.62,
+        "b2": 139.75,
+        "part_id": "Geo_Sample_1081"
+      },
+      "loading": {
+        "A": 57.124,
+        "Ts": 0.067,
+        "part_id": "Load_Sample_1081"
+      },
+      "material": {
+        "mu": 1471.63,
+        "part_id": "Mat_Sample_1081"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "Ts",
+        "side": "lower",
+        "training_lower": 0.1,
+        "training_upper": 0.5,
+        "value": 0.067,
+        "normalized_ood_distance": 0.0825
+      }
+    },
+    {
+      "case_id": "Case_1082",
+      "geometry": {
+        "c": 1.77,
+        "sx": 52.28,
+        "sy": 226.22,
+        "r1": 56.42,
+        "a2": 42.23,
+        "b1": 108.53,
+        "b2": 128.52,
+        "part_id": "Geo_Sample_1082"
+      },
+      "loading": {
+        "A": 4.981,
+        "Ts": 0.252,
+        "part_id": "Load_Sample_1082"
+      },
+      "material": {
+        "mu": 2664.18,
+        "part_id": "Mat_Sample_1082"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "A",
+        "side": "lower",
+        "training_lower": 10.0,
+        "training_upper": 90.0,
+        "value": 4.981,
+        "normalized_ood_distance": 0.0627375
+      }
+    },
+    {
+      "case_id": "Case_1083",
+      "geometry": {
+        "c": 2.76,
+        "sx": 43.54,
+        "sy": 306.32,
+        "r1": 52.58,
+        "a2": 73.07,
+        "b1": 91.97,
+        "b2": 107.02,
+        "part_id": "Geo_Sample_1083"
+      },
+      "loading": {
+        "A": 84.544,
+        "Ts": 0.526,
+        "part_id": "Load_Sample_1083"
+      },
+      "material": {
+        "mu": 1691.99,
+        "part_id": "Mat_Sample_1083"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "Ts",
+        "side": "upper",
+        "training_lower": 0.1,
+        "training_upper": 0.5,
+        "value": 0.526,
+        "normalized_ood_distance": 0.065
+      }
+    },
+    {
+      "case_id": "Case_1084",
+      "geometry": {
+        "c": 2.31,
+        "sx": 53.46,
+        "sy": 205.93,
+        "r1": 57.2,
+        "a2": 73.95,
+        "b1": 109.56,
+        "b2": 146.96,
+        "part_id": "Geo_Sample_1084"
+      },
+      "loading": {
+        "A": 24.39,
+        "Ts": 0.072,
+        "part_id": "Load_Sample_1084"
+      },
+      "material": {
+        "mu": 2376.08,
+        "part_id": "Mat_Sample_1084"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "Ts",
+        "side": "lower",
+        "training_lower": 0.1,
+        "training_upper": 0.5,
+        "value": 0.072,
+        "normalized_ood_distance": 0.07
+      }
+    },
+    {
+      "case_id": "Case_1085",
+      "geometry": {
+        "c": 2.36,
+        "sx": 112.35,
+        "sy": 308.76,
+        "r1": 67.28,
+        "a2": 42.63,
+        "b1": 95.14,
+        "b2": 108.0,
+        "part_id": "Geo_Sample_1085"
+      },
+      "loading": {
+        "A": 84.173,
+        "Ts": 0.519,
+        "part_id": "Load_Sample_1085"
+      },
+      "material": {
+        "mu": 2527.06,
+        "part_id": "Mat_Sample_1085"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "Ts",
+        "side": "upper",
+        "training_lower": 0.1,
+        "training_upper": 0.5,
+        "value": 0.519,
+        "normalized_ood_distance": 0.0475
+      }
+    },
+    {
+      "case_id": "Case_1086",
+      "geometry": {
+        "c": 2.99,
+        "sx": 83.63,
+        "sy": 136.73,
+        "r1": 50.53,
+        "a2": 76.24,
+        "b1": 117.15,
+        "b2": 112.87,
+        "part_id": "Geo_Sample_1086"
+      },
+      "loading": {
+        "A": 2.632,
+        "Ts": 0.167,
+        "part_id": "Load_Sample_1086"
+      },
+      "material": {
+        "mu": 1097.06,
+        "part_id": "Mat_Sample_1086"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "A",
+        "side": "lower",
+        "training_lower": 10.0,
+        "training_upper": 90.0,
+        "value": 2.632,
+        "normalized_ood_distance": 0.0921
+      }
+    },
+    {
+      "case_id": "Case_1087",
+      "geometry": {
+        "c": 1.4,
+        "sx": 94.51,
+        "sy": 296.34,
+        "r1": 53.74,
+        "a2": 65.36,
+        "b1": 82.43,
+        "b2": 83.67,
+        "part_id": "Geo_Sample_1087"
+      },
+      "loading": {
+        "A": 96.034,
+        "Ts": 0.363,
+        "part_id": "Load_Sample_1087"
+      },
+      "material": {
+        "mu": 1474.43,
+        "part_id": "Mat_Sample_1087"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "A",
+        "side": "upper",
+        "training_lower": 10.0,
+        "training_upper": 90.0,
+        "value": 96.034,
+        "normalized_ood_distance": 0.075425
+      }
+    },
+    {
+      "case_id": "Case_1088",
+      "geometry": {
+        "c": 1.27,
+        "sx": 99.07,
+        "sy": 317.89,
+        "r1": 65.96,
+        "a2": 46.95,
+        "b1": 116.03,
+        "b2": 144.73,
+        "part_id": "Geo_Sample_1088"
+      },
+      "loading": {
+        "A": 29.25,
+        "Ts": 0.514,
+        "part_id": "Load_Sample_1088"
+      },
+      "material": {
+        "mu": 2761.24,
+        "part_id": "Mat_Sample_1088"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "Ts",
+        "side": "upper",
+        "training_lower": 0.1,
+        "training_upper": 0.5,
+        "value": 0.514,
+        "normalized_ood_distance": 0.035
+      }
+    },
+    {
+      "case_id": "Case_1089",
+      "geometry": {
+        "c": 1.44,
+        "sx": 93.19,
+        "sy": 317.45,
+        "r1": 60.89,
+        "a2": 60.39,
+        "b1": 84.67,
+        "b2": 91.88,
+        "part_id": "Geo_Sample_1089"
+      },
+      "loading": {
+        "A": 3.457,
+        "Ts": 0.234,
+        "part_id": "Load_Sample_1089"
+      },
+      "material": {
+        "mu": 2588.21,
+        "part_id": "Mat_Sample_1089"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "A",
+        "side": "lower",
+        "training_lower": 10.0,
+        "training_upper": 90.0,
+        "value": 3.457,
+        "normalized_ood_distance": 0.0817875
+      }
+    },
+    {
+      "case_id": "Case_1090",
+      "geometry": {
+        "c": 1.2,
+        "sx": 50.83,
+        "sy": 224.41,
+        "r1": 51.25,
+        "a2": 40.56,
+        "b1": 115.09,
+        "b2": 145.18,
+        "part_id": "Geo_Sample_1090"
+      },
+      "loading": {
+        "A": 17.23,
+        "Ts": 0.08,
+        "part_id": "Load_Sample_1090"
+      },
+      "material": {
+        "mu": 1804.73,
+        "part_id": "Mat_Sample_1090"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "Ts",
+        "side": "lower",
+        "training_lower": 0.1,
+        "training_upper": 0.5,
+        "value": 0.08,
+        "normalized_ood_distance": 0.05
+      }
+    },
+    {
+      "case_id": "Case_1091",
+      "geometry": {
+        "c": 1.37,
+        "sx": 113.69,
+        "sy": 202.96,
+        "r1": 57.0,
+        "a2": 79.56,
+        "b1": 92.06,
+        "b2": 121.47,
+        "part_id": "Geo_Sample_1091"
+      },
+      "loading": {
+        "A": 17.78,
+        "Ts": 0.07,
+        "part_id": "Load_Sample_1091"
+      },
+      "material": {
+        "mu": 1350.96,
+        "part_id": "Mat_Sample_1091"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "Ts",
+        "side": "lower",
+        "training_lower": 0.1,
+        "training_upper": 0.5,
+        "value": 0.07,
+        "normalized_ood_distance": 0.075
+      }
+    },
+    {
+      "case_id": "Case_1092",
+      "geometry": {
+        "c": 2.64,
+        "sx": 112.99,
+        "sy": 304.58,
+        "r1": 68.06,
+        "a2": 76.72,
+        "b1": 103.22,
+        "b2": 94.71,
+        "part_id": "Geo_Sample_1092"
+      },
+      "loading": {
+        "A": 64.237,
+        "Ts": 0.066,
+        "part_id": "Load_Sample_1092"
+      },
+      "material": {
+        "mu": 2880.33,
+        "part_id": "Mat_Sample_1092"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "Ts",
+        "side": "lower",
+        "training_lower": 0.1,
+        "training_upper": 0.5,
+        "value": 0.066,
+        "normalized_ood_distance": 0.085
+      }
+    },
+    {
+      "case_id": "Case_1093",
+      "geometry": {
+        "c": 2.33,
+        "sx": 116.52,
+        "sy": 316.81,
+        "r1": 67.85,
+        "a2": 74.61,
+        "b1": 114.28,
+        "b2": 120.43,
+        "part_id": "Geo_Sample_1093"
+      },
+      "loading": {
+        "A": 66.808,
+        "Ts": 0.517,
+        "part_id": "Load_Sample_1093"
+      },
+      "material": {
+        "mu": 1159.51,
+        "part_id": "Mat_Sample_1093"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "Ts",
+        "side": "upper",
+        "training_lower": 0.1,
+        "training_upper": 0.5,
+        "value": 0.517,
+        "normalized_ood_distance": 0.0425
+      }
+    },
+    {
+      "case_id": "Case_1094",
+      "geometry": {
+        "c": 1.05,
+        "sx": 98.65,
+        "sy": 281.04,
+        "r1": 51.91,
+        "a2": 57.95,
+        "b1": 109.8,
+        "b2": 85.09,
+        "part_id": "Geo_Sample_1094"
+      },
+      "loading": {
+        "A": 91.67,
+        "Ts": 0.109,
+        "part_id": "Load_Sample_1094"
+      },
+      "material": {
+        "mu": 1052.23,
+        "part_id": "Mat_Sample_1094"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "A",
+        "side": "upper",
+        "training_lower": 10.0,
+        "training_upper": 90.0,
+        "value": 91.67,
+        "normalized_ood_distance": 0.020875
+      }
+    },
+    {
+      "case_id": "Case_1095",
+      "geometry": {
+        "c": 1.3,
+        "sx": 110.33,
+        "sy": 156.43,
+        "r1": 50.85,
+        "a2": 42.44,
+        "b1": 85.64,
+        "b2": 123.66,
+        "part_id": "Geo_Sample_1095"
+      },
+      "loading": {
+        "A": 6.127,
+        "Ts": 0.259,
+        "part_id": "Load_Sample_1095"
+      },
+      "material": {
+        "mu": 2680.52,
+        "part_id": "Mat_Sample_1095"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "A",
+        "side": "lower",
+        "training_lower": 10.0,
+        "training_upper": 90.0,
+        "value": 6.127,
+        "normalized_ood_distance": 0.0484125
+      }
+    },
+    {
+      "case_id": "Case_1096",
+      "geometry": {
+        "c": 1.35,
+        "sx": 47.3,
+        "sy": 285.48,
+        "r1": 59.61,
+        "a2": 72.19,
+        "b1": 117.37,
+        "b2": 140.56,
+        "part_id": "Geo_Sample_1096"
+      },
+      "loading": {
+        "A": 16.974,
+        "Ts": 0.508,
+        "part_id": "Load_Sample_1096"
+      },
+      "material": {
+        "mu": 1773.93,
+        "part_id": "Mat_Sample_1096"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "Ts",
+        "side": "upper",
+        "training_lower": 0.1,
+        "training_upper": 0.5,
+        "value": 0.508,
+        "normalized_ood_distance": 0.02
+      }
+    },
+    {
+      "case_id": "Case_1097",
+      "geometry": {
+        "c": 2.8,
+        "sx": 94.77,
+        "sy": 311.27,
+        "r1": 52.83,
+        "a2": 69.11,
+        "b1": 91.85,
+        "b2": 110.15,
+        "part_id": "Geo_Sample_1097"
+      },
+      "loading": {
+        "A": 92.391,
+        "Ts": 0.405,
+        "part_id": "Load_Sample_1097"
+      },
+      "material": {
+        "mu": 1109.63,
+        "part_id": "Mat_Sample_1097"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "A",
+        "side": "upper",
+        "training_lower": 10.0,
+        "training_upper": 90.0,
+        "value": 92.391,
+        "normalized_ood_distance": 0.0298875
+      }
+    },
+    {
+      "case_id": "Case_1098",
+      "geometry": {
+        "c": 2.13,
+        "sx": 97.25,
+        "sy": 309.34,
+        "r1": 62.47,
+        "a2": 56.62,
+        "b1": 90.0,
+        "b2": 95.17,
+        "part_id": "Geo_Sample_1098"
+      },
+      "loading": {
+        "A": 97.38,
+        "Ts": 0.124,
+        "part_id": "Load_Sample_1098"
+      },
+      "material": {
+        "mu": 1848.63,
+        "part_id": "Mat_Sample_1098"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "A",
+        "side": "upper",
+        "training_lower": 10.0,
+        "training_upper": 90.0,
+        "value": 97.38,
+        "normalized_ood_distance": 0.09225
+      }
+    },
+    {
+      "case_id": "Case_1099",
+      "geometry": {
+        "c": 1.35,
+        "sx": 52.48,
+        "sy": 247.29,
+        "r1": 50.05,
+        "a2": 44.67,
+        "b1": 92.43,
+        "b2": 110.76,
+        "part_id": "Geo_Sample_1099"
+      },
+      "loading": {
+        "A": 38.365,
+        "Ts": 0.501,
+        "part_id": "Load_Sample_1099"
+      },
+      "material": {
+        "mu": 2130.36,
+        "part_id": "Mat_Sample_1099"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "Ts",
+        "side": "upper",
+        "training_lower": 0.1,
+        "training_upper": 0.5,
+        "value": 0.501,
+        "normalized_ood_distance": 0.0025
+      }
+    },
+    {
+      "case_id": "Case_1100",
+      "geometry": {
+        "c": 2.28,
+        "sx": 81.46,
+        "sy": 182.22,
+        "r1": 51.96,
+        "a2": 62.79,
+        "b1": 99.31,
+        "b2": 133.77,
+        "part_id": "Geo_Sample_1100"
+      },
+      "loading": {
+        "A": 18.746,
+        "Ts": 0.517,
+        "part_id": "Load_Sample_1100"
+      },
+      "material": {
+        "mu": 1740.8,
+        "part_id": "Mat_Sample_1100"
+      },
+      "ood": {
+        "group": "loading_ood",
+        "parameter": "Ts",
+        "side": "upper",
+        "training_lower": 0.1,
+        "training_upper": 0.5,
+        "value": 0.517,
+        "normalized_ood_distance": 0.0425
+      }
+    },
+    {
+      "case_id": "Case_1101",
+      "geometry": {
+        "c": 2.87,
+        "sx": 58.37,
+        "sy": 318.4,
+        "r1": 59.88,
+        "a2": 60.37,
+        "b1": 96.22,
+        "b2": 137.94,
+        "part_id": "Geo_Sample_1101"
+      },
+      "loading": {
+        "A": 54.028,
+        "Ts": 0.4,
+        "part_id": "Load_Sample_1101"
+      },
+      "material": {
+        "mu": 834.86,
+        "part_id": "Mat_Sample_1101"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "lower",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 834.86,
+        "normalized_ood_distance": 0.08257
+      }
+    },
+    {
+      "case_id": "Case_1102",
+      "geometry": {
+        "c": 2.26,
+        "sx": 104.62,
+        "sy": 301.55,
+        "r1": 56.3,
+        "a2": 68.67,
+        "b1": 117.38,
+        "b2": 120.52,
+        "part_id": "Geo_Sample_1102"
+      },
+      "loading": {
+        "A": 45.824,
+        "Ts": 0.416,
+        "part_id": "Load_Sample_1102"
+      },
+      "material": {
+        "mu": 3118.34,
+        "part_id": "Mat_Sample_1102"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "upper",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 3118.34,
+        "normalized_ood_distance": 0.05917
+      }
+    },
+    {
+      "case_id": "Case_1103",
+      "geometry": {
+        "c": 2.12,
+        "sx": 48.3,
+        "sy": 277.03,
+        "r1": 50.09,
+        "a2": 72.16,
+        "b1": 103.81,
+        "b2": 102.32,
+        "part_id": "Geo_Sample_1103"
+      },
+      "loading": {
+        "A": 46.564,
+        "Ts": 0.191,
+        "part_id": "Load_Sample_1103"
+      },
+      "material": {
+        "mu": 3110.65,
+        "part_id": "Mat_Sample_1103"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "upper",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 3110.65,
+        "normalized_ood_distance": 0.055325
+      }
+    },
+    {
+      "case_id": "Case_1104",
+      "geometry": {
+        "c": 2.12,
+        "sx": 85.99,
+        "sy": 258.14,
+        "r1": 59.59,
+        "a2": 62.43,
+        "b1": 84.44,
+        "b2": 100.46,
+        "part_id": "Geo_Sample_1104"
+      },
+      "loading": {
+        "A": 59.622,
+        "Ts": 0.274,
+        "part_id": "Load_Sample_1104"
+      },
+      "material": {
+        "mu": 3081.18,
+        "part_id": "Mat_Sample_1104"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "upper",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 3081.18,
+        "normalized_ood_distance": 0.04059
+      }
+    },
+    {
+      "case_id": "Case_1105",
+      "geometry": {
+        "c": 2.37,
+        "sx": 102.76,
+        "sy": 222.28,
+        "r1": 52.75,
+        "a2": 42.23,
+        "b1": 88.46,
+        "b2": 82.96,
+        "part_id": "Geo_Sample_1105"
+      },
+      "loading": {
+        "A": 59.475,
+        "Ts": 0.14,
+        "part_id": "Load_Sample_1105"
+      },
+      "material": {
+        "mu": 951.86,
+        "part_id": "Mat_Sample_1105"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "lower",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 951.86,
+        "normalized_ood_distance": 0.02407
+      }
+    },
+    {
+      "case_id": "Case_1106",
+      "geometry": {
+        "c": 1.92,
+        "sx": 75.76,
+        "sy": 252.97,
+        "r1": 59.76,
+        "a2": 70.42,
+        "b1": 84.8,
+        "b2": 85.97,
+        "part_id": "Geo_Sample_1106"
+      },
+      "loading": {
+        "A": 18.402,
+        "Ts": 0.285,
+        "part_id": "Load_Sample_1106"
+      },
+      "material": {
+        "mu": 3150.75,
+        "part_id": "Mat_Sample_1106"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "upper",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 3150.75,
+        "normalized_ood_distance": 0.075375
+      }
+    },
+    {
+      "case_id": "Case_1107",
+      "geometry": {
+        "c": 1.64,
+        "sx": 80.51,
+        "sy": 158.4,
+        "r1": 57.98,
+        "a2": 72.07,
+        "b1": 116.82,
+        "b2": 86.43,
+        "part_id": "Geo_Sample_1107"
+      },
+      "loading": {
+        "A": 29.761,
+        "Ts": 0.334,
+        "part_id": "Load_Sample_1107"
+      },
+      "material": {
+        "mu": 842.28,
+        "part_id": "Mat_Sample_1107"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "lower",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 842.28,
+        "normalized_ood_distance": 0.07886
+      }
+    },
+    {
+      "case_id": "Case_1108",
+      "geometry": {
+        "c": 1.62,
+        "sx": 54.12,
+        "sy": 207.86,
+        "r1": 64.23,
+        "a2": 46.12,
+        "b1": 88.58,
+        "b2": 135.63,
+        "part_id": "Geo_Sample_1108"
+      },
+      "loading": {
+        "A": 12.005,
+        "Ts": 0.304,
+        "part_id": "Load_Sample_1108"
+      },
+      "material": {
+        "mu": 3190.01,
+        "part_id": "Mat_Sample_1108"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "upper",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 3190.01,
+        "normalized_ood_distance": 0.095005
+      }
+    },
+    {
+      "case_id": "Case_1109",
+      "geometry": {
+        "c": 2.47,
+        "sx": 57.89,
+        "sy": 197.33,
+        "r1": 50.42,
+        "a2": 74.34,
+        "b1": 86.64,
+        "b2": 85.86,
+        "part_id": "Geo_Sample_1109"
+      },
+      "loading": {
+        "A": 16.859,
+        "Ts": 0.292,
+        "part_id": "Load_Sample_1109"
+      },
+      "material": {
+        "mu": 3031.51,
+        "part_id": "Mat_Sample_1109"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "upper",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 3031.51,
+        "normalized_ood_distance": 0.015755
+      }
+    },
+    {
+      "case_id": "Case_1110",
+      "geometry": {
+        "c": 1.71,
+        "sx": 110.42,
+        "sy": 309.14,
+        "r1": 54.05,
+        "a2": 61.2,
+        "b1": 96.9,
+        "b2": 128.51,
+        "part_id": "Geo_Sample_1110"
+      },
+      "loading": {
+        "A": 17.514,
+        "Ts": 0.411,
+        "part_id": "Load_Sample_1110"
+      },
+      "material": {
+        "mu": 3144.42,
+        "part_id": "Mat_Sample_1110"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "upper",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 3144.42,
+        "normalized_ood_distance": 0.07221
+      }
+    },
+    {
+      "case_id": "Case_1111",
+      "geometry": {
+        "c": 2.85,
+        "sx": 69.04,
+        "sy": 280.98,
+        "r1": 52.08,
+        "a2": 76.77,
+        "b1": 105.43,
+        "b2": 109.4,
+        "part_id": "Geo_Sample_1111"
+      },
+      "loading": {
+        "A": 19.829,
+        "Ts": 0.305,
+        "part_id": "Load_Sample_1111"
+      },
+      "material": {
+        "mu": 881.37,
+        "part_id": "Mat_Sample_1111"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "lower",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 881.37,
+        "normalized_ood_distance": 0.059315
+      }
+    },
+    {
+      "case_id": "Case_1112",
+      "geometry": {
+        "c": 1.06,
+        "sx": 99.26,
+        "sy": 221.85,
+        "r1": 55.86,
+        "a2": 53.47,
+        "b1": 101.9,
+        "b2": 100.5,
+        "part_id": "Geo_Sample_1112"
+      },
+      "loading": {
+        "A": 20.398,
+        "Ts": 0.492,
+        "part_id": "Load_Sample_1112"
+      },
+      "material": {
+        "mu": 992.53,
+        "part_id": "Mat_Sample_1112"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "lower",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 992.53,
+        "normalized_ood_distance": 0.003735
+      }
+    },
+    {
+      "case_id": "Case_1113",
+      "geometry": {
+        "c": 1.81,
+        "sx": 66.2,
+        "sy": 294.06,
+        "r1": 58.84,
+        "a2": 49.32,
+        "b1": 108.94,
+        "b2": 96.11,
+        "part_id": "Geo_Sample_1113"
+      },
+      "loading": {
+        "A": 88.716,
+        "Ts": 0.176,
+        "part_id": "Load_Sample_1113"
+      },
+      "material": {
+        "mu": 913.07,
+        "part_id": "Mat_Sample_1113"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "lower",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 913.07,
+        "normalized_ood_distance": 0.043465
+      }
+    },
+    {
+      "case_id": "Case_1114",
+      "geometry": {
+        "c": 2.01,
+        "sx": 75.93,
+        "sy": 252.25,
+        "r1": 69.34,
+        "a2": 53.38,
+        "b1": 103.99,
+        "b2": 121.3,
+        "part_id": "Geo_Sample_1114"
+      },
+      "loading": {
+        "A": 13.481,
+        "Ts": 0.408,
+        "part_id": "Load_Sample_1114"
+      },
+      "material": {
+        "mu": 800.5,
+        "part_id": "Mat_Sample_1114"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "lower",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 800.5,
+        "normalized_ood_distance": 0.09975
+      }
+    },
+    {
+      "case_id": "Case_1115",
+      "geometry": {
+        "c": 1.24,
+        "sx": 119.79,
+        "sy": 308.57,
+        "r1": 62.61,
+        "a2": 70.03,
+        "b1": 115.31,
+        "b2": 134.24,
+        "part_id": "Geo_Sample_1115"
+      },
+      "loading": {
+        "A": 37.99,
+        "Ts": 0.114,
+        "part_id": "Load_Sample_1115"
+      },
+      "material": {
+        "mu": 861.67,
+        "part_id": "Mat_Sample_1115"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "lower",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 861.67,
+        "normalized_ood_distance": 0.069165
+      }
+    },
+    {
+      "case_id": "Case_1116",
+      "geometry": {
+        "c": 1.41,
+        "sx": 108.73,
+        "sy": 203.5,
+        "r1": 57.03,
+        "a2": 59.09,
+        "b1": 82.35,
+        "b2": 97.97,
+        "part_id": "Geo_Sample_1116"
+      },
+      "loading": {
+        "A": 37.291,
+        "Ts": 0.1,
+        "part_id": "Load_Sample_1116"
+      },
+      "material": {
+        "mu": 995.95,
+        "part_id": "Mat_Sample_1116"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "lower",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 995.95,
+        "normalized_ood_distance": 0.002025
+      }
+    },
+    {
+      "case_id": "Case_1117",
+      "geometry": {
+        "c": 2.34,
+        "sx": 68.11,
+        "sy": 275.94,
+        "r1": 69.28,
+        "a2": 60.16,
+        "b1": 111.54,
+        "b2": 140.17,
+        "part_id": "Geo_Sample_1117"
+      },
+      "loading": {
+        "A": 18.729,
+        "Ts": 0.414,
+        "part_id": "Load_Sample_1117"
+      },
+      "material": {
+        "mu": 857.51,
+        "part_id": "Mat_Sample_1117"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "lower",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 857.51,
+        "normalized_ood_distance": 0.071245
+      }
+    },
+    {
+      "case_id": "Case_1118",
+      "geometry": {
+        "c": 2.42,
+        "sx": 100.26,
+        "sy": 217.88,
+        "r1": 66.3,
+        "a2": 73.03,
+        "b1": 85.38,
+        "b2": 138.49,
+        "part_id": "Geo_Sample_1118"
+      },
+      "loading": {
+        "A": 26.882,
+        "Ts": 0.399,
+        "part_id": "Load_Sample_1118"
+      },
+      "material": {
+        "mu": 3129.62,
+        "part_id": "Mat_Sample_1118"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "upper",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 3129.62,
+        "normalized_ood_distance": 0.06481
+      }
+    },
+    {
+      "case_id": "Case_1119",
+      "geometry": {
+        "c": 2.22,
+        "sx": 42.97,
+        "sy": 172.04,
+        "r1": 59.56,
+        "a2": 59.97,
+        "b1": 95.19,
+        "b2": 113.75,
+        "part_id": "Geo_Sample_1119"
+      },
+      "loading": {
+        "A": 13.018,
+        "Ts": 0.222,
+        "part_id": "Load_Sample_1119"
+      },
+      "material": {
+        "mu": 981.86,
+        "part_id": "Mat_Sample_1119"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "lower",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 981.86,
+        "normalized_ood_distance": 0.00907
+      }
+    },
+    {
+      "case_id": "Case_1120",
+      "geometry": {
+        "c": 1.36,
+        "sx": 84.76,
+        "sy": 236.27,
+        "r1": 56.95,
+        "a2": 52.41,
+        "b1": 99.83,
+        "b2": 118.88,
+        "part_id": "Geo_Sample_1120"
+      },
+      "loading": {
+        "A": 36.651,
+        "Ts": 0.38,
+        "part_id": "Load_Sample_1120"
+      },
+      "material": {
+        "mu": 916.81,
+        "part_id": "Mat_Sample_1120"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "lower",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 916.81,
+        "normalized_ood_distance": 0.041595
+      }
+    },
+    {
+      "case_id": "Case_1121",
+      "geometry": {
+        "c": 1.57,
+        "sx": 63.34,
+        "sy": 211.22,
+        "r1": 64.65,
+        "a2": 57.22,
+        "b1": 105.14,
+        "b2": 143.07,
+        "part_id": "Geo_Sample_1121"
+      },
+      "loading": {
+        "A": 27.373,
+        "Ts": 0.196,
+        "part_id": "Load_Sample_1121"
+      },
+      "material": {
+        "mu": 3190.32,
+        "part_id": "Mat_Sample_1121"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "upper",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 3190.32,
+        "normalized_ood_distance": 0.09516
+      }
+    },
+    {
+      "case_id": "Case_1122",
+      "geometry": {
+        "c": 2.13,
+        "sx": 78.19,
+        "sy": 204.79,
+        "r1": 67.47,
+        "a2": 54.41,
+        "b1": 119.14,
+        "b2": 115.68,
+        "part_id": "Geo_Sample_1122"
+      },
+      "loading": {
+        "A": 33.213,
+        "Ts": 0.263,
+        "part_id": "Load_Sample_1122"
+      },
+      "material": {
+        "mu": 3089.67,
+        "part_id": "Mat_Sample_1122"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "upper",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 3089.67,
+        "normalized_ood_distance": 0.044835
+      }
+    },
+    {
+      "case_id": "Case_1123",
+      "geometry": {
+        "c": 1.99,
+        "sx": 114.3,
+        "sy": 231.27,
+        "r1": 66.46,
+        "a2": 68.79,
+        "b1": 90.84,
+        "b2": 135.17,
+        "part_id": "Geo_Sample_1123"
+      },
+      "loading": {
+        "A": 22.447,
+        "Ts": 0.449,
+        "part_id": "Load_Sample_1123"
+      },
+      "material": {
+        "mu": 3070.15,
+        "part_id": "Mat_Sample_1123"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "upper",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 3070.15,
+        "normalized_ood_distance": 0.035075
+      }
+    },
+    {
+      "case_id": "Case_1124",
+      "geometry": {
+        "c": 1.55,
+        "sx": 42.05,
+        "sy": 230.86,
+        "r1": 68.25,
+        "a2": 77.12,
+        "b1": 111.41,
+        "b2": 138.29,
+        "part_id": "Geo_Sample_1124"
+      },
+      "loading": {
+        "A": 34.156,
+        "Ts": 0.406,
+        "part_id": "Load_Sample_1124"
+      },
+      "material": {
+        "mu": 891.85,
+        "part_id": "Mat_Sample_1124"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "lower",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 891.85,
+        "normalized_ood_distance": 0.054075
+      }
+    },
+    {
+      "case_id": "Case_1125",
+      "geometry": {
+        "c": 2.15,
+        "sx": 118.29,
+        "sy": 294.79,
+        "r1": 59.52,
+        "a2": 75.21,
+        "b1": 84.59,
+        "b2": 109.87,
+        "part_id": "Geo_Sample_1125"
+      },
+      "loading": {
+        "A": 52.323,
+        "Ts": 0.266,
+        "part_id": "Load_Sample_1125"
+      },
+      "material": {
+        "mu": 3095.06,
+        "part_id": "Mat_Sample_1125"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "upper",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 3095.06,
+        "normalized_ood_distance": 0.04753
+      }
+    },
+    {
+      "case_id": "Case_1126",
+      "geometry": {
+        "c": 2.73,
+        "sx": 85.13,
+        "sy": 305.79,
+        "r1": 61.47,
+        "a2": 43.03,
+        "b1": 110.81,
+        "b2": 106.64,
+        "part_id": "Geo_Sample_1126"
+      },
+      "loading": {
+        "A": 74.417,
+        "Ts": 0.489,
+        "part_id": "Load_Sample_1126"
+      },
+      "material": {
+        "mu": 960.19,
+        "part_id": "Mat_Sample_1126"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "lower",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 960.19,
+        "normalized_ood_distance": 0.019905
+      }
+    },
+    {
+      "case_id": "Case_1127",
+      "geometry": {
+        "c": 2.02,
+        "sx": 42.96,
+        "sy": 316.47,
+        "r1": 68.03,
+        "a2": 75.59,
+        "b1": 100.4,
+        "b2": 100.77,
+        "part_id": "Geo_Sample_1127"
+      },
+      "loading": {
+        "A": 21.422,
+        "Ts": 0.211,
+        "part_id": "Load_Sample_1127"
+      },
+      "material": {
+        "mu": 850.97,
+        "part_id": "Mat_Sample_1127"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "lower",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 850.97,
+        "normalized_ood_distance": 0.074515
+      }
+    },
+    {
+      "case_id": "Case_1128",
+      "geometry": {
+        "c": 1.4,
+        "sx": 118.77,
+        "sy": 256.47,
+        "r1": 58.01,
+        "a2": 40.01,
+        "b1": 90.52,
+        "b2": 102.87,
+        "part_id": "Geo_Sample_1128"
+      },
+      "loading": {
+        "A": 22.336,
+        "Ts": 0.393,
+        "part_id": "Load_Sample_1128"
+      },
+      "material": {
+        "mu": 3115.48,
+        "part_id": "Mat_Sample_1128"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "upper",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 3115.48,
+        "normalized_ood_distance": 0.05774
+      }
+    },
+    {
+      "case_id": "Case_1129",
+      "geometry": {
+        "c": 1.17,
+        "sx": 111.96,
+        "sy": 315.42,
+        "r1": 51.85,
+        "a2": 54.0,
+        "b1": 89.15,
+        "b2": 92.93,
+        "part_id": "Geo_Sample_1129"
+      },
+      "loading": {
+        "A": 65.152,
+        "Ts": 0.358,
+        "part_id": "Load_Sample_1129"
+      },
+      "material": {
+        "mu": 3174.64,
+        "part_id": "Mat_Sample_1129"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "upper",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 3174.64,
+        "normalized_ood_distance": 0.08732
+      }
+    },
+    {
+      "case_id": "Case_1130",
+      "geometry": {
+        "c": 2.19,
+        "sx": 117.73,
+        "sy": 313.77,
+        "r1": 66.54,
+        "a2": 40.68,
+        "b1": 107.46,
+        "b2": 107.09,
+        "part_id": "Geo_Sample_1130"
+      },
+      "loading": {
+        "A": 33.428,
+        "Ts": 0.248,
+        "part_id": "Load_Sample_1130"
+      },
+      "material": {
+        "mu": 816.31,
+        "part_id": "Mat_Sample_1130"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "lower",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 816.31,
+        "normalized_ood_distance": 0.091845
+      }
+    },
+    {
+      "case_id": "Case_1131",
+      "geometry": {
+        "c": 2.02,
+        "sx": 64.4,
+        "sy": 223.96,
+        "r1": 55.01,
+        "a2": 58.33,
+        "b1": 114.4,
+        "b2": 112.6,
+        "part_id": "Geo_Sample_1131"
+      },
+      "loading": {
+        "A": 50.303,
+        "Ts": 0.208,
+        "part_id": "Load_Sample_1131"
+      },
+      "material": {
+        "mu": 3075.73,
+        "part_id": "Mat_Sample_1131"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "upper",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 3075.73,
+        "normalized_ood_distance": 0.037865
+      }
+    },
+    {
+      "case_id": "Case_1132",
+      "geometry": {
+        "c": 1.33,
+        "sx": 75.43,
+        "sy": 295.36,
+        "r1": 64.08,
+        "a2": 50.45,
+        "b1": 107.22,
+        "b2": 97.08,
+        "part_id": "Geo_Sample_1132"
+      },
+      "loading": {
+        "A": 87.973,
+        "Ts": 0.278,
+        "part_id": "Load_Sample_1132"
+      },
+      "material": {
+        "mu": 907.29,
+        "part_id": "Mat_Sample_1132"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "lower",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 907.29,
+        "normalized_ood_distance": 0.046355
+      }
+    },
+    {
+      "case_id": "Case_1133",
+      "geometry": {
+        "c": 2.16,
+        "sx": 49.29,
+        "sy": 269.85,
+        "r1": 56.15,
+        "a2": 60.13,
+        "b1": 104.33,
+        "b2": 104.82,
+        "part_id": "Geo_Sample_1133"
+      },
+      "loading": {
+        "A": 10.451,
+        "Ts": 0.422,
+        "part_id": "Load_Sample_1133"
+      },
+      "material": {
+        "mu": 3005.73,
+        "part_id": "Mat_Sample_1133"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "upper",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 3005.73,
+        "normalized_ood_distance": 0.002865
+      }
+    },
+    {
+      "case_id": "Case_1134",
+      "geometry": {
+        "c": 2.24,
+        "sx": 111.05,
+        "sy": 222.79,
+        "r1": 53.91,
+        "a2": 65.01,
+        "b1": 93.12,
+        "b2": 156.91,
+        "part_id": "Geo_Sample_1134"
+      },
+      "loading": {
+        "A": 19.952,
+        "Ts": 0.127,
+        "part_id": "Load_Sample_1134"
+      },
+      "material": {
+        "mu": 855.93,
+        "part_id": "Mat_Sample_1134"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "lower",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 855.93,
+        "normalized_ood_distance": 0.072035
+      }
+    },
+    {
+      "case_id": "Case_1135",
+      "geometry": {
+        "c": 1.08,
+        "sx": 100.38,
+        "sy": 240.25,
+        "r1": 63.79,
+        "a2": 44.0,
+        "b1": 118.7,
+        "b2": 105.92,
+        "part_id": "Geo_Sample_1135"
+      },
+      "loading": {
+        "A": 36.46,
+        "Ts": 0.227,
+        "part_id": "Load_Sample_1135"
+      },
+      "material": {
+        "mu": 804.11,
+        "part_id": "Mat_Sample_1135"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "lower",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 804.11,
+        "normalized_ood_distance": 0.097945
+      }
+    },
+    {
+      "case_id": "Case_1136",
+      "geometry": {
+        "c": 1.09,
+        "sx": 95.72,
+        "sy": 291.68,
+        "r1": 67.2,
+        "a2": 78.05,
+        "b1": 104.58,
+        "b2": 114.2,
+        "part_id": "Geo_Sample_1136"
+      },
+      "loading": {
+        "A": 68.925,
+        "Ts": 0.151,
+        "part_id": "Load_Sample_1136"
+      },
+      "material": {
+        "mu": 3020.11,
+        "part_id": "Mat_Sample_1136"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "upper",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 3020.11,
+        "normalized_ood_distance": 0.010055
+      }
+    },
+    {
+      "case_id": "Case_1137",
+      "geometry": {
+        "c": 1.56,
+        "sx": 95.94,
+        "sy": 171.83,
+        "r1": 64.16,
+        "a2": 51.22,
+        "b1": 118.41,
+        "b2": 116.6,
+        "part_id": "Geo_Sample_1137"
+      },
+      "loading": {
+        "A": 20.802,
+        "Ts": 0.159,
+        "part_id": "Load_Sample_1137"
+      },
+      "material": {
+        "mu": 973.66,
+        "part_id": "Mat_Sample_1137"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "lower",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 973.66,
+        "normalized_ood_distance": 0.01317
+      }
+    },
+    {
+      "case_id": "Case_1138",
+      "geometry": {
+        "c": 2.74,
+        "sx": 81.68,
+        "sy": 317.36,
+        "r1": 52.06,
+        "a2": 79.39,
+        "b1": 92.92,
+        "b2": 136.51,
+        "part_id": "Geo_Sample_1138"
+      },
+      "loading": {
+        "A": 30.532,
+        "Ts": 0.486,
+        "part_id": "Load_Sample_1138"
+      },
+      "material": {
+        "mu": 3082.73,
+        "part_id": "Mat_Sample_1138"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "upper",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 3082.73,
+        "normalized_ood_distance": 0.041365
+      }
+    },
+    {
+      "case_id": "Case_1139",
+      "geometry": {
+        "c": 2.48,
+        "sx": 55.57,
+        "sy": 287.09,
+        "r1": 61.94,
+        "a2": 47.15,
+        "b1": 82.55,
+        "b2": 82.39,
+        "part_id": "Geo_Sample_1139"
+      },
+      "loading": {
+        "A": 15.87,
+        "Ts": 0.181,
+        "part_id": "Load_Sample_1139"
+      },
+      "material": {
+        "mu": 3076.42,
+        "part_id": "Mat_Sample_1139"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "upper",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 3076.42,
+        "normalized_ood_distance": 0.03821
+      }
+    },
+    {
+      "case_id": "Case_1140",
+      "geometry": {
+        "c": 2.35,
+        "sx": 115.5,
+        "sy": 212.48,
+        "r1": 61.64,
+        "a2": 68.11,
+        "b1": 109.71,
+        "b2": 93.97,
+        "part_id": "Geo_Sample_1140"
+      },
+      "loading": {
+        "A": 22.869,
+        "Ts": 0.429,
+        "part_id": "Load_Sample_1140"
+      },
+      "material": {
+        "mu": 952.57,
+        "part_id": "Mat_Sample_1140"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "lower",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 952.57,
+        "normalized_ood_distance": 0.023715
+      }
+    },
+    {
+      "case_id": "Case_1141",
+      "geometry": {
+        "c": 1.59,
+        "sx": 48.04,
+        "sy": 203.79,
+        "r1": 60.8,
+        "a2": 73.05,
+        "b1": 115.81,
+        "b2": 115.2,
+        "part_id": "Geo_Sample_1141"
+      },
+      "loading": {
+        "A": 23.033,
+        "Ts": 0.335,
+        "part_id": "Load_Sample_1141"
+      },
+      "material": {
+        "mu": 3069.52,
+        "part_id": "Mat_Sample_1141"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "upper",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 3069.52,
+        "normalized_ood_distance": 0.03476
+      }
+    },
+    {
+      "case_id": "Case_1142",
+      "geometry": {
+        "c": 2.59,
+        "sx": 111.73,
+        "sy": 245.36,
+        "r1": 61.19,
+        "a2": 60.41,
+        "b1": 98.03,
+        "b2": 129.88,
+        "part_id": "Geo_Sample_1142"
+      },
+      "loading": {
+        "A": 42.0,
+        "Ts": 0.173,
+        "part_id": "Load_Sample_1142"
+      },
+      "material": {
+        "mu": 842.93,
+        "part_id": "Mat_Sample_1142"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "lower",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 842.93,
+        "normalized_ood_distance": 0.078535
+      }
+    },
+    {
+      "case_id": "Case_1143",
+      "geometry": {
+        "c": 1.01,
+        "sx": 112.72,
+        "sy": 233.11,
+        "r1": 65.2,
+        "a2": 62.29,
+        "b1": 92.71,
+        "b2": 92.6,
+        "part_id": "Geo_Sample_1143"
+      },
+      "loading": {
+        "A": 40.709,
+        "Ts": 0.31,
+        "part_id": "Load_Sample_1143"
+      },
+      "material": {
+        "mu": 957.83,
+        "part_id": "Mat_Sample_1143"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "lower",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 957.83,
+        "normalized_ood_distance": 0.021085
+      }
+    },
+    {
+      "case_id": "Case_1144",
+      "geometry": {
+        "c": 2.66,
+        "sx": 116.18,
+        "sy": 231.72,
+        "r1": 51.93,
+        "a2": 45.96,
+        "b1": 87.04,
+        "b2": 102.98,
+        "part_id": "Geo_Sample_1144"
+      },
+      "loading": {
+        "A": 54.741,
+        "Ts": 0.245,
+        "part_id": "Load_Sample_1144"
+      },
+      "material": {
+        "mu": 811.38,
+        "part_id": "Mat_Sample_1144"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "lower",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 811.38,
+        "normalized_ood_distance": 0.09431
+      }
+    },
+    {
+      "case_id": "Case_1145",
+      "geometry": {
+        "c": 2.54,
+        "sx": 63.91,
+        "sy": 173.27,
+        "r1": 51.11,
+        "a2": 67.38,
+        "b1": 95.27,
+        "b2": 124.91,
+        "part_id": "Geo_Sample_1145"
+      },
+      "loading": {
+        "A": 11.282,
+        "Ts": 0.489,
+        "part_id": "Load_Sample_1145"
+      },
+      "material": {
+        "mu": 3129.25,
+        "part_id": "Mat_Sample_1145"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "upper",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 3129.25,
+        "normalized_ood_distance": 0.064625
+      }
+    },
+    {
+      "case_id": "Case_1146",
+      "geometry": {
+        "c": 2.56,
+        "sx": 88.14,
+        "sy": 317.0,
+        "r1": 63.9,
+        "a2": 55.1,
+        "b1": 83.82,
+        "b2": 158.05,
+        "part_id": "Geo_Sample_1146"
+      },
+      "loading": {
+        "A": 56.974,
+        "Ts": 0.205,
+        "part_id": "Load_Sample_1146"
+      },
+      "material": {
+        "mu": 3147.92,
+        "part_id": "Mat_Sample_1146"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "upper",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 3147.92,
+        "normalized_ood_distance": 0.07396
+      }
+    },
+    {
+      "case_id": "Case_1147",
+      "geometry": {
+        "c": 2.96,
+        "sx": 80.41,
+        "sy": 248.74,
+        "r1": 69.85,
+        "a2": 70.7,
+        "b1": 107.0,
+        "b2": 127.54,
+        "part_id": "Geo_Sample_1147"
+      },
+      "loading": {
+        "A": 43.682,
+        "Ts": 0.41,
+        "part_id": "Load_Sample_1147"
+      },
+      "material": {
+        "mu": 3038.59,
+        "part_id": "Mat_Sample_1147"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "upper",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 3038.59,
+        "normalized_ood_distance": 0.019295
+      }
+    },
+    {
+      "case_id": "Case_1148",
+      "geometry": {
+        "c": 1.24,
+        "sx": 75.06,
+        "sy": 260.63,
+        "r1": 68.71,
+        "a2": 40.61,
+        "b1": 92.87,
+        "b2": 121.11,
+        "part_id": "Geo_Sample_1148"
+      },
+      "loading": {
+        "A": 29.166,
+        "Ts": 0.395,
+        "part_id": "Load_Sample_1148"
+      },
+      "material": {
+        "mu": 3078.97,
+        "part_id": "Mat_Sample_1148"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "upper",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 3078.97,
+        "normalized_ood_distance": 0.039485
+      }
+    },
+    {
+      "case_id": "Case_1149",
+      "geometry": {
+        "c": 2.73,
+        "sx": 47.13,
+        "sy": 269.03,
+        "r1": 60.92,
+        "a2": 70.66,
+        "b1": 99.36,
+        "b2": 117.36,
+        "part_id": "Geo_Sample_1149"
+      },
+      "loading": {
+        "A": 40.424,
+        "Ts": 0.484,
+        "part_id": "Load_Sample_1149"
+      },
+      "material": {
+        "mu": 3004.98,
+        "part_id": "Mat_Sample_1149"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "upper",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 3004.98,
+        "normalized_ood_distance": 0.00249
+      }
+    },
+    {
+      "case_id": "Case_1150",
+      "geometry": {
+        "c": 1.77,
+        "sx": 72.98,
+        "sy": 190.92,
+        "r1": 69.58,
+        "a2": 54.33,
+        "b1": 95.8,
+        "b2": 110.67,
+        "part_id": "Geo_Sample_1150"
+      },
+      "loading": {
+        "A": 14.028,
+        "Ts": 0.22,
+        "part_id": "Load_Sample_1150"
+      },
+      "material": {
+        "mu": 882.26,
+        "part_id": "Mat_Sample_1150"
+      },
+      "ood": {
+        "group": "material_ood",
+        "parameter": "mu",
+        "side": "lower",
+        "training_lower": 1000.0,
+        "training_upper": 3000.0,
+        "value": 882.26,
+        "normalized_ood_distance": 0.05887
+      }
+    }
+  ]
+}

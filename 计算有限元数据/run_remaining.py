@@ -20,14 +20,35 @@ from failure_registry import (
 from transfer2hdf5 import is_valid_hdf5
 
 
-BASE_DIR = Path(__file__).parent.resolve()
-PARAMETERS_PATH = BASE_DIR / "4_Combined_Master_Dataset.json"
-WORKER_PATH = BASE_DIR / "main.py"
-CONVERTER_PATH = BASE_DIR / "transfer2hdf5.py"
-VTU_DIR = BASE_DIR / "comsol_output"
-HDF5_DIR = BASE_DIR / "comsol_hdf5"
-LOG_DIR = BASE_DIR / "batch_logs"
-STATE_PATH = BASE_DIR / "batch_state.json"
+SCRIPT_DIR = Path(__file__).parent.resolve()
+WORKER_PATH = SCRIPT_DIR / "main.py"
+CONVERTER_PATH = SCRIPT_DIR / "transfer2hdf5.py"
+
+
+def configure_workspace(
+    workspace_root: Path | None = None,
+    model_path: Path | None = None,
+) -> None:
+    """Point controller state and output at one isolated workspace."""
+    global WORKSPACE_ROOT, PARAMETERS_PATH, MODEL_PATH, VTU_DIR, HDF5_DIR
+    global LOG_DIR, STATE_PATH, REGISTRY_PATH
+    WORKSPACE_ROOT = (
+        SCRIPT_DIR if workspace_root is None else Path(workspace_root).resolve()
+    )
+    PARAMETERS_PATH = WORKSPACE_ROOT / "4_Combined_Master_Dataset.json"
+    MODEL_PATH = (
+        SCRIPT_DIR / "standard_model.mph"
+        if model_path is None
+        else Path(model_path).resolve()
+    )
+    VTU_DIR = WORKSPACE_ROOT / "comsol_output"
+    HDF5_DIR = WORKSPACE_ROOT / "comsol_hdf5"
+    LOG_DIR = WORKSPACE_ROOT / "batch_logs"
+    STATE_PATH = WORKSPACE_ROOT / "batch_state.json"
+    REGISTRY_PATH = WORKSPACE_ROOT / "failed_cases.json"
+
+
+configure_workspace()
 
 
 def configure_logging() -> Path:
@@ -46,7 +67,8 @@ def configure_logging() -> Path:
     return path
 
 
-def load_case_ids(path: Path = PARAMETERS_PATH) -> list[str]:
+def load_case_ids(path: Path | None = None) -> list[str]:
+    path = PARAMETERS_PATH if path is None else Path(path)
     with path.open("r", encoding="utf-8") as stream:
         payload = json.load(stream)
     samples = payload.get("parameters_list")
@@ -136,6 +158,10 @@ def build_worker_command(case_ids: list[str], cores: int) -> list[str]:
     return [
         sys.executable,
         str(WORKER_PATH),
+        "--workspace-root",
+        str(WORKSPACE_ROOT),
+        "--model-path",
+        str(MODEL_PATH),
         "--case-ids",
         ",".join(case_ids),
         "--cores",
@@ -147,6 +173,10 @@ def build_converter_command(case_ids: list[str]) -> list[str]:
     return [
         sys.executable,
         str(CONVERTER_PATH),
+        "--input-dir",
+        str(VTU_DIR),
+        "--output-dir",
+        str(HDF5_DIR),
         "--case-ids",
         ",".join(case_ids),
     ]
@@ -185,7 +215,7 @@ def run_worker(
     logging.info("启动独立 worker: %s", " ".join(command))
     process = subprocess.Popen(
         command,
-        cwd=BASE_DIR,
+        cwd=WORKSPACE_ROOT,
         creationflags=creationflags,
     )
     timeout = None if timeout_minutes <= 0 else timeout_minutes * 60
@@ -209,7 +239,7 @@ def run_converter(case_ids: list[str]) -> int:
     logging.info("转换为 HDF5: %s", ", ".join(case_ids))
     completed = subprocess.run(
         build_converter_command(case_ids),
-        cwd=BASE_DIR,
+        cwd=WORKSPACE_ROOT,
         check=False,
     )
     return completed.returncode
@@ -284,6 +314,8 @@ def parse_args() -> argparse.Namespace:
         description="按独立进程批次自动续算全部缺失 COMSOL 工况"
     )
     parser.add_argument("--batch-size", type=int, default=10)
+    parser.add_argument("--workspace-root", type=Path)
+    parser.add_argument("--model-path", type=Path)
     parser.add_argument("--cores", type=int, default=16)
     parser.add_argument("--max-retries", type=int, default=2)
     parser.add_argument("--pause-seconds", type=float, default=10.0)
@@ -333,6 +365,7 @@ def validate_args(args: argparse.Namespace) -> None:
 def main() -> int:
     args = parse_args()
     try:
+        configure_workspace(args.workspace_root, args.model_path)
         validate_args(args)
         all_case_ids = select_case_range(
             load_case_ids(), args.first_case, args.last_case

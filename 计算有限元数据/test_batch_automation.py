@@ -22,6 +22,54 @@ TEST_TEMP_ROOT = Path(__file__).parents[1].resolve()
 
 
 class BatchAutomationTest(unittest.TestCase):
+    def test_workspace_override_is_forwarded_to_worker_and_converter(self):
+        with tempfile.TemporaryDirectory(dir=TEST_TEMP_ROOT) as directory:
+            workspace = Path(directory).resolve()
+            model_path = workspace / "source_model.mph"
+            try:
+                scheduler.configure_workspace(workspace, model_path)
+                worker.configure_workspace(workspace, model_path)
+
+                worker_command = scheduler.build_worker_command(
+                    ["Case_1001"], cores=4
+                )
+                converter_command = scheduler.build_converter_command(
+                    ["Case_1001"]
+                )
+                self.assertEqual(
+                    worker_command[worker_command.index("--workspace-root") + 1],
+                    str(workspace),
+                )
+                self.assertEqual(
+                    worker_command[worker_command.index("--model-path") + 1],
+                    str(model_path),
+                )
+                self.assertEqual(
+                    converter_command[converter_command.index("--input-dir") + 1],
+                    str(workspace / "comsol_output"),
+                )
+                self.assertEqual(
+                    converter_command[converter_command.index("--output-dir") + 1],
+                    str(workspace / "comsol_hdf5"),
+                )
+                self.assertEqual(worker.PARAMETERS_PATH, workspace / "4_Combined_Master_Dataset.json")
+                self.assertEqual(worker.VTU_DIR, workspace / "comsol_output")
+            finally:
+                scheduler.configure_workspace(None, None)
+                worker.configure_workspace(None, None)
+
+    def test_default_workspace_remains_the_calculation_directory(self):
+        scheduler.configure_workspace(None, None)
+        worker.configure_workspace(None, None)
+
+        self.assertEqual(scheduler.WORKSPACE_ROOT, scheduler.SCRIPT_DIR)
+        self.assertEqual(worker.WORKSPACE_ROOT, worker.SCRIPT_DIR)
+        self.assertEqual(
+            scheduler.PARAMETERS_PATH,
+            scheduler.SCRIPT_DIR / "4_Combined_Master_Dataset.json",
+        )
+        self.assertEqual(worker.MODEL_PATH, worker.SCRIPT_DIR / "standard_model.mph")
+
     def test_load_select_and_chunk_cases(self):
         samples = [
             {"case_id": f"Case_{index:04d}"} for index in range(1, 7)

@@ -21,6 +21,11 @@ training_workspace/plots/*
 training_workspace/_smoke/
 evaluation_workspace/results/*
 !evaluation_workspace/results/.gitkeep
+ood_generalization_workspace/comsol_output/
+ood_generalization_workspace/comsol_hdf5/
+ood_generalization_workspace/batch_logs/
+ood_generalization_workspace/batch_state.json
+ood_generalization_workspace/failed_cases.json
 /计算有限元数据/comsol_output/
 /计算有限元数据/comsol_hdf5/
 /计算有限元数据/batch_logs/
